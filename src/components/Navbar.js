@@ -1,7 +1,15 @@
 import React, { useState, useRef, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { logout } from "../features/auth/authSlice";
 
 const Navbar = () => {
   const [isMenuOpen, setMenuOpen] = useState(false);
+
+  const dispatch = useDispatch();
+  const handleLogout = () => {
+    dispatch(logout());
+  };
 
   // Reference the profile menu DOM element.
   const menuRef = useRef(null);
@@ -18,38 +26,39 @@ const Navbar = () => {
   };
 
   useEffect(() => {
-    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("click", handleClickOutside);
     return () => {
       // When the Navbar component is unmounted, the event listener is removed
-      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("click", handleClickOutside);
     };
   }, []);
 
+  const navItems = ["Home", "Friends", "Post"];
+  const navRoutes = {
+    Home: "/",
+    Friends: "/friends",
+  };
   const menuItems = ["Profile", "Setting", "Logout"];
 
   return (
     <nav className="bg-purple-600 px-4 py-2">
       <div className="grid grid-cols-3">
         <div className="flex justify-start self-center text-white font-bold text-3xl">
-          <a href="/">Odin-book</a>
+          <Link to="/">Odin-book</Link>
         </div>
 
         <div className="flex justify-center gap-x-16">
-          <button>
-            <a href="/" className="text-white">
-              Home
-            </a>
-          </button>
-          <button>
-            <a href="/friends" className="text-white">
-              Friends
-            </a>
-          </button>
-          <button>
-            <a href="/post" className="text-white">
-              Post
-            </a>
-          </button>
+          {navItems.map((element, index) => {
+            return index === navItems.length - 1 ? (
+              <button className="text-white">{element}</button>
+            ) : (
+              <button>
+                <Link to={navRoutes[element]} className="text-white">
+                  {element}
+                </Link>
+              </button>
+            );
+          })}
         </div>
         <div className="flex justify-end self-center">
           <button onClick={toggleProfileMenu} ref={menuRef}>
@@ -62,14 +71,26 @@ const Navbar = () => {
 
           {isMenuOpen && (
             <div className="absolute top-[53px] right-3 mt-2 w-36 bg-white rounded-md shadow-lg py-1 text-gray-700">
-              {menuItems.map((element) => (
-                <a
-                  href="/profile"
-                  className="block px-4 py-2 hover:bg-purple-600 hover:text-white"
-                >
-                  {element}
-                </a>
-              ))}
+              {menuItems.map((element, index) => {
+                return index === menuItems.length - 1 ? (
+                  <button
+                    type="button"
+                    key={index}
+                    onClick={handleLogout}
+                    className="w-full block px-4 py-2 hover:bg-purple-600 hover:text-white"
+                  >
+                    {element}
+                  </button>
+                ) : (
+                  <Link
+                    key={index}
+                    to={"/" + element}
+                    className="block px-4 py-2 hover:bg-purple-600 hover:text-white"
+                  >
+                    {element}
+                  </Link>
+                );
+              })}
             </div>
           )}
         </div>

@@ -8,7 +8,12 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import LandingPage from "./components/LandingPage";
 import NewsFeed from "./components/NewsFeed";
+import Profile from "./components/Profile";
+import Friends from "./components/Friends";
+import Setting from "./components/Setting";
 import Loading from "./components/Loading";
+import Footer from "./components/Footer";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   const dispatch = useDispatch();
@@ -56,12 +61,14 @@ function App() {
         {isLoggedIn && <Navbar />}
         <Routes>
           <Route
-            path="/odin-book-frontend/"
+            path="/"
             element={isLoggedIn ? <NewsFeed /> : <LandingPage />}
           />
-          <Route path="/odin_Blog-API-frontend/friends" element={<Friends />} />
-          <Route path="/odin_Blog-API-frontend/profile" element={<Profile />} />
-          <Route path="/odin_Blog-API-frontend/setting" element={<Setting />} />
+          <Route path="/" element={<ProtectedRoute />}>
+            <Route path="/friends" element={<Friends />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/setting" element={<Setting />} />
+          </Route>
         </Routes>
         <Footer />
       </Router>
