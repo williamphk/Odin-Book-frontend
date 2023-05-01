@@ -1,24 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { login } from "./features/auth/authSlice";
+
+import LandingPage from "./components/LandingPage";
+import NewsFeed from "./components/NewsFeed";
 
 function App() {
+  const dispatch = useDispatch();
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+
+    if (token) {
+      dispatch(login(token));
+      setIsLoading(false);
+    } else {
+      setIsLoading(false);
+    }
+  }, [dispatch]);
+
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <div className="App">{isLoggedIn ? <NewsFeed /> : <LandingPage />}</div>
   );
 }
 
