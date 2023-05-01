@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import Navbar from "./components/Navbar";
 import LandingPage from "./components/LandingPage";
+import Register from "./components/Register";
 import NewsFeed from "./components/NewsFeed";
 import Profile from "./components/Profile";
 import Friends from "./components/Friends";
@@ -60,6 +61,7 @@ function App() {
       <Router>
         {isLoggedIn && <Navbar />}
         <Routes>
+          <Route path="/register" element={<Register />} />
           <Route
             path="/"
             element={isLoggedIn ? <NewsFeed /> : <LandingPage />}

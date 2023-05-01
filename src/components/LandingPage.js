@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../features/auth/authSlice";
@@ -20,6 +21,7 @@ const LandingPage = () => {
   const [errorPasswordMessage, setPasswordErrorMessage] = useState("");
 
   const onSubmit = async (data) => {
+    console.log(data);
     try {
       const response = await axios.post("http://localhost:3000/login", data);
       console.log("Login response:", response);
@@ -87,14 +89,24 @@ const LandingPage = () => {
           </button>
         </form>
         <div className="flex space-x-4">
-          <button className="bg-pink-500 text-white px-7 py-2 rounded font-semibold shadow-md transition duration-200">
-            Register
-          </button>
+          <Link to="/register">
+            <button className="bg-pink-500 text-white px-7 py-2 rounded font-semibold shadow-md transition duration-200">
+              Register
+            </button>
+          </Link>
           <button className="bg-blue-500 text-white px-6 py-2 rounded font-semibold shadow-md transition duration-200">
             Login with Facebook
           </button>
         </div>
-        <button className="">Login with Test Account</button>
+
+        <button
+          className=""
+          onClick={() =>
+            onSubmit({ email: "test@test.com", password: "12345678aA!" })
+          }
+        >
+          Login with Test Account
+        </button>
       </div>
     </div>
   );
