@@ -3,9 +3,12 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "./features/auth/authSlice";
 import jwt_decode from "jwt-decode";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
+import Navbar from "./components/Navbar";
 import LandingPage from "./components/LandingPage";
 import NewsFeed from "./components/NewsFeed";
+import Loading from "./components/Loading";
 
 function App() {
   const dispatch = useDispatch();
@@ -44,11 +47,25 @@ function App() {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <Loading />;
   }
 
   return (
-    <div className="App">{isLoggedIn ? <NewsFeed /> : <LandingPage />}</div>
+    <div className="App">
+      <Router>
+        {isLoggedIn && <Navbar />}
+        <Routes>
+          <Route
+            path="/odin-book-frontend/"
+            element={isLoggedIn ? <NewsFeed /> : <LandingPage />}
+          />
+          <Route path="/odin_Blog-API-frontend/friends" element={<Friends />} />
+          <Route path="/odin_Blog-API-frontend/profile" element={<Profile />} />
+          <Route path="/odin_Blog-API-frontend/setting" element={<Setting />} />
+        </Routes>
+        <Footer />
+      </Router>
+    </div>
   );
 }
 
