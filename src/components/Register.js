@@ -151,7 +151,7 @@ const Register = () => {
               <option value="">Select...</option>
               <option value="male">Male</option>
               <option value="female">Female</option>
-              <option value="others">Other</option>
+              <option value="others">Others</option>
             </select>
             <div className="h-5">
               <span className="text-red-500 text-sm">
@@ -174,7 +174,7 @@ const Register = () => {
               className="bg-purple-600 text-white hover:bg-purple-800 w-full px-6 py-2 rounded font-semibold mr-4 shadow-md transition duration-200"
               type="button"
             >
-              Login
+              Already have a account?
             </button>
           </Link>
         </div>

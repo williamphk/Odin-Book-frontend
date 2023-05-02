@@ -3,6 +3,9 @@ import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { logout } from "../features/auth/authSlice";
 
+import AddPost from "./AddPost";
+import MaterialIcon from "./MaterialIcon";
+
 const Navbar = () => {
   const [isMenuOpen, setMenuOpen] = useState(false);
 
@@ -38,7 +41,24 @@ const Navbar = () => {
     Home: "/",
     Friends: "/friends",
   };
+  const navIconArray = ["home", "group", "post_add"];
+  const navIcons = navIconArray.map((iconName) => (
+    <MaterialIcon
+      className="material-symbols-outlined text-4xl"
+      iconName={iconName}
+    />
+  ));
   const menuItems = ["Profile", "Setting", "Logout"];
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
 
   return (
     <nav className="bg-purple-600 px-4 py-2">
@@ -47,21 +67,31 @@ const Navbar = () => {
           <Link to="/">Odin-book</Link>
         </div>
 
-        <div className="flex justify-center gap-x-16">
+        <div className="flex justify-center gap-x-32">
           {navItems.map((element, index) => {
             return index === navItems.length - 1 ? (
-              <button className="text-white" key={index}>
+              <button
+                className="text-white flex flex-col items-center text-sm"
+                key={index}
+                onClick={openModal}
+              >
+                {navIcons[index]}
                 {element}
               </button>
             ) : (
-              <button key={index}>
-                <Link to={navRoutes[element]} className="text-white">
+              <button
+                className="text-white flex flex-col items-center"
+                key={index}
+              >
+                {navIcons[index]}
+                <Link to={navRoutes[element]} className="text-white text-sm">
                   {element}
                 </Link>
               </button>
             );
           })}
         </div>
+
         <div className="flex justify-end self-center">
           <button onClick={toggleProfileMenu} ref={menuRef}>
             <img
@@ -97,6 +127,7 @@ const Navbar = () => {
           )}
         </div>
       </div>
+      <AddPost isOpen={isModalOpen} closeModal={closeModal} />
     </nav>
   );
 };

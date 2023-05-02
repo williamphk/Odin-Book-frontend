@@ -50,13 +50,16 @@ const authSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(loginUser.fulfilled, (state, action) => {
+      console.log(action.payload);
       state.isLoggedIn = true;
+      // Update the state with the received user data
       state.token = action.payload.token;
-      state.user = action.payload.user;
+      state.user = action.payload.userResponse;
       state.status = "succeeded";
       state.error = null;
       // Store the token in localStorage
       localStorage.setItem("token", action.payload.token);
+      localStorage.setItem("user", action.payload.userResponse);
     });
     builder.addCase(loginUser.rejected, (state, action) => {
       state.status = "failed";
@@ -68,10 +71,11 @@ const authSlice = createSlice({
       // Handle the registration success case
       state.status = "succeeded";
       // Update the state with the received user data
-      state.user = action.payload;
       state.token = action.payload.token;
-      // Store the token in localStorage
+      state.user = action.payload.userResponse;
+      // Store the token & user in localStorage
       localStorage.setItem("token", action.payload.token);
+      localStorage.setItem("user", action.payload.userResponse);
     });
     builder.addCase(signUp.rejected, (state, action) => {
       // Handle the registration error case
