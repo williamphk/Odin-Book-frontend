@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { login } from "../features/auth/authSlice";
+import { loginUser } from "../features/auth/authSlice";
 
 import "./styles.css";
 
@@ -20,20 +20,9 @@ const LandingPage = () => {
   const [errorEmailMessage, setEmailErrorMessage] = useState("");
   const [errorPasswordMessage, setPasswordErrorMessage] = useState("");
 
-  const onSubmit = async (data) => {
+  const onSubmit = (data) => {
     console.log(data);
-    try {
-      const response = await axios.post("http://localhost:3000/login", data);
-      console.log("Login response:", response);
-      //redirect to another page, etc.
-      localStorage.setItem("token", response.data.token);
-      dispatch(login({ token: response.data.token }));
-      console.log(isLoggedIn);
-    } catch (error) {
-      console.error("Error during login:", error);
-      setEmailErrorMessage(error.response.data.email);
-      setPasswordErrorMessage(error.response.data.password);
-    }
+    dispatch(loginUser(data));
   };
 
   return (
@@ -90,17 +79,17 @@ const LandingPage = () => {
         </form>
         <div className="flex space-x-4">
           <Link to="/register">
-            <button className="bg-pink-500 text-white px-7 py-2 rounded font-semibold shadow-md transition duration-200">
+            <button className="bg-pink-500 hover:bg-pink-700 text-white px-7 py-2 rounded font-semibold shadow-md transition duration-200">
               Register
             </button>
           </Link>
-          <button className="bg-blue-500 text-white px-6 py-2 rounded font-semibold shadow-md transition duration-200">
+          <button className="bg-blue-500 hover:bg-blue-700 text-white px-6 py-2 rounded font-semibold shadow-md transition duration-200">
             Login with Facebook
           </button>
         </div>
 
         <button
-          className=""
+          className="text-black underline hover:text-blue-500 transition duration-50"
           onClick={() =>
             onSubmit({ email: "test@test.com", password: "12345678aA!" })
           }
