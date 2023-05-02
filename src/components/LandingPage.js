@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
-import axios from "axios";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { loginUser } from "../features/auth/authSlice";
 
 import "./styles.css";
@@ -15,13 +14,11 @@ const LandingPage = () => {
   } = useForm();
 
   const dispatch = useDispatch();
-  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
 
   const [errorEmailMessage, setEmailErrorMessage] = useState("");
   const [errorPasswordMessage, setPasswordErrorMessage] = useState("");
 
   const onSubmit = (data) => {
-    console.log(data);
     dispatch(loginUser(data));
   };
 
@@ -33,6 +30,7 @@ const LandingPage = () => {
       </h2>
       <div className="bg-white p-6 rounded shadow-lg w-90 space-y-6">
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-3">
+          {/* email */}
           <div className="flex flex-col">
             <input
               id="email"
@@ -53,6 +51,7 @@ const LandingPage = () => {
               </span>
             </div>
           </div>
+          {/* password */}
           <div className="flex flex-col">
             <input
               id="password"
@@ -73,21 +72,24 @@ const LandingPage = () => {
               </span>
             </div>
           </div>
+          {/* login button */}
           <button className="bg-purple-600 text-white hover:bg-purple-800 w-full px-6 py-2 rounded font-semibold mr-4 shadow-md transition duration-200">
             Login
           </button>
         </form>
         <div className="flex space-x-4">
+          {/* register button */}
           <Link to="/register">
             <button className="bg-pink-500 hover:bg-pink-700 text-white px-7 py-2 rounded font-semibold shadow-md transition duration-200">
               Register
             </button>
           </Link>
+          {/* login with facebook */}
           <button className="bg-blue-500 hover:bg-blue-700 text-white px-6 py-2 rounded font-semibold shadow-md transition duration-200">
             Login with Facebook
           </button>
         </div>
-
+        {/* Login with Test Account */}
         <button
           className="text-black underline hover:text-blue-500 transition duration-50"
           onClick={() =>

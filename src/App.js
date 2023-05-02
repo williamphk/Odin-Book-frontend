@@ -17,6 +17,7 @@ import Footer from "./components/Footer";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(true);
 
@@ -35,7 +36,7 @@ function App() {
     } else {
       setIsLoading(false);
     }
-  }, [dispatch]);
+  }, [dispatch, isLoggedIn]);
 
   const isTokenValid = (token) => {
     let decodedToken = jwt_decode(token);
@@ -49,8 +50,6 @@ function App() {
       return true;
     }
   };
-
-  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
 
   if (isLoading) {
     return <Loading />;
