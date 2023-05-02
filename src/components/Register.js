@@ -17,8 +17,7 @@ const Register = () => {
   } = useForm();
 
   const dispatch = useDispatch();
-
-  let navigate = useNavigate();
+  const navigate = useNavigate();
 
   const onSubmit = async (data) => {
     if (data.password !== data.confirmPassword) {
@@ -92,6 +91,10 @@ const Register = () => {
             labeltext="Password"
             validation={{
               required: "Password is required",
+              minLength: {
+                value: 6,
+                message: "Password must be at least 6 characters long",
+              },
             }}
           />
           {/* confirm password */}
@@ -104,6 +107,10 @@ const Register = () => {
             labeltext="Confirm Password"
             validation={{
               required: "Confirm Password is required",
+              minLength: {
+                value: 6,
+                message: "Password must be at least 6 characters long",
+              },
             }}
           />
           {/* birthday */}

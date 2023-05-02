@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { loginUser } from "../features/auth/authSlice";
 
+import InputField from "./InputField";
+
 import "./styles.css";
 
 const LandingPage = () => {
@@ -14,9 +16,6 @@ const LandingPage = () => {
   } = useForm();
 
   const dispatch = useDispatch();
-
-  const [errorEmailMessage, setEmailErrorMessage] = useState("");
-  const [errorPasswordMessage, setPasswordErrorMessage] = useState("");
 
   const onSubmit = (data) => {
     dispatch(loginUser(data));
@@ -31,47 +30,37 @@ const LandingPage = () => {
       <div className="bg-white p-6 rounded shadow-lg w-90 space-y-6">
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-3">
           {/* email */}
-          <div className="flex flex-col">
-            <input
-              id="email"
-              type="email"
-              placeholder="Email"
-              className="border border-gray-300 p-2 rounded focus:outline-none focus:ring-2 focus:ring-purple-600"
-              {...register("email", {
-                required: "Email is required",
-                pattern: {
-                  value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
-                  message: "Invalid email address",
-                },
-              })}
-            />
-            <div className="h-5">
-              <span className="text-red-500 text-sm">
-                {errors.email?.message || errorEmailMessage}
-              </span>
-            </div>
-          </div>
+          <InputField
+            register={register}
+            errors={errors}
+            id="email"
+            type="email"
+            placeholder="Email:"
+            labeltext="Email"
+            validation={{
+              required: "Email is required",
+              pattern: {
+                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+                message: "Invalid email address",
+              },
+            }}
+          />
           {/* password */}
-          <div className="flex flex-col">
-            <input
-              id="password"
-              type="password"
-              placeholder="Password"
-              className="border border-gray-300 p-2 rounded focus:outline-none focus:ring-2 focus:ring-purple-600"
-              {...register("password", {
-                required: "Password is required",
-                minLength: {
-                  value: 6,
-                  message: "Password must be at least 6 characters long",
-                },
-              })}
-            />
-            <div className="h-5">
-              <span className="text-red-500 text-sm">
-                {errors.password?.message || errorPasswordMessage}
-              </span>
-            </div>
-          </div>
+          <InputField
+            register={register}
+            errors={errors}
+            id="password"
+            type="password"
+            placeholder="Password:"
+            labeltext="Password"
+            validation={{
+              required: "Password is required",
+              minLength: {
+                value: 6,
+                message: "Password must be at least 6 characters long",
+              },
+            }}
+          />
           {/* login button */}
           <button className="bg-purple-600 text-white hover:bg-purple-800 w-full px-6 py-2 rounded font-semibold mr-4 shadow-md transition duration-200">
             Login
