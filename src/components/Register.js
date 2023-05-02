@@ -1,5 +1,5 @@
-import React from "react";
-import { useDispatch } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { signUp } from "../features/auth/authSlice";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
@@ -18,6 +18,8 @@ const Register = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+  const errorState = useSelector((state) => state.auth.error);
 
   const onSubmit = async (data) => {
     if (data.password !== data.confirmPassword) {
@@ -30,11 +32,21 @@ const Register = () => {
     try {
       await dispatch(signUp(data));
       // Redirect to homepage
-      navigate("/");
+      if (isLoggedIn) {
+        navigate("/");
+      }
     } catch (error) {
       console.error("Error during registration:", error);
     }
   };
+
+  useEffect(() => {
+    if (errorState && errorState.errors) {
+      errorState.errors.forEach((error) => {
+        setError(error.path, { message: error.msg });
+      });
+    }
+  }, [errorState]);
 
   return (
     <div className="min-h-screen moving-gradient flex flex-col items-center justify-center gap-10 ">

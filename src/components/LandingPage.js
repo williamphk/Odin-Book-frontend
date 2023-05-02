@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../features/auth/authSlice";
 
 import InputField from "./InputField";
@@ -12,14 +12,25 @@ const LandingPage = () => {
   const {
     register,
     handleSubmit,
+    setError,
     formState: { errors },
   } = useForm();
 
   const dispatch = useDispatch();
+  const errorState = useSelector((state) => state.auth.error);
 
   const onSubmit = (data) => {
     dispatch(loginUser(data));
   };
+
+  useEffect(() => {
+    if (errorState && errorState.email) {
+      setError("email", { message: errorState.email });
+    }
+    if (errorState && errorState.password) {
+      setError("password", { message: errorState.password });
+    }
+  }, [errorState]);
 
   return (
     <div className="min-h-screen moving-gradient flex flex-col items-center justify-center gap-10">

@@ -50,9 +50,11 @@ const Navbar = () => {
         <div className="flex justify-center gap-x-16">
           {navItems.map((element, index) => {
             return index === navItems.length - 1 ? (
-              <button className="text-white">{element}</button>
+              <button className="text-white" key={index}>
+                {element}
+              </button>
             ) : (
-              <button>
+              <button key={index}>
                 <Link to={navRoutes[element]} className="text-white">
                   {element}
                 </Link>

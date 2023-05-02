@@ -76,7 +76,7 @@ const authSlice = createSlice({
     builder.addCase(signUp.rejected, (state, action) => {
       // Handle the registration error case
       state.status = "failed";
-      state.error = action.payload.error;
+      state.error = action.payload;
     });
   },
 });
