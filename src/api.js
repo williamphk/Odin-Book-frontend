@@ -15,4 +15,13 @@ export const createPost = async (newPost, token) => {
   return response.data;
 };
 
+export const getNewsFeed = async (token) => {
+  const response = await api.get("/posts/newsfeed", {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return response;
+};
+
 export default api;
