@@ -24,11 +24,46 @@ const NewsFeed = () => {
     fetchNewsFeed();
   }, [token]);
 
+  console.log(posts);
+
+  function formatDate(date) {
+    const inputDate = new Date(date);
+    return inputDate.toLocaleDateString("en-US");
+  }
+
   const renderPosts = () => {
     return posts.data.posts.map((post) => (
-      <div key={post._id} className="bg-white rounded p-4 mb-4 shadow">
-        <h3 className="text-xl mb-2">{post.title}</h3>
-        <p>{post.content}</p>
+      <div key={post._id} className="bg-white w-1/2 rounded p-4 mb-4 shadow">
+        <div className="flex gap-x-2">
+          <button>
+            <img
+              src={post.user.profile.picture}
+              alt="Profile"
+              className="w-10 h-10 rounded-full"
+            />
+          </button>
+          <div className="flex flex-col items-start">
+            <p className="font-bold hover:underline cursor-pointer">
+              {post.user.profile.fullName}
+            </p>
+            <p>{formatDate(post.createdAt)}</p>
+          </div>
+        </div>
+        <div className="flex justify-start py-2 break-all">
+          <p>{post.content}</p>
+        </div>
+        <div className="flex justify-between py-2">
+          <button>Number of likes</button>
+          <button>Number of comments</button>
+        </div>
+        <div className="border-t">
+          <button className="text-gray-500 font-medium hover:bg-gray-100 py-2 rounded w-1/2 disabled:hover:bg-transparent outline-plum-600">
+            Like
+          </button>
+          <button className="text-gray-500 font-medium hover:bg-gray-100 py-2 rounded w-1/2 disabled:hover:bg-transparent outline-plum-600">
+            Comment
+          </button>
+        </div>
       </div>
     ));
   };
@@ -42,9 +77,11 @@ const NewsFeed = () => {
   }
 
   return (
-    <div className="min-h-screen bg-blue-100">
-      <h1 className="flex justify-center">News Feed</h1>
-      <div className="container mx-auto">{renderPosts()}</div>
+    <div className="min-h-screen flex flex-col items-center">
+      <h1 className="">News Feed</h1>
+      <div className="container flex flex-col items-center">
+        {renderPosts()}
+      </div>
     </div>
   );
 };
