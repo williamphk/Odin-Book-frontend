@@ -4,7 +4,7 @@ import api from "../../api";
 export const signUp = createAsyncThunk(
   "auth/signUp",
   async (data, thunkAPI) => {
-    console.log(data);
+    //console.log(data);
     try {
       const response = await api.post("/users", data);
       return response.data;
@@ -17,7 +17,7 @@ export const signUp = createAsyncThunk(
 export const loginUser = createAsyncThunk(
   "auth/login",
   async (data, thunkAPI) => {
-    console.log(data);
+    //console.log(data);
     try {
       const response = await api.post("/login", data);
       return response.data;
@@ -38,30 +38,35 @@ const authSlice = createSlice({
   },
   reducers: {
     login: (state, action) => {
+      console.log("login");
       state.isLoggedIn = true;
       state.token = action.payload.token;
+      state.user = action.payload.user;
+      state.status = "succeeded";
     },
     logout: (state) => {
       console.log("logout");
       state.isLoggedIn = false;
       state.token = null;
       localStorage.removeItem("token");
+      localStorage.removeItem("user");
     },
   },
   extraReducers: (builder) => {
     builder.addCase(loginUser.fulfilled, (state, action) => {
-      console.log(action.payload);
       state.isLoggedIn = true;
+      // Handle the registration success case
+      state.status = "succeeded";
       // Update the state with the received user data
       state.token = action.payload.token;
       state.user = action.payload.userResponse;
-      state.status = "succeeded";
       state.error = null;
       // Store the token in localStorage
       localStorage.setItem("token", action.payload.token);
-      localStorage.setItem("user", action.payload.userResponse);
+      localStorage.setItem("user", JSON.stringify(action.payload.userResponse));
     });
     builder.addCase(loginUser.rejected, (state, action) => {
+      // Handle the login error case
       state.status = "failed";
       state.error = action.payload;
     });
@@ -73,6 +78,7 @@ const authSlice = createSlice({
       // Update the state with the received user data
       state.token = action.payload.token;
       state.user = action.payload.userResponse;
+      state.error = null;
       // Store the token & user in localStorage
       localStorage.setItem("token", action.payload.token);
       localStorage.setItem("user", action.payload.userResponse);

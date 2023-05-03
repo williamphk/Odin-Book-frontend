@@ -76,7 +76,7 @@ const Navbar = () => {
                 onClick={openModal}
               >
                 {navIcons[index]}
-                {element}
+                <div>{element}</div>
               </button>
             ) : (
               <button

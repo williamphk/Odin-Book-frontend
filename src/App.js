@@ -23,15 +23,18 @@ function App() {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
+    const user = JSON.parse(localStorage.getItem("user"));
+
     if (token && isTokenValid(token)) {
-      console.log("Token is valid");
+      //console.log("Token is valid");
     } else if (token && !isTokenValid(token)) {
       console.log("Token is expired");
       localStorage.removeItem("token");
     }
 
-    if (token) {
-      dispatch(login(token));
+    // Dispatch the login action only if there's a valid token in the localStorage and the user is not already logged in
+    if (token && !isLoggedIn) {
+      dispatch(login({ token, user }));
       setIsLoading(false);
     } else {
       setIsLoading(false);
@@ -40,13 +43,13 @@ function App() {
 
   const isTokenValid = (token) => {
     let decodedToken = jwt_decode(token);
-    console.log("Decoded Token", decodedToken);
+    //console.log("Decoded Token", decodedToken);
     let currentDate = new Date();
 
     if (decodedToken.exp * 1000 < currentDate.getTime()) {
       return false;
     } else {
-      console.log("Valid token");
+      //console.log("Valid token");
       return true;
     }
   };

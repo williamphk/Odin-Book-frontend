@@ -2,14 +2,17 @@ import React from "react";
 import "./styles.css";
 import { useSelector } from "react-redux";
 
+import MaterialIcon from "./MaterialIcon";
+
 const AddPost = ({ isOpen, closeModal }) => {
   const user = useSelector((state) => state.auth.user);
-  console.log(user);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     closeModal();
   };
+
+  const closeIcon = "close";
 
   if (!isOpen) return null;
 
@@ -17,7 +20,15 @@ const AddPost = ({ isOpen, closeModal }) => {
     <div className="add-post-modal">
       <div className="modal-overlay" onClick={closeModal}></div>
       <div className="modal-content">
-        <h2 className="text-xl font-bold mb-4">Add a new post</h2>
+        <div className="flex justify-between">
+          <h2 className="text-xl font-bold mb-4">Add a new post</h2>
+          <button onClick={closeModal}>
+            <MaterialIcon
+              className="material-symbols-outlined text-4xl"
+              iconName={closeIcon}
+            />
+          </button>
+        </div>
         <form onSubmit={handleSubmit}>
           <textarea
             className="border border-gray-300 w-full p-2 mb-4 rounded"
