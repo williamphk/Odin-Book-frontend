@@ -7,7 +7,9 @@ const InputField = ({
   type,
   placeholder,
   labeltext,
+  rows,
   validation,
+  isTextArea = false,
 }) => {
   return (
     <div className="flex flex-col">
@@ -16,14 +18,27 @@ const InputField = ({
           {placeholder}
         </label>
       )}
-      <input
-        className="border border-gray-300 p-2 rounded focus:outline-none focus:ring-2 focus:ring-purple-600"
-        id={id}
-        type={type}
-        placeholder={placeholder}
-        aria-label={labeltext}
-        {...register(id, validation)}
-      />
+
+      {isTextArea ? (
+        <textarea
+          className="border border-gray-300 w-full p-2 rounded"
+          id={id}
+          placeholder={placeholder}
+          aria-label={labeltext}
+          rows={rows}
+          {...register(id, validation)}
+        />
+      ) : (
+        <input
+          className="border border-gray-300 p-2 rounded focus:outline-none focus:ring-2 focus:ring-purple-600"
+          id={id}
+          type={type}
+          placeholder={placeholder}
+          aria-label={labeltext}
+          {...register(id, validation)}
+        />
+      )}
+
       <div className="h-5">
         <span className="text-red-500 text-sm">{errors[id]?.message}</span>
       </div>

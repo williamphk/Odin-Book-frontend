@@ -5,11 +5,11 @@ const api = axios.create({
   baseURL: "http://localhost:3000",
 });
 
-export const createPost = async (newPost) => {
-  const response = await apiClient.post("/posts", newPost, {
+export const createPost = async (newPost, token) => {
+  const response = await api.post("/posts", newPost, {
     headers: {
       "Content-Type": "application/json",
-      // Add any additional headers, like authentication tokens, if required
+      Authorization: `Bearer ${token}`,
     },
   });
   return response.data;

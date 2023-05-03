@@ -1,14 +1,26 @@
 import React from "react";
 import "./styles.css";
 import { useSelector } from "react-redux";
+import { useForm } from "react-hook-form";
 
+import { createPost } from "../api";
 import MaterialIcon from "./MaterialIcon";
+import InputField from "./InputField";
 
 const AddPost = ({ isOpen, closeModal }) => {
+  const {
+    register,
+    handleSubmit,
+    setError,
+    formState: { errors },
+  } = useForm();
+
+  const token = useSelector((state) => state.auth.token);
   const user = useSelector((state) => state.auth.user);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const onSubmit = (data) => {
+    const result = createPost(data, token);
+    console.log(result);
     closeModal();
   };
 
@@ -29,11 +41,19 @@ const AddPost = ({ isOpen, closeModal }) => {
             />
           </button>
         </div>
-        <form onSubmit={handleSubmit}>
-          <textarea
-            className="border border-gray-300 w-full p-2 mb-4 rounded"
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <InputField
+            register={register}
+            errors={errors}
+            id="content"
+            type="text"
             placeholder={`What's on your mind, ${user.firstName}?`}
             rows={4}
+            isTextArea={true}
+            labeltext="Post content"
+            validation={{
+              required: "Content is required",
+            }}
           />
           <button
             type="submit"
