@@ -1,7 +1,7 @@
 import React from "react";
 
 import MaterialIcon from "./MaterialIcon";
-import Modal from "./Modal";
+import MenuModal from "./MenuModal";
 
 const Post = ({ post }) => {
   function formatDate(date) {
@@ -50,7 +50,7 @@ const Post = ({ post }) => {
               iconName={"more_horiz"}
             />
           </button>
-          <Modal menuItems={menuItems} />
+          <MenuModal menuItems={menuItems} />
         </div>
       </div>
       <div className="py-2 break-all text-left">

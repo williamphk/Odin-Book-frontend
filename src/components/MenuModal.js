@@ -6,10 +6,13 @@ const Modal = ({ menuItems }) => {
     <div className="absolute top-full right-1 w-36 mt-1 p-1 bg-white rounded-md shadow-lg text-gray-700">
       {menuItems.map((element, index) => {
         return element.isLink ? (
-          <button key={index}>
+          <button
+            className="w-full block hover:bg-purple-600 hover:text-white"
+            key={index}
+          >
             <Link
-              to={"/" + element.route}
-              className="block px-4 py-2 hover:bg-purple-600 hover:text-white"
+              className="w-full block px-4 py-2 hover:bg-purple-600 hover:text-white"
+              to={"/" + element.name}
             >
               {element.name}
             </Link>

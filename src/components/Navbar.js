@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { logout } from "../features/auth/authSlice";
 
-import Modal from "./Modal";
+import MenuModal from "./MenuModal";
 import AddPost from "./AddPost";
 import MaterialIcon from "./MaterialIcon";
 
@@ -101,8 +101,8 @@ const Navbar = () => {
                   className="text-white flex flex-col items-center"
                   key={index}
                 >
-                  {navIcons[index]}
                   <Link to={navRoutes[element]} className="text-white text-sm">
+                    {navIcons[index]}
                     {element}
                   </Link>
                 </button>
@@ -118,7 +118,7 @@ const Navbar = () => {
                 className="w-10 h-10 rounded-full"
               />
             </button>
-            {isMenuOpen && <Modal menuItems={menuItems} />}
+            {isMenuOpen && <MenuModal menuItems={menuItems} />}
           </div>
         </div>
         <AddPost isOpen={isModalOpen} closeModal={closeModal} />
