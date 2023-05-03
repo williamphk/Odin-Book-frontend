@@ -34,7 +34,7 @@ const NewsFeed = () => {
   }
 
   return (
-    <div className="min-h-screen flex flex-col items-center bg-gray-100">
+    <div className="min-h-screen bg-gray-100">
       <div className="container flex flex-col items-center">
         {posts.data.posts.map((post, index) => (
           <Post post={post} key={index} />

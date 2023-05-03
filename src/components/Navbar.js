@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { logout } from "../features/auth/authSlice";
 
+import Modal from "./Modal";
 import AddPost from "./AddPost";
 import MaterialIcon from "./MaterialIcon";
 
@@ -41,6 +42,7 @@ const Navbar = () => {
     Home: "/",
     Friends: "/friends",
   };
+
   const navIconArray = ["home", "group", "post_add"];
   const navIcons = navIconArray.map((iconName) => (
     <MaterialIcon
@@ -48,7 +50,22 @@ const Navbar = () => {
       iconName={iconName}
     />
   ));
-  const menuItems = ["Profile", "Setting", "Logout"];
+
+  const menuItems = [
+    {
+      name: "Profile",
+      isLink: true,
+    },
+    {
+      name: "Setting",
+      isLink: true,
+    },
+    {
+      name: "Logout",
+      isLink: false,
+      onClick: handleLogout,
+    },
+  ];
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -93,7 +110,7 @@ const Navbar = () => {
             })}
           </div>
 
-          <div className="flex justify-end self-center">
+          <div className="relative flex justify-end self-center">
             <button onClick={toggleProfileMenu} ref={menuRef}>
               <img
                 src="https://via.placeholder.com/32"
@@ -101,31 +118,7 @@ const Navbar = () => {
                 className="w-10 h-10 rounded-full"
               />
             </button>
-
-            {isMenuOpen && (
-              <div className="absolute top-[53px] right-3 mt-2 w-36 bg-white rounded-md shadow-lg py-1 text-gray-700">
-                {menuItems.map((element, index) => {
-                  return index === menuItems.length - 1 ? (
-                    <button
-                      type="button"
-                      key={index}
-                      onClick={handleLogout}
-                      className="w-full block px-4 py-2 hover:bg-purple-600 hover:text-white"
-                    >
-                      {element}
-                    </button>
-                  ) : (
-                    <Link
-                      key={index}
-                      to={"/" + element}
-                      className="block px-4 py-2 hover:bg-purple-600 hover:text-white"
-                    >
-                      {element}
-                    </Link>
-                  );
-                })}
-              </div>
-            )}
+            {isMenuOpen && <Modal menuItems={menuItems} />}
           </div>
         </div>
         <AddPost isOpen={isModalOpen} closeModal={closeModal} />

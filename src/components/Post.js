@@ -1,26 +1,56 @@
 import React from "react";
 
+import MaterialIcon from "./MaterialIcon";
+import Modal from "./Modal";
+
 const Post = ({ post }) => {
   function formatDate(date) {
     const inputDate = new Date(date);
     return inputDate.toLocaleDateString("en-US");
   }
 
+  const handlePostEdit = () => {};
+  const handlePostDelete = () => {};
+
+  const menuItems = [
+    {
+      name: "Edit",
+      isLink: false,
+      onClick: handlePostEdit,
+    },
+    {
+      name: "Delete",
+      isLink: false,
+      onClick: handlePostDelete,
+    },
+  ];
+
   return (
     <div key={post._id} className="bg-white w-1/2 rounded p-4 mb-4 shadow">
-      <div className="flex gap-x-2">
-        <button>
-          <img
-            src={post.user.profile.picture}
-            alt="Profile"
-            className="w-10 h-10 rounded-full"
-          />
-        </button>
-        <div className="flex flex-col items-start">
-          <p className="font-bold hover:underline cursor-pointer">
-            {post.user.profile.fullName}
-          </p>
-          <p>{formatDate(post.createdAt)}</p>
+      <div className="flex justify-between">
+        <div className="flex gap-x-2">
+          <button>
+            <img
+              src={post.user.profile.picture}
+              alt="Profile"
+              className="w-10 h-10 rounded-full"
+            />
+          </button>
+          <div className="flex flex-col items-start">
+            <p className="font-bold hover:underline cursor-pointer">
+              {post.user.profile.fullName}
+            </p>
+            <p>{formatDate(post.createdAt)}</p>
+          </div>
+        </div>
+        <div className="relative">
+          <button>
+            <MaterialIcon
+              className="material-symbols-outlined text-4xl"
+              iconName={"more_horiz"}
+            />
+          </button>
+          <Modal menuItems={menuItems} />
         </div>
       </div>
       <div className="py-2 break-all text-left">
