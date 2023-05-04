@@ -132,14 +132,16 @@ const Navbar = () => {
             {isMenuOpen && <MenuModal menuItems={menuItems} />}
           </div>
         </div>
-        <PostModal
-          title="Add a new post"
-          placeholder={`What's on your mind, ${user.firstName}?`}
-          isOpen={isPostModalOpen}
-          closePostModal={closePostModal}
-          button="Post"
-          onSubmit={onSubmit}
-        />
+        {isPostModalOpen && (
+          <PostModal
+            title="Add a new post"
+            placeholder={`What's on your mind, ${user.firstName}?`}
+            closePostModal={closePostModal}
+            requiredInputField={true}
+            button="Post"
+            onSubmit={onSubmit}
+          />
+        )}
       </nav>
     </header>
   );

@@ -10,8 +10,9 @@ const PostModal = ({
   placeholder,
   value,
   setPostContent,
-  isOpen,
+  // isOpen,
   closePostModal,
+  requiredInputField,
   button,
   onSubmit,
 }) => {
@@ -24,7 +25,7 @@ const PostModal = ({
 
   const closeIcon = "close";
 
-  if (!isOpen) return null;
+  // if (!isOpen) return null;
 
   return (
     <div className="add-post-modal">
@@ -40,21 +41,23 @@ const PostModal = ({
           </button>
         </div>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <InputField
-            register={register}
-            errors={errors}
-            id="content"
-            type="text"
-            placeholder={placeholder}
-            value={value}
-            setPostContent={setPostContent}
-            rows={4}
-            isTextArea={true}
-            labeltext="Post content"
-            validation={{
-              required: "Content is required",
-            }}
-          />
+          {requiredInputField && (
+            <InputField
+              register={register}
+              errors={errors}
+              id="content"
+              type="text"
+              placeholder={placeholder}
+              value={value}
+              setPostContent={setPostContent}
+              rows={4}
+              isTextArea={true}
+              labeltext="Post content"
+              validation={{
+                required: "Content is required",
+              }}
+            />
+          )}
           <button
             type="submit"
             className="bg-blue-500 text-white px-4 py-2 rounded shadow-md hover:bg-blue-600 transition duration-200"

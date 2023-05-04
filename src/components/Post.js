@@ -120,15 +120,17 @@ const Post = ({ post, id }) => {
           Comment
         </button>
       </div>
-      <PostModal
-        title="Edit"
-        value={postContent}
-        setPostContent={setPostContent}
-        isOpen={isPostModalOpen}
-        closePostModal={closePostModal}
-        button="Save"
-        onSubmit={onSubmit}
-      />
+      {isPostModalOpen && (
+        <PostModal
+          title="Edit"
+          value={postContent}
+          setPostContent={setPostContent}
+          closePostModal={closePostModal}
+          requiredInputField={true}
+          button="Save"
+          onSubmit={onSubmit}
+        />
+      )}
     </div>
   );
 };
