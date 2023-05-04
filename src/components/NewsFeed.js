@@ -7,6 +7,9 @@ import Loading from "./Loading";
 
 const NewsFeed = () => {
   const token = useSelector((state) => state.auth.token);
+  const createOrUpdateCount = useSelector(
+    (state) => state.post.createOrUpdateCount
+  );
   const [posts, setPosts] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -24,7 +27,7 @@ const NewsFeed = () => {
     };
 
     fetchNewsFeed();
-  }, [token]);
+  }, [token, createOrUpdateCount]);
 
   if (isLoading) {
     return <Loading />;

@@ -17,7 +17,7 @@ const InputField = ({
 
   // Create a custom handleChange function with the original onChange function inside
   const handleChange = (e) => {
-    setPostContent(e.target.value);
+    setPostContent && setPostContent(e.target.value);
     onChange(e);
   };
 

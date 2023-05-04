@@ -1,10 +1,11 @@
 import React, { useState, useRef, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 import MaterialIcon from "./MaterialIcon";
 import PostModal from "./PostModal";
 import MenuModal from "./MenuModal";
 import { getPostContent, updatePost } from "../api";
+import { incrementCreateOrUpdateCount } from "../slices/postSlice";
 
 const Post = ({ post, id }) => {
   const [isPostMenuOpen, setPostMenuOpen] = useState(false);
@@ -64,9 +65,12 @@ const Post = ({ post, id }) => {
     };
   }, []);
 
+  const dispatch = useDispatch();
+
   const onSubmit = (data) => {
     updatePost(data, token, id);
     closePostModal();
+    dispatch(incrementCreateOrUpdateCount());
   };
 
   return (

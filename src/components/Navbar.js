@@ -7,6 +7,7 @@ import MenuModal from "./MenuModal";
 import PostModal from "./PostModal";
 import MaterialIcon from "./MaterialIcon";
 import { createPost } from "../api";
+import { incrementCreateOrUpdateCount } from "../slices/postSlice";
 
 const Navbar = () => {
   const [isMenuOpen, setMenuOpen] = useState(false);
@@ -15,9 +16,9 @@ const Navbar = () => {
   const token = useSelector((state) => state.auth.token);
 
   const onSubmit = (data) => {
-    const result = createPost(data, token);
-    console.log(result);
+    createPost(data, token);
     closePostModal();
+    dispatch(incrementCreateOrUpdateCount());
   };
 
   const dispatch = useDispatch();
