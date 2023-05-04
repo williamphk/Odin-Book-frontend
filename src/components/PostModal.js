@@ -10,7 +10,6 @@ const PostModal = ({
   placeholder,
   value,
   setPostContent,
-  // isOpen,
   closePostModal,
   requiredInputField,
   button,
