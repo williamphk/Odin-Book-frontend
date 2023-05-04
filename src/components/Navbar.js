@@ -1,14 +1,24 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../features/auth/authSlice";
 
 import MenuModal from "./MenuModal";
-import AddPost from "./AddPost";
+import PostModal from "./PostModal";
 import MaterialIcon from "./MaterialIcon";
+import { createPost } from "../api";
 
 const Navbar = () => {
   const [isMenuOpen, setMenuOpen] = useState(false);
+
+  const user = useSelector((state) => state.auth.user);
+  const token = useSelector((state) => state.auth.token);
+
+  const onSubmit = (data) => {
+    const result = createPost(data, token);
+    console.log(result);
+    closePostModal();
+  };
 
   const dispatch = useDispatch();
   const handleLogout = () => {
@@ -67,14 +77,14 @@ const Navbar = () => {
     },
   ];
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isPostModalOpen, setIsPostModalOpen] = useState(false);
 
-  const openModal = () => {
-    setIsModalOpen(true);
+  const openPostModal = () => {
+    setIsPostModalOpen(true);
   };
 
-  const closeModal = () => {
-    setIsModalOpen(false);
+  const closePostModal = () => {
+    setIsPostModalOpen(false);
   };
 
   return (
@@ -91,7 +101,7 @@ const Navbar = () => {
                 <button
                   className="text-white flex flex-col items-center text-sm"
                   key={index}
-                  onClick={openModal}
+                  onClick={openPostModal}
                 >
                   {navIcons[index]}
                   <div>{element}</div>
@@ -121,7 +131,14 @@ const Navbar = () => {
             {isMenuOpen && <MenuModal menuItems={menuItems} />}
           </div>
         </div>
-        <AddPost isOpen={isModalOpen} closeModal={closeModal} />
+        <PostModal
+          title="Add a new post"
+          placeholder={`What's on your mind, ${user.firstName}?`}
+          isOpen={isPostModalOpen}
+          closePostModal={closePostModal}
+          button="Post"
+          onSubmit={onSubmit}
+        />
       </nav>
     </header>
   );

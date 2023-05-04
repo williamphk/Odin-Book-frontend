@@ -6,11 +6,21 @@ const InputField = ({
   id,
   type,
   placeholder,
+  value,
+  setPostContent,
   labeltext,
   rows,
   validation,
   isTextArea = false,
 }) => {
+  const { onChange, ...rest } = register(id, validation);
+
+  // Create a custom handleChange function with the original onChange function inside
+  const handleChange = (e) => {
+    setPostContent(e.target.value);
+    onChange(e);
+  };
+
   return (
     <div className="flex flex-col">
       {type === "date" && (
@@ -24,9 +34,11 @@ const InputField = ({
           className="border border-gray-300 w-full p-2 rounded"
           id={id}
           placeholder={placeholder}
+          value={value}
+          onChange={handleChange}
           aria-label={labeltext}
           rows={rows}
-          {...register(id, validation)}
+          {...rest}
         />
       ) : (
         <input

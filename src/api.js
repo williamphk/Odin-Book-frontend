@@ -24,4 +24,23 @@ export const getNewsFeed = async (token) => {
   return response;
 };
 
+export const getPostContent = async (token, postId) => {
+  const response = await api.get("/posts/" + postId, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return response;
+};
+
+export const updatePost = async (updatedPost, token, postId) => {
+  const response = await api.put("/posts/" + postId, updatedPost, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return response;
+};
+
 export default api;

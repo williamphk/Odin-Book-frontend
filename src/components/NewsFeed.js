@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 
 import { getNewsFeed } from "../api";
 import Post from "./Post";
+import Loading from "./Loading";
 
 const NewsFeed = () => {
   const token = useSelector((state) => state.auth.token);
@@ -26,7 +27,7 @@ const NewsFeed = () => {
   }, [token]);
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <Loading />;
   }
 
   if (error) {
@@ -34,10 +35,10 @@ const NewsFeed = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="min-h-screen bg-gray-100 p-3">
       <div className="container flex flex-col items-center">
-        {posts.data.posts.map((post, index) => (
-          <Post post={post} key={index} />
+        {posts.data.posts.map((post) => (
+          <Post post={post} key={post._id} id={post._id} />
         ))}
       </div>
     </div>
