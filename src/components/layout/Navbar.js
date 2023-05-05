@@ -90,17 +90,17 @@ const Navbar = () => {
 
   return (
     <header>
-      <nav className="bg-purple-600 px-4 py-1">
+      <nav className="px-4 py-1">
         <div className="grid grid-cols-3">
-          <h1 className="flex justify-start self-center text-white font-bold text-3xl">
+          <h1 className="flex justify-start self-center text-purple-500 font-bold text-3xl">
             <Link to="/">Odin-book</Link>
           </h1>
 
-          <div className="flex justify-center gap-x-32">
+          <div className="flex justify-center gap-x-4">
             {navItems.map((element, index) => {
               return index === navItems.length - 1 ? (
                 <button
-                  className="text-white flex flex-col items-center text-sm"
+                  className="text-gray-500 flex flex-col items-center text-xs hover:bg-gray-100 rounded-lg w-32"
                   key={index}
                   onClick={openPostModal}
                 >
@@ -109,12 +109,15 @@ const Navbar = () => {
                 </button>
               ) : (
                 <button
-                  className="text-white flex flex-col items-center"
+                  className="flex flex-col items-center hover:bg-gray-100 rounded-lg w-32"
                   key={index}
                 >
-                  <Link to={navRoutes[element]} className="text-white text-sm">
+                  <Link
+                    to={navRoutes[element]}
+                    className="text-gray-500 text-xs w-full"
+                  >
                     {navIcons[index]}
-                    {element}
+                    <div>{element}</div>
                   </Link>
                 </button>
               );

@@ -117,4 +117,15 @@ export const getPostLikeList = async (token, postId) => {
   return response;
 };
 
+export const createPostLike = async (token, postId) => {
+  const response = await api.post(
+    "/posts/" + postId + "/likes",
+    {},
+    {
+      headers: { Authorization: `Bearer ${token}` },
+    }
+  );
+  return response;
+};
+
 export default api;

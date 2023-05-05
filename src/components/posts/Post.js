@@ -10,6 +10,7 @@ import {
   deletePost,
   getCommentList,
   getPostLikeList,
+  createPostLike,
 } from "../../api";
 import { incrementCreateOrUpdateCount } from "../../slices/postSlice";
 import CommentList from "../comments/CommentList";
@@ -124,6 +125,10 @@ const Post = ({ post, id }) => {
     fetchPostLikes();
   }, []);
 
+  const handleLikeButton = async () => {
+    await createPostLike(token, id);
+  };
+
   return (
     <div
       key={post._id}
@@ -151,7 +156,11 @@ const Post = ({ post, id }) => {
           </div>
         </div>
         <div className="relative">
-          <button onClick={togglePostMenu} ref={menuRef}>
+          <button
+            className="hover:bg-gray-100 rounded-full h-10 w-10 flex justify-center items-center"
+            onClick={togglePostMenu}
+            ref={menuRef}
+          >
             <MaterialIcon
               className="material-symbols-outlined text-3xl"
               iconName={"more_horiz"}
@@ -164,13 +173,27 @@ const Post = ({ post, id }) => {
         <p>{post.content}</p>
       </div>
       <div className="flex justify-between py-2">
-        {postLikes && <button>Number of likes:{postLikes.length}</button>}
-        <button className="hover:underline" onClick={handleCommentShow}>
+        {postLikes && (
+          <button className="flex gap-x-1 items-center">
+            <MaterialIcon
+              className="material-symbols-outlined text-xl text-purple-500"
+              iconName={"thumb_up"}
+            />
+            {postLikes.length}
+          </button>
+        )}
+        <button
+          className="hover:underline text-gray-500 text-sm"
+          onClick={handleCommentShow}
+        >
           {comments.length} comments
         </button>
       </div>
       <div className="border-t border-b pt-1 pb-1 mb-3">
-        <button className="text-gray-500 font-medium hover:bg-gray-100 py-2 rounded w-1/2 disabled:hover:bg-transparent outline-plum-600">
+        <button
+          onClick={handleLikeButton}
+          className="text-gray-500 font-medium hover:bg-gray-100 py-2 rounded w-1/2 disabled:hover:bg-transparent outline-plum-600"
+        >
           Like
         </button>
         <button
