@@ -89,7 +89,7 @@ const Navbar = () => {
   };
 
   return (
-    <header>
+    <header className="sticky top-0 shadow-md bg-white z-10">
       <nav className="px-4 py-1">
         <div className="grid grid-cols-3">
           <h1 className="flex justify-start self-center text-purple-500 font-bold text-3xl">
