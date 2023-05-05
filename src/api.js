@@ -86,4 +86,20 @@ export const getCommentContent = async (token, postId, commentId) => {
   return response;
 };
 
+export const updateComment = async (
+  token,
+  postId,
+  commentId,
+  updatedComment
+) => {
+  const response = await api.put(
+    "/posts/" + postId + "/comments/" + commentId,
+    updatedComment,
+    {
+      headers: { Authorization: `Bearer ${token}` },
+    }
+  );
+  return response;
+};
+
 export default api;

@@ -1,12 +1,15 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useSelector } from "react-redux";
 
 import MaterialIcon from "./MaterialIcon";
 import InputField from "./InputField";
-import { createComment } from "../api";
 
-const CommentField = ({ postId, commentContent, setCommentContent }) => {
+const CommentField = ({
+  commentContent,
+  setCommentContent,
+  placeholder,
+  onSubmit,
+}) => {
   const {
     register,
     handleSubmit,
@@ -14,15 +17,9 @@ const CommentField = ({ postId, commentContent, setCommentContent }) => {
     formState: { errors },
   } = useForm();
 
-  const token = useSelector((state) => state.auth.token);
-
-  const handleCommentSubmit = async (data) => {
-    await createComment(data, token, postId);
-  };
-
   return (
     <form
-      onSubmit={handleSubmit(handleCommentSubmit)}
+      onSubmit={handleSubmit(onSubmit)}
       className="relative w-full flex justify-end"
     >
       <InputField
@@ -30,7 +27,7 @@ const CommentField = ({ postId, commentContent, setCommentContent }) => {
         errors={errors}
         id="content"
         type="text"
-        placeholder="Write a comment..."
+        placeholder={placeholder || "Write a comment..."}
         value={commentContent}
         setPostContent={setCommentContent}
         inputClassName="textborder bg-gray-100 w-full p-2 rounded-lg focus:outline-none"

@@ -176,7 +176,9 @@ const Post = ({ post, id }) => {
           buttonHoverColor="bg-red-600"
         />
       )}
-      {isCommentShow && <CommentList postId={id} comments={comments} />}
+      {isCommentShow && (
+        <CommentList postId={id} comments={comments} token={token} />
+      )}
     </div>
   );
 };

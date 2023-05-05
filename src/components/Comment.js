@@ -1,20 +1,21 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
 
 import CommentField from "./CommentField";
-import { getCommentContent } from "../api";
+import { getCommentContent, updateComment } from "../api";
 
-const Comment = ({ comment, postId, commentId }) => {
-  const token = useSelector((state) => state.auth.token);
-
+const Comment = ({ comment, postId, commentId, token }) => {
   const [isEdit, setIsEdit] = useState(false);
   const [commentContent, setCommentContent] = useState("");
 
   const handleEditButton = async () => {
     setIsEdit(!isEdit);
     const response = await getCommentContent(token, postId, commentId);
-    console.log(postId, commentId);
     setCommentContent(response.data.comment.content);
+  };
+
+  const onSubmit = async (data) => {
+    const response = updateComment(token, postId, commentId, data);
+    return response;
   };
 
   return (
@@ -27,7 +28,13 @@ const Comment = ({ comment, postId, commentId }) => {
         />
       </button>
       {isEdit ? (
-        <CommentField postId={postId} commentContent={commentContent} />
+        <CommentField
+          postId={postId}
+          commentContent={commentContent}
+          placeholder="Loading..."
+          onSubmit={onSubmit}
+          setCommentContent={setCommentContent}
+        />
       ) : (
         <div className="flex flex-col items-start">
           <div className="flex flex-col bg-gray-100 rounded-xl px-3 py-1 text-sm items-start">
@@ -40,6 +47,7 @@ const Comment = ({ comment, postId, commentId }) => {
               Edit
             </button>
             <button className="pl-1 text-sm">Delete</button>
+            <div>{comment.createdAt}</div>
           </div>
         </div>
       )}
