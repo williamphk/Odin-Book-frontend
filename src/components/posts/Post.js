@@ -14,6 +14,7 @@ import {
 } from "../../api";
 import { incrementCreateOrUpdateCount } from "../../slices/postSlice";
 import CommentList from "../comments/CommentList";
+import AddComment from "../comments/AddComment";
 import FormattedDate from "../common/FormattedDate";
 
 const Post = ({ post, id }) => {
@@ -26,6 +27,7 @@ const Post = ({ post, id }) => {
   const [postLikes, setPostLikes] = useState([]);
 
   const token = useSelector((state) => state.auth.token);
+
   const createOrUpdateCount = useSelector(
     (state) => state.comment.createOrUpdateCount
   );
@@ -189,17 +191,25 @@ const Post = ({ post, id }) => {
           {comments.length} comments
         </button>
       </div>
-      <div className="border-t border-b pt-1 pb-1 mb-3">
+      <div className="flex border-t border-b pt-1 pb-1 mb-3">
         <button
           onClick={handleLikeButton}
-          className="text-gray-500 font-medium hover:bg-gray-100 py-2 rounded w-1/2 disabled:hover:bg-transparent outline-plum-600"
+          className="text-gray-500 font-medium hover:bg-gray-100 py-2 rounded w-1/2 flex items-center justify-center gap-x-2"
         >
-          Like
+          <MaterialIcon
+            className="material-symbols-outlined text-xl"
+            iconName={"thumb_up"}
+          />
+          <div>Like</div>
         </button>
         <button
-          className="text-gray-500 font-medium hover:bg-gray-100 py-2 rounded w-1/2 disabled:hover:bg-transparent outline-plum-600"
+          className="text-gray-500 font-medium hover:bg-gray-100 py-2 rounded w-1/2 flex items-center justify-center gap-x-2"
           onClick={handleCommentShow}
         >
+          <MaterialIcon
+            className="material-symbols-outlined text-xl"
+            iconName={"add_comment"}
+          />
           Comment
         </button>
       </div>
@@ -227,6 +237,7 @@ const Post = ({ post, id }) => {
       {isCommentShow && (
         <CommentList postId={id} comments={comments} token={token} />
       )}
+      <AddComment postId={id} token={token} />
     </div>
   );
 };

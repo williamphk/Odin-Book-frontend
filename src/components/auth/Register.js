@@ -61,6 +61,7 @@ const Register = () => {
             type="text"
             placeholder="First Name:"
             labeltext="First Name"
+            requiredError={true}
             validation={{
               required: "First Name is required",
             }}
@@ -73,6 +74,7 @@ const Register = () => {
             type="text"
             placeholder="Last Name:"
             labeltext="Last Name"
+            requiredError={true}
             validation={{
               required: "Last Name is required",
             }}
@@ -85,6 +87,7 @@ const Register = () => {
             type="email"
             placeholder="Email:"
             labeltext="Email"
+            requiredError={true}
             validation={{
               required: "Email is required",
               pattern: {
@@ -101,6 +104,7 @@ const Register = () => {
             type="password"
             placeholder="Password:"
             labeltext="Password"
+            requiredError={true}
             validation={{
               required: "Password is required",
               minLength: {
@@ -117,6 +121,7 @@ const Register = () => {
             type="password"
             placeholder="Confirm Password:"
             labeltext="Confirm Password"
+            requiredError={true}
             validation={{
               required: "Confirm Password is required",
               minLength: {
@@ -133,6 +138,7 @@ const Register = () => {
             type="date"
             placeholder="Birthday:"
             labeltext="Birthday"
+            requiredError={true}
             validation={{
               required: "Birthday is required",
             }}

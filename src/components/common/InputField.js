@@ -12,6 +12,7 @@ const InputField = ({
   labeltext,
   rows,
   validation,
+  requiredError,
   isTextArea = false,
 }) => {
   const { onChange, ...rest } = register(id, validation);
@@ -54,9 +55,11 @@ const InputField = ({
         />
       )}
 
-      <div className="h-5">
-        <span className="text-red-500 text-sm">{errors[id]?.message}</span>
-      </div>
+      {requiredError && (
+        <div className="h-5">
+          <span className="text-red-500 text-sm">{errors[id]?.message}</span>
+        </div>
+      )}
     </div>
   );
 };

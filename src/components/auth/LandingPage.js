@@ -48,6 +48,7 @@ const LandingPage = () => {
             type="email"
             placeholder="Email:"
             labeltext="Email"
+            requiredError={true}
             validation={{
               required: "Email is required",
               pattern: {
@@ -64,6 +65,7 @@ const LandingPage = () => {
             type="password"
             placeholder="Password:"
             labeltext="Password"
+            requiredError={true}
             validation={{
               required: "Password is required",
               minLength: {
