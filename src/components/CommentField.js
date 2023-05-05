@@ -1,20 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useSelector } from "react-redux";
 
 import MaterialIcon from "./MaterialIcon";
 import InputField from "./InputField";
+import { createComment } from "../api";
 
-const CommentField = ({
-  setCommentContent,
-  handleCommentSubmit,
-  commentContent,
-}) => {
+const CommentField = ({ id }) => {
   const {
     register,
     handleSubmit,
     setError,
     formState: { errors },
   } = useForm();
+
+  const token = useSelector((state) => state.auth.token);
+  const [commentContent, setCommentContent] = useState("");
+
+  const handleCommentSubmit = async (data) => {
+    await createComment(data, token, id);
+  };
+
   return (
     <form
       onSubmit={handleSubmit(handleCommentSubmit)}

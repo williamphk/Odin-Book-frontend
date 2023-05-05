@@ -4,13 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import MaterialIcon from "./MaterialIcon";
 import PostModal from "./PostModal";
 import MenuModal from "./MenuModal";
-import {
-  getPostContent,
-  updatePost,
-  deletePost,
-  getCommentList,
-  createComment,
-} from "../api";
+import { getPostContent, updatePost, deletePost, getCommentList } from "../api";
 import { incrementCreateOrUpdateCount } from "../slices/postSlice";
 import CommentList from "./CommentList";
 
@@ -20,7 +14,6 @@ const Post = ({ post, id }) => {
   const [isPostDeleteModalOpen, setIsPostDeleteModalOpen] = useState(false);
   const [postContent, setPostContent] = useState("loading...");
   const [isCommentShow, setIsCommentShow] = useState(false);
-  const [commentContent, setCommentContent] = useState("");
   const [comments, setComments] = useState([]);
 
   const token = useSelector((state) => state.auth.token);
@@ -111,10 +104,6 @@ const Post = ({ post, id }) => {
     fetchComments();
   }, [isCommentShow]);
 
-  const handleCommentSubmit = async (data) => {
-    await createComment(data, token, id);
-  };
-
   return (
     <div
       key={post._id}
@@ -188,14 +177,7 @@ const Post = ({ post, id }) => {
           buttonHoverColor="bg-red-600"
         />
       )}
-      {isCommentShow && (
-        <CommentList
-          setCommentContent={setCommentContent}
-          handleCommentSubmit={handleCommentSubmit}
-          commentContent={commentContent}
-          comments={comments}
-        />
-      )}
+      {isCommentShow && <CommentList id={id} comments={comments} />}
     </div>
   );
 };

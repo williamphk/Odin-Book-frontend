@@ -2,12 +2,7 @@ import React, { useState } from "react";
 
 import CommentField from "./CommentField";
 
-const Comment = ({
-  comment,
-  setCommentContent,
-  handleCommentSubmit,
-  commentContent,
-}) => {
+const Comment = ({ comment, id }) => {
   const [isEdit, setIsEdit] = useState(false);
 
   const handleEditButton = () => {
@@ -24,11 +19,7 @@ const Comment = ({
         />
       </button>
       {isEdit ? (
-        <CommentField
-          setCommentContent={setCommentContent}
-          handleCommentSubmit={handleCommentSubmit}
-          commentContent={commentContent}
-        />
+        <CommentField id={id} />
       ) : (
         <div className="flex flex-col items-start">
           <div className="flex flex-col bg-gray-100 rounded-xl px-3 py-1 text-sm items-start">
