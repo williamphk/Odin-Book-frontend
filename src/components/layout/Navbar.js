@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { logout } from "../../features/auth/authSlice";
+import { logout } from "../../slices/authSlice";
 
 import MenuModal from "../common/MenuModal";
 import PostModal from "../posts/PostModal";

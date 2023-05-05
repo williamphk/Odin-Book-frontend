@@ -1,7 +1,7 @@
 import "./App.css";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { login } from "./features/auth/authSlice";
+import { login } from "./slices/authSlice";
 import jwt_decode from "jwt-decode";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
