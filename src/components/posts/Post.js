@@ -27,6 +27,7 @@ const Post = ({ post, id }) => {
   const [postLikes, setPostLikes] = useState([]);
 
   const token = useSelector((state) => state.auth.token);
+  const user = useSelector((state) => state.auth.user);
 
   const createOrUpdateCount = useSelector(
     (state) => state.comment.createOrUpdateCount
@@ -131,6 +132,10 @@ const Post = ({ post, id }) => {
     await createPostLike(token, id);
   };
 
+  const isPostLikedByUser = postLikes.some(
+    (like) => like.user._id === user._id
+  );
+
   return (
     <div
       key={post._id}
@@ -197,10 +202,21 @@ const Post = ({ post, id }) => {
           className="text-gray-500 font-medium hover:bg-gray-100 py-2 rounded w-1/2 flex items-center justify-center gap-x-2"
         >
           <MaterialIcon
-            className="material-symbols-outlined text-xl"
+            className={`material-symbols-outlined text-xl ${
+              isPostLikedByUser ? "text-purple-600" : "text-gray-500"
+            }`}
             iconName={"thumb_up"}
           />
-          <div>Like</div>
+
+          <div
+            className={
+              isPostLikedByUser
+                ? "text-purple-600" // Purple when user has liked the post
+                : "text-gray-500" // Default color when user hasn't liked the post
+            }
+          >
+            Like
+          </div>
         </button>
         <button
           className="text-gray-500 font-medium hover:bg-gray-100 py-2 rounded w-1/2 flex items-center justify-center gap-x-2"

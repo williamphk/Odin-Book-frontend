@@ -31,7 +31,7 @@ const Comment = ({ comment, postId, commentId, token }) => {
   };
 
   return (
-    <div className="flex m-y-1 gap-x-2" id={commentId}>
+    <div className="flex m-y-1 gap-x-2 mb-1" id={commentId}>
       <button>
         <img
           src={comment.user.profile.picture}
@@ -49,7 +49,7 @@ const Comment = ({ comment, postId, commentId, token }) => {
         />
       ) : (
         <div className="flex flex-col items-start">
-          <div className="flex flex-col bg-gray-100 rounded-xl px-3 py-1 text-sm items-start">
+          <div className="flex flex-col bg-gray-100 rounded-xl px-3 py-1 text-sm items-start mb-1">
             <button className="font-medium">
               {comment.user.profile.fullName}
             </button>
