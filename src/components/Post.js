@@ -12,7 +12,7 @@ import {
   createComment,
 } from "../api";
 import { incrementCreateOrUpdateCount } from "../slices/postSlice";
-import Comment from "./Comment";
+import CommentList from "./CommentList";
 
 const Post = ({ post, id }) => {
   const [isPostMenuOpen, setPostMenuOpen] = useState(false);
@@ -189,7 +189,7 @@ const Post = ({ post, id }) => {
         />
       )}
       {isCommentShow && (
-        <Comment
+        <CommentList
           setCommentContent={setCommentContent}
           handleCommentSubmit={handleCommentSubmit}
           commentContent={commentContent}
