@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 
 import CommentField from "./CommentField";
-import { getCommentContent, updateComment } from "../api";
+import { getCommentContent, updateComment, deleteComment } from "../api";
+import FormattedDate from "./FormattedDate";
 
 const Comment = ({ comment, postId, commentId, token }) => {
   const [isEdit, setIsEdit] = useState(false);
@@ -13,8 +14,13 @@ const Comment = ({ comment, postId, commentId, token }) => {
     setCommentContent(response.data.comment.content);
   };
 
+  const handleDeleteButton = async () => {
+    await deleteComment(token, postId, commentId);
+  };
+
   const onSubmit = async (data) => {
     const response = updateComment(token, postId, commentId, data);
+    setIsEdit(!isEdit);
     return response;
   };
 
@@ -41,13 +47,18 @@ const Comment = ({ comment, postId, commentId, token }) => {
             <button>{comment.user.profile.fullName}</button>
             <div>{comment.content}</div>
           </div>
-          <div className="flex gap-x-2 pl-2">
+          <div className="flex gap-x-2 pl-2 items-center">
             <button className="pl-1 text-sm">Like</button>
             <button className="pl-1 text-sm" onClick={handleEditButton}>
               Edit
             </button>
-            <button className="pl-1 text-sm">Delete</button>
-            <div>{comment.createdAt}</div>
+            <button className="pl-1 text-sm" onClick={handleDeleteButton}>
+              Delete
+            </button>
+            <FormattedDate
+              className="pl-1 text-xs text-gray-500"
+              date={new Date(comment.createdAt)}
+            />
           </div>
         </div>
       )}

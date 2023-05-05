@@ -7,6 +7,7 @@ import MenuModal from "./MenuModal";
 import { getPostContent, updatePost, deletePost, getCommentList } from "../api";
 import { incrementCreateOrUpdateCount } from "../slices/postSlice";
 import CommentList from "./CommentList";
+import FormattedDate from "./FormattedDate";
 
 const Post = ({ post, id }) => {
   const [isPostMenuOpen, setPostMenuOpen] = useState(false);
@@ -122,7 +123,11 @@ const Post = ({ post, id }) => {
             <p className="font-bold hover:underline cursor-pointer">
               {post.user.profile.fullName}
             </p>
-            <p>{formatDate(post.createdAt)}</p>
+
+            <FormattedDate
+              className="pl-1 text-sm text-gray-500"
+              date={new Date(post.createdAt)}
+            ></FormattedDate>
           </div>
         </div>
         <div className="relative">

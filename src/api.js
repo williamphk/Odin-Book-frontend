@@ -102,4 +102,12 @@ export const updateComment = async (
   return response;
 };
 
+export const deleteComment = async (token, postId, commentId) => {
+  const response = await api.delete(
+    "/posts/" + postId + "/comments/" + commentId,
+    { headers: { Authorization: `Bearer ${token}` } }
+  );
+  return response;
+};
+
 export default api;
