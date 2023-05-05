@@ -43,4 +43,35 @@ export const updatePost = async (updatedPost, token, postId) => {
   return response;
 };
 
+export const deletePost = async (token, postId) => {
+  const response = await api.delete("/posts/" + postId, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return response;
+};
+
+export const getCommentList = async (token, postId) => {
+  const response = await api.get("/posts/" + postId + "/comments", {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return response;
+};
+
+export const createComment = async (newComment, token, postId) => {
+  const response = await api.post(
+    "/posts/" + postId + "/comments",
+    newComment,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+  return response;
+};
+
 export default api;

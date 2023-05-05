@@ -1,27 +1,53 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useForm } from "react-hook-form";
 
 import MaterialIcon from "./MaterialIcon";
 import PostModal from "./PostModal";
 import MenuModal from "./MenuModal";
-import { getPostContent, updatePost } from "../api";
+import {
+  getPostContent,
+  updatePost,
+  deletePost,
+  getCommentList,
+  createComment,
+} from "../api";
 import { incrementCreateOrUpdateCount } from "../slices/postSlice";
+import InputField from "./InputField";
 
 const Post = ({ post, id }) => {
   const [isPostMenuOpen, setPostMenuOpen] = useState(false);
-  const [isPostModalOpen, setIsPostModalOpen] = useState(false);
+  const [isPostEditModalOpen, setIsPostEditModalOpen] = useState(false);
+  const [isPostDeleteModalOpen, setIsPostDeleteModalOpen] = useState(false);
   const [postContent, setPostContent] = useState("loading...");
+  const [isCommentShow, setIsCommentShow] = useState(false);
+  const [commentContent, setCommentContent] = useState("");
+
+  const {
+    register,
+    handleSubmit,
+    setError,
+    formState: { errors },
+  } = useForm();
 
   const token = useSelector((state) => state.auth.token);
+  const user = useSelector((state) => state.auth.user);
 
-  const openPostModal = async () => {
-    setIsPostModalOpen(true);
+  const openPostEditModal = async () => {
+    setIsPostEditModalOpen(true);
+    const response = await getPostContent(token, id);
+    setPostContent(response.data.post.content);
+  };
+
+  const openPostDeleteModal = async () => {
+    setIsPostDeleteModalOpen(true);
     const response = await getPostContent(token, id);
     setPostContent(response.data.post.content);
   };
 
   const closePostModal = () => {
-    setIsPostModalOpen(false);
+    setIsPostEditModalOpen(false);
+    setIsPostDeleteModalOpen(false);
   };
 
   function formatDate(date) {
@@ -29,18 +55,16 @@ const Post = ({ post, id }) => {
     return inputDate.toLocaleDateString("en-US");
   }
 
-  const handlePostDelete = () => {};
-
   const menuItems = [
     {
       name: "Edit",
       isLink: false,
-      onClick: openPostModal,
+      onClick: openPostEditModal,
     },
     {
       name: "Delete",
       isLink: false,
-      onClick: handlePostDelete,
+      onClick: openPostDeleteModal,
     },
   ];
 
@@ -67,10 +91,27 @@ const Post = ({ post, id }) => {
 
   const dispatch = useDispatch();
 
-  const onSubmit = (data) => {
+  const onEditSubmit = (data) => {
     updatePost(data, token, id);
     closePostModal();
     dispatch(incrementCreateOrUpdateCount());
+  };
+
+  const onDeleteSubmit = () => {
+    deletePost(token, id);
+    closePostModal();
+    dispatch(incrementCreateOrUpdateCount());
+  };
+
+  const handleCommentShow = async () => {
+    setIsCommentShow(!isCommentShow);
+    const response = await getCommentList(token, id);
+    console.log(response);
+  };
+
+  const handleCommentSubmit = async (data) => {
+    const response = await createComment(data, token, id);
+    console.log(response);
   };
 
   return (
@@ -110,17 +151,22 @@ const Post = ({ post, id }) => {
       </div>
       <div className="flex justify-between py-2">
         <button>Number of likes</button>
-        <button>Number of comments</button>
+        <button className="hover:underline" onClick={handleCommentShow}>
+          Number of comments
+        </button>
       </div>
-      <div className="border-t pt-1 pb-1">
+      <div className="border-t border-b pt-1 pb-1 mb-3">
         <button className="text-gray-500 font-medium hover:bg-gray-100 py-2 rounded w-1/2 disabled:hover:bg-transparent outline-plum-600">
           Like
         </button>
-        <button className="text-gray-500 font-medium hover:bg-gray-100 py-2 rounded w-1/2 disabled:hover:bg-transparent outline-plum-600">
+        <button
+          className="text-gray-500 font-medium hover:bg-gray-100 py-2 rounded w-1/2 disabled:hover:bg-transparent outline-plum-600"
+          onClick={handleCommentShow}
+        >
           Comment
         </button>
       </div>
-      {isPostModalOpen && (
+      {isPostEditModalOpen && (
         <PostModal
           title="Edit"
           value={postContent}
@@ -128,8 +174,56 @@ const Post = ({ post, id }) => {
           closePostModal={closePostModal}
           requiredInputField={true}
           button="Save"
-          onSubmit={onSubmit}
+          onSubmit={onEditSubmit}
         />
+      )}
+      {isPostDeleteModalOpen && (
+        <PostModal
+          title="Delete"
+          closePostModal={closePostModal}
+          button="Confirm"
+          onSubmit={onDeleteSubmit}
+          buttonColor="bg-red-500"
+          buttonHoverColor="bg-red-600"
+        />
+      )}
+      {isCommentShow && (
+        <div className="flex gap-x-2 items-start">
+          <button>
+            <img
+              src={user.picture}
+              alt="Profile picture"
+              className="w-10 h-10 rounded-full"
+            />
+          </button>
+          <form
+            onSubmit={handleSubmit(handleCommentSubmit)}
+            className="relative w-full flex justify-end"
+          >
+            <InputField
+              register={register}
+              errors={errors}
+              id="content"
+              type="text"
+              placeholder="Write a comment..."
+              value={commentContent}
+              setPostContent={setCommentContent}
+              inputClassName="textborder bg-gray-100 w-full p-2 rounded-lg focus:outline-none"
+              rows={2}
+              isTextArea={true}
+              labeltext="Comment content"
+              validation={{
+                required: "Content is required",
+              }}
+            />
+            <button className="absolute top-9 right-6">
+              <MaterialIcon
+                className="material-symbols-outlined text-xl text-gray-500 absolute"
+                iconName={"send"}
+              />
+            </button>
+          </form>
+        </div>
       )}
     </div>
   );

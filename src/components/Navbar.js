@@ -90,7 +90,7 @@ const Navbar = () => {
 
   return (
     <header>
-      <nav className="bg-purple-600 px-4 py-2">
+      <nav className="bg-purple-600 px-4 py-1">
         <div className="grid grid-cols-3">
           <h1 className="flex justify-start self-center text-white font-bold text-3xl">
             <Link to="/">Odin-book</Link>

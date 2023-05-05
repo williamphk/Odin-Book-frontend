@@ -14,6 +14,8 @@ const PostModal = ({
   requiredInputField,
   button,
   onSubmit,
+  buttonColor,
+  buttonHoverColor,
 }) => {
   const {
     register,
@@ -58,8 +60,14 @@ const PostModal = ({
             />
           )}
           <button
-            type="submit"
-            className="bg-blue-500 text-white px-4 py-2 rounded shadow-md hover:bg-blue-600 transition duration-200"
+            className={`${
+              buttonColor || "bg-blue-500"
+            } text-white px-4 py-2 rounded shadow-md ${
+              buttonHoverColor
+                ? "hover:" + buttonHoverColor
+                : "hover:bg-blue-600"
+            }
+            transition duration-200`}
           >
             {button}
           </button>

@@ -8,6 +8,7 @@ const InputField = ({
   placeholder,
   value,
   setPostContent,
+  inputClassName,
   labeltext,
   rows,
   validation,
@@ -22,7 +23,7 @@ const InputField = ({
   };
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col w-full">
       {type === "date" && (
         <label className="text-sm" htmlFor={id}>
           {placeholder}
@@ -31,7 +32,9 @@ const InputField = ({
 
       {isTextArea ? (
         <textarea
-          className="border border-gray-300 w-full p-2 rounded"
+          className={
+            inputClassName || "border border-gray-300 w-full p-2 rounded"
+          }
           id={id}
           placeholder={placeholder}
           value={value}
