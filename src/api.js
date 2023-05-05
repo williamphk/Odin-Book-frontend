@@ -74,4 +74,16 @@ export const createComment = async (newComment, token, postId) => {
   return response;
 };
 
+export const getCommentContent = async (token, postId, commentId) => {
+  const response = await api.get(
+    "/posts/" + postId + "/comments/" + commentId,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+  return response;
+};
+
 export default api;

@@ -6,7 +6,7 @@ import MaterialIcon from "./MaterialIcon";
 import InputField from "./InputField";
 import { createComment } from "../api";
 
-const CommentField = ({ id }) => {
+const CommentField = ({ postId, commentContent, setCommentContent }) => {
   const {
     register,
     handleSubmit,
@@ -15,10 +15,9 @@ const CommentField = ({ id }) => {
   } = useForm();
 
   const token = useSelector((state) => state.auth.token);
-  const [commentContent, setCommentContent] = useState("");
 
   const handleCommentSubmit = async (data) => {
-    await createComment(data, token, id);
+    await createComment(data, token, postId);
   };
 
   return (

@@ -73,7 +73,6 @@ const Post = ({ post, id }) => {
       document.removeEventListener("click", handleClickOutside);
     };
   }, []);
-  console.log(comments);
 
   const dispatch = useDispatch();
 
@@ -177,7 +176,7 @@ const Post = ({ post, id }) => {
           buttonHoverColor="bg-red-600"
         />
       )}
-      {isCommentShow && <CommentList id={id} comments={comments} />}
+      {isCommentShow && <CommentList postId={id} comments={comments} />}
     </div>
   );
 };

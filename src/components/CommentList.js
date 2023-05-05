@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import CommentField from "./CommentField";
 import Comment from "./Comment";
 
-const CommentList = ({ id, comments }) => {
+const CommentList = ({ postId, comments }) => {
   const user = useSelector((state) => state.auth.user);
 
   return (
@@ -17,11 +17,11 @@ const CommentList = ({ id, comments }) => {
             className="w-10 h-10 rounded-full"
           />
         </button>
-        <CommentField id={id} />
+        <CommentField postId={postId} />
       </div>
       <div>
         {comments.map((comment) => (
-          <Comment comment={comment} id={id} />
+          <Comment comment={comment} postId={postId} commentId={comment._id} />
         ))}
       </div>
     </div>

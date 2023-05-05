@@ -1,16 +1,24 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 
 import CommentField from "./CommentField";
+import { getCommentContent } from "../api";
 
-const Comment = ({ comment, id }) => {
+const Comment = ({ comment, postId, commentId }) => {
+  const token = useSelector((state) => state.auth.token);
+
   const [isEdit, setIsEdit] = useState(false);
+  const [commentContent, setCommentContent] = useState("");
 
-  const handleEditButton = () => {
+  const handleEditButton = async () => {
     setIsEdit(!isEdit);
+    const response = await getCommentContent(token, postId, commentId);
+    console.log(postId, commentId);
+    setCommentContent(response.data.comment.content);
   };
 
   return (
-    <div className="flex m-1 gap-x-2">
+    <div className="flex m-1 gap-x-2" id={commentId}>
       <button>
         <img
           src={comment.user.profile.picture}
@@ -19,7 +27,7 @@ const Comment = ({ comment, id }) => {
         />
       </button>
       {isEdit ? (
-        <CommentField id={id} />
+        <CommentField postId={postId} commentContent={commentContent} />
       ) : (
         <div className="flex flex-col items-start">
           <div className="flex flex-col bg-gray-100 rounded-xl px-3 py-1 text-sm items-start">
