@@ -1,5 +1,6 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { incrementCreateOrUpdateCount } from "../slices/commentSlice";
 
 import CommentField from "./CommentField";
 import Comment from "./Comment";
@@ -8,8 +9,11 @@ import { createComment } from "../api";
 const CommentList = ({ postId, comments, token }) => {
   const user = useSelector((state) => state.auth.user);
 
+  const dispatch = useDispatch();
+
   const onSubmit = async (data) => {
     await createComment(data, token, postId);
+    dispatch(incrementCreateOrUpdateCount());
   };
 
   return (

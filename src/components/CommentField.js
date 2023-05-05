@@ -30,7 +30,7 @@ const CommentField = ({
         placeholder={placeholder || "Write a comment..."}
         value={commentContent}
         setPostContent={setCommentContent}
-        inputClassName="textborder bg-gray-100 w-full p-2 rounded-lg focus:outline-none"
+        inputClassName="textborder bg-gray-100 w-full p-2 rounded-lg focus:outline-none text-sm"
         rows={2}
         isTextArea={true}
         labeltext="Comment content"
@@ -38,7 +38,7 @@ const CommentField = ({
           required: "Content is required",
         }}
       />
-      <button className="absolute top-9 right-6">
+      <button className="absolute top-7 right-7">
         <MaterialIcon
           className="material-symbols-outlined text-xl text-gray-500 absolute"
           iconName={"send"}

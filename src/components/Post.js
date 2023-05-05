@@ -18,6 +18,9 @@ const Post = ({ post, id }) => {
   const [comments, setComments] = useState([]);
 
   const token = useSelector((state) => state.auth.token);
+  const createOrUpdateCount = useSelector(
+    (state) => state.comment.createOrUpdateCount
+  );
 
   const openPostEditModal = async () => {
     setIsPostEditModalOpen(true);
@@ -102,7 +105,7 @@ const Post = ({ post, id }) => {
     };
 
     fetchComments();
-  }, [isCommentShow]);
+  }, [isCommentShow, createOrUpdateCount]);
 
   return (
     <div
