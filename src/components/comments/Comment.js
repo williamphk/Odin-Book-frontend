@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 
 import CommentField from "./CommentField";
-import { getCommentContent, updateComment, deleteComment } from "../api";
-import FormattedDate from "./FormattedDate";
-import { incrementCreateOrUpdateCount } from "../slices/commentSlice";
+import { getCommentContent, updateComment, deleteComment } from "../../api";
+import FormattedDate from "../common/FormattedDate";
+import { incrementCreateOrUpdateCount } from "../../slices/commentSlice";
 import { useDispatch } from "react-redux";
 
 const Comment = ({ comment, postId, commentId, token }) => {

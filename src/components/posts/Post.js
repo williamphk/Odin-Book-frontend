@@ -1,13 +1,18 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-import MaterialIcon from "./MaterialIcon";
+import MaterialIcon from "../common/MaterialIcon";
 import PostModal from "./PostModal";
-import MenuModal from "./MenuModal";
-import { getPostContent, updatePost, deletePost, getCommentList } from "../api";
-import { incrementCreateOrUpdateCount } from "../slices/postSlice";
-import CommentList from "./CommentList";
-import FormattedDate from "./FormattedDate";
+import MenuModal from "../common/MenuModal";
+import {
+  getPostContent,
+  updatePost,
+  deletePost,
+  getCommentList,
+} from "../../api";
+import { incrementCreateOrUpdateCount } from "../../slices/postSlice";
+import CommentList from "../comments/CommentList";
+import FormattedDate from "../common/FormattedDate";
 
 const Post = ({ post, id }) => {
   const [isPostMenuOpen, setPostMenuOpen] = useState(false);

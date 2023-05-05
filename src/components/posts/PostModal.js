@@ -1,9 +1,9 @@
 import React from "react";
-import "./styles.css";
+import "../styles.css";
 import { useForm } from "react-hook-form";
 
-import MaterialIcon from "./MaterialIcon";
-import InputField from "./InputField";
+import MaterialIcon from "../common/MaterialIcon";
+import InputField from "../common/InputField";
 
 const PostModal = ({
   title,

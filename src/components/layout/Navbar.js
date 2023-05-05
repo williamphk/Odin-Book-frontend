@@ -1,13 +1,13 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { logout } from "../features/auth/authSlice";
+import { logout } from "../../features/auth/authSlice";
 
-import MenuModal from "./MenuModal";
-import PostModal from "./PostModal";
-import MaterialIcon from "./MaterialIcon";
-import { createPost } from "../api";
-import { incrementCreateOrUpdateCount } from "../slices/postSlice";
+import MenuModal from "../common/MenuModal";
+import PostModal from "../posts/PostModal";
+import MaterialIcon from "../common/MaterialIcon";
+import { createPost } from "../../api";
+import { incrementCreateOrUpdateCount } from "../../slices/postSlice";
 
 const Navbar = () => {
   const [isMenuOpen, setMenuOpen] = useState(false);

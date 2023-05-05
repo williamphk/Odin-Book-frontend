@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { signUp } from "../features/auth/authSlice";
+import { signUp } from "../../features/auth/authSlice";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 
-import InputField from "./InputField";
+import InputField from "../common/InputField";
 
-import "./styles.css";
+import "../styles.css";
 
 const Register = () => {
   const {

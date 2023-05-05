@@ -5,16 +5,16 @@ import { login } from "./features/auth/authSlice";
 import jwt_decode from "jwt-decode";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
-import Navbar from "./components/Navbar";
-import LandingPage from "./components/LandingPage";
-import Register from "./components/Register";
-import NewsFeed from "./components/NewsFeed";
-import Profile from "./components/Profile";
-import Friends from "./components/Friends";
-import Setting from "./components/Setting";
-import Loading from "./components/Loading";
-import Footer from "./components/Footer";
-import ProtectedRoute from "./components/ProtectedRoute";
+import Navbar from "./components/layout/Navbar";
+import LandingPage from "./components/auth/LandingPage";
+import Register from "./components/auth/Register";
+import NewsFeed from "./components/posts/NewsFeed";
+import Profile from "./components/profile/Profile";
+import Friends from "./components/friends/Friends";
+import Setting from "./components/settings/Setting";
+import Loading from "./components/common/Loading";
+import Footer from "./components/layout/Footer";
+import ProtectedRoute from "./components/auth/ProtectedRoute";
 
 function App() {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
