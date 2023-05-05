@@ -9,6 +9,7 @@ import {
   updatePost,
   deletePost,
   getCommentList,
+  getPostLikeList,
 } from "../../api";
 import { incrementCreateOrUpdateCount } from "../../slices/postSlice";
 import CommentList from "../comments/CommentList";
@@ -21,6 +22,7 @@ const Post = ({ post, id }) => {
   const [postContent, setPostContent] = useState("loading...");
   const [isCommentShow, setIsCommentShow] = useState(false);
   const [comments, setComments] = useState([]);
+  const [postLikes, setPostLikes] = useState([]);
 
   const token = useSelector((state) => state.auth.token);
   const createOrUpdateCount = useSelector(
@@ -43,11 +45,6 @@ const Post = ({ post, id }) => {
     setIsPostEditModalOpen(false);
     setIsPostDeleteModalOpen(false);
   };
-
-  function formatDate(date) {
-    const inputDate = new Date(date);
-    return inputDate.toLocaleDateString("en-US");
-  }
 
   const menuItems = [
     {
@@ -106,11 +103,26 @@ const Post = ({ post, id }) => {
       try {
         const fetchedComments = await getCommentList(token, id);
         setComments(fetchedComments.data.comments);
-      } catch (err) {}
+      } catch (err) {
+        setComments(err);
+      }
     };
 
     fetchComments();
   }, [isCommentShow, createOrUpdateCount]);
+
+  useEffect(() => {
+    const fetchPostLikes = async () => {
+      try {
+        const fetchedLikes = await getPostLikeList(token, id);
+        setPostLikes(fetchedLikes.data.likes);
+      } catch (err) {
+        setPostLikes(err);
+      }
+    };
+
+    fetchPostLikes();
+  }, []);
 
   return (
     <div
@@ -152,7 +164,7 @@ const Post = ({ post, id }) => {
         <p>{post.content}</p>
       </div>
       <div className="flex justify-between py-2">
-        <button>Number of likes</button>
+        {postLikes && <button>Number of likes:{postLikes.length}</button>}
         <button className="hover:underline" onClick={handleCommentShow}>
           {comments.length} comments
         </button>
