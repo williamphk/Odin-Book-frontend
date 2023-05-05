@@ -1,6 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useForm } from "react-hook-form";
 
 import MaterialIcon from "./MaterialIcon";
 import PostModal from "./PostModal";
@@ -13,7 +12,7 @@ import {
   createComment,
 } from "../api";
 import { incrementCreateOrUpdateCount } from "../slices/postSlice";
-import InputField from "./InputField";
+import Comment from "./Comment";
 
 const Post = ({ post, id }) => {
   const [isPostMenuOpen, setPostMenuOpen] = useState(false);
@@ -22,16 +21,9 @@ const Post = ({ post, id }) => {
   const [postContent, setPostContent] = useState("loading...");
   const [isCommentShow, setIsCommentShow] = useState(false);
   const [commentContent, setCommentContent] = useState("");
-
-  const {
-    register,
-    handleSubmit,
-    setError,
-    formState: { errors },
-  } = useForm();
+  const [comments, setComments] = useState([]);
 
   const token = useSelector((state) => state.auth.token);
-  const user = useSelector((state) => state.auth.user);
 
   const openPostEditModal = async () => {
     setIsPostEditModalOpen(true);
@@ -88,6 +80,7 @@ const Post = ({ post, id }) => {
       document.removeEventListener("click", handleClickOutside);
     };
   }, []);
+  console.log(comments);
 
   const dispatch = useDispatch();
 
@@ -105,20 +98,28 @@ const Post = ({ post, id }) => {
 
   const handleCommentShow = async () => {
     setIsCommentShow(!isCommentShow);
-    const response = await getCommentList(token, id);
-    console.log(response);
   };
 
+  useEffect(() => {
+    const fetchComments = async () => {
+      try {
+        const fetchedComments = await getCommentList(token, id);
+        setComments(fetchedComments.data.comments);
+      } catch (err) {}
+    };
+
+    fetchComments();
+  }, [isCommentShow]);
+
   const handleCommentSubmit = async (data) => {
-    const response = await createComment(data, token, id);
-    console.log(response);
+    await createComment(data, token, id);
   };
 
   return (
     <div
       key={post._id}
       id={id}
-      className="bg-white w-1/2 rounded pt-4 px-4 mb-4 shadow"
+      className="bg-white w-1/2 rounded py-4 px-4 mb-4 shadow"
     >
       <div className="flex justify-between items-center">
         <div className="flex gap-x-2">
@@ -152,7 +153,7 @@ const Post = ({ post, id }) => {
       <div className="flex justify-between py-2">
         <button>Number of likes</button>
         <button className="hover:underline" onClick={handleCommentShow}>
-          Number of comments
+          {comments.length} comments
         </button>
       </div>
       <div className="border-t border-b pt-1 pb-1 mb-3">
@@ -188,42 +189,12 @@ const Post = ({ post, id }) => {
         />
       )}
       {isCommentShow && (
-        <div className="flex gap-x-2 items-start">
-          <button>
-            <img
-              src={user.picture}
-              alt="Profile picture"
-              className="w-10 h-10 rounded-full"
-            />
-          </button>
-          <form
-            onSubmit={handleSubmit(handleCommentSubmit)}
-            className="relative w-full flex justify-end"
-          >
-            <InputField
-              register={register}
-              errors={errors}
-              id="content"
-              type="text"
-              placeholder="Write a comment..."
-              value={commentContent}
-              setPostContent={setCommentContent}
-              inputClassName="textborder bg-gray-100 w-full p-2 rounded-lg focus:outline-none"
-              rows={2}
-              isTextArea={true}
-              labeltext="Comment content"
-              validation={{
-                required: "Content is required",
-              }}
-            />
-            <button className="absolute top-9 right-6">
-              <MaterialIcon
-                className="material-symbols-outlined text-xl text-gray-500 absolute"
-                iconName={"send"}
-              />
-            </button>
-          </form>
-        </div>
+        <Comment
+          setCommentContent={setCommentContent}
+          handleCommentSubmit={handleCommentSubmit}
+          commentContent={commentContent}
+          comments={comments}
+        />
       )}
     </div>
   );
