@@ -8,12 +8,15 @@ import PostModal from "../posts/PostModal";
 import MaterialIcon from "../common/MaterialIcon";
 import { createPost } from "../../api";
 import { incrementCreateOrUpdateCount } from "../../slices/postSlice";
+import { switchToFriends, switchToNewfeed } from "../../slices/pageSlice";
 
 const Navbar = () => {
   const [isMenuOpen, setMenuOpen] = useState(false);
 
   const user = useSelector((state) => state.auth.user);
   const token = useSelector((state) => state.auth.token);
+  const newsfeed = useSelector((state) => state.page.newsfeed);
+  const friends = useSelector((state) => state.page.friends);
 
   const onSubmit = (data) => {
     createPost(data, token);
@@ -53,6 +56,14 @@ const Navbar = () => {
     Home: "/",
     Friends: "/friends",
   };
+  const navSelected = {
+    Home: newsfeed,
+    Friends: friends,
+  };
+  const navOnClick = {
+    Home: () => dispatch(switchToNewfeed()),
+    Friends: () => dispatch(switchToFriends()),
+  };
 
   const navIconArray = ["home", "group", "post_add"];
   const navIcons = navIconArray.map((iconName) => (
@@ -90,7 +101,7 @@ const Navbar = () => {
 
   return (
     <header className="sticky top-0 shadow-md bg-white z-10">
-      <nav className="px-4 py-1">
+      <nav className="px-4">
         <div className="grid grid-cols-3">
           <h1 className="flex justify-start self-center text-purple-500 font-bold text-3xl">
             <Link to="/">Odin-book</Link>
@@ -111,10 +122,15 @@ const Navbar = () => {
                 <button
                   className="flex flex-col items-center hover:bg-gray-100 rounded-lg w-32"
                   key={index}
+                  onClick={navOnClick[element]}
                 >
                   <Link
                     to={navRoutes[element]}
-                    className="text-gray-500 text-xs w-full"
+                    className={`${
+                      navSelected[element]
+                        ? "text-purple-500 border-b-2 border-purple-500"
+                        : "text-gray-500"
+                    } text-xs w-full`}
                   >
                     {navIcons[index]}
                     <div>{element}</div>
