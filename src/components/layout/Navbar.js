@@ -103,11 +103,13 @@ const Navbar = () => {
     <header className="sticky top-0 shadow-md bg-white z-10">
       <nav className="px-4">
         <div className="grid grid-cols-3">
-          <h1 className="flex justify-start self-center text-purple-500 font-bold text-3xl">
-            <Link to="/">Odin-book</Link>
-          </h1>
+          <div>
+            <h1 className="sm:flex justify-start self-center text-purple-500 font-bold text-3xl hidden">
+              <Link to="/">Odin-book</Link>
+            </h1>
+          </div>
 
-          <div className="flex justify-center gap-x-4">
+          <div className="flex justify-center items-center gap-x-4">
             {navItems.map((element, index) => {
               return index === navItems.length - 1 ? (
                 <button
@@ -116,7 +118,7 @@ const Navbar = () => {
                   onClick={openPostModal}
                 >
                   {navIcons[index]}
-                  <div>{element}</div>
+                  <div className="hidden sm:block">{element}</div>
                 </button>
               ) : (
                 <button
@@ -133,7 +135,7 @@ const Navbar = () => {
                     } text-xs w-full`}
                   >
                     {navIcons[index]}
-                    <div>{element}</div>
+                    <div className="hidden sm:block">{element}</div>
                   </Link>
                 </button>
               );
