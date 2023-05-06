@@ -1,8 +1,8 @@
 import React from "react";
 
-const RightSidebar = ({ friends }) => {
+const RightSidebar = ({ friends, className }) => {
   return (
-    <div className="bg-gray-100 w-1/2 p-4">
+    <div className={className}>
       <h3 className="font-bold text-lg mb-4">Friends</h3>
       <ul>
         {friends.map((friend) => (

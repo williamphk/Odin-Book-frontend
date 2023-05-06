@@ -1,9 +1,9 @@
 // LeftSidebar.js
 import React from "react";
 
-const LeftSidebar = () => {
+const LeftSidebar = ({ className }) => {
   return (
-    <div className="flex flex-col bg-gray-100 p-4 w-1/2">
+    <div className={className}>
       <div className="flex items-center mb-4">
         <img
           src="https://via.placeholder.com/40"
