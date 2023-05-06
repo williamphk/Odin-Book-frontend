@@ -11,6 +11,7 @@ import {
   getCommentList,
   getPostLikeList,
   createPostLike,
+  deletePostLike,
 } from "../../api";
 import { incrementCreateOrUpdateCount } from "../../slices/postSlice";
 import CommentList from "../comments/CommentList";
@@ -25,6 +26,8 @@ const Post = ({ post, id }) => {
   const [isCommentShow, setIsCommentShow] = useState(false);
   const [comments, setComments] = useState([]);
   const [postLikes, setPostLikes] = useState([]);
+  const [isLike, setIsLike] = useState(false);
+  const [userLikeId, setUserLikeId] = useState(null);
 
   const token = useSelector((state) => state.auth.token);
   const user = useSelector((state) => state.auth.user);
@@ -126,15 +129,28 @@ const Post = ({ post, id }) => {
     };
 
     fetchPostLikes();
-  }, []);
+  }, [postLikes, isLike]);
 
-  const handleLikeButton = async () => {
-    await createPostLike(token, id);
+  const handleLikeButtonClick = () => {
+    if (isLike) {
+      // Delete the like
+      deletePostLike(token, id, userLikeId);
+    } else {
+      // Create a new like
+      createPostLike(token, id);
+    }
   };
 
-  const isPostLikedByUser = postLikes.some(
-    (like) => like.user._id === user._id
-  );
+  useEffect(() => {
+    const userLike = postLikes.find((like) => like.user._id === user._id);
+    if (userLike) {
+      setIsLike(true);
+      setUserLikeId(userLike._id);
+    } else {
+      setIsLike(false);
+      setUserLikeId(null);
+    }
+  }, [postLikes]);
 
   return (
     <div
@@ -198,19 +214,19 @@ const Post = ({ post, id }) => {
       </div>
       <div className="flex border-t border-b pt-1 pb-1 mb-3">
         <button
-          onClick={handleLikeButton}
+          onClick={handleLikeButtonClick}
           className="text-gray-500 font-medium hover:bg-gray-100 py-2 rounded w-1/2 flex items-center justify-center gap-x-2"
         >
           <MaterialIcon
             className={`material-symbols-outlined text-xl ${
-              isPostLikedByUser ? "text-purple-600" : "text-gray-500"
+              isLike ? "text-purple-600" : "text-gray-500"
             }`}
             iconName={"thumb_up"}
           />
 
           <div
             className={
-              isPostLikedByUser
+              isLike
                 ? "text-purple-600" // Purple when user has liked the post
                 : "text-gray-500" // Default color when user hasn't liked the post
             }

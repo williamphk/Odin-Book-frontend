@@ -128,4 +128,11 @@ export const createPostLike = async (token, postId) => {
   return response;
 };
 
+export const deletePostLike = async (token, postId, likeId) => {
+  const response = await api.delete("/posts/" + postId + "/likes/" + likeId, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  return response;
+};
+
 export default api;
