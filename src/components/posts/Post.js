@@ -39,7 +39,7 @@ const Post = ({ post, id }) => {
     <div
       key={post._id}
       id={id}
-      className="bg-white w-full rounded py-4 px-4 mb-4 shadow"
+      className="bg-white w-full rounded p-4 mb-4 shadow"
     >
       <PostHeader post={post} postId={id} />
       <PostContent post={post} />

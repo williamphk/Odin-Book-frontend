@@ -103,8 +103,8 @@ const Navbar = () => {
     <header className="sticky top-0 shadow-md bg-white z-10">
       <nav className="px-4">
         <div className="grid grid-cols-3">
-          <div>
-            <h1 className="sm:flex justify-start self-center text-purple-500 font-bold text-3xl hidden">
+          <div className="self-center">
+            <h1 className="lg:flex justify-start text-purple-500 font-bold text-3xl hidden">
               <Link to="/">Odin-book</Link>
             </h1>
           </div>
