@@ -1,9 +1,10 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
+import PostHeader from "./PostHeader";
+import PostContent from "./PostContent";
 import MaterialIcon from "../common/MaterialIcon";
 import PostModal from "./PostModal";
-import MenuModal from "../common/MenuModal";
 import {
   getPostContent,
   updatePost,
@@ -16,7 +17,6 @@ import {
 import { incrementCreateOrUpdateCount } from "../../slices/postSlice";
 import CommentList from "../comments/CommentList";
 import AddComment from "../comments/AddComment";
-import FormattedDate from "../common/FormattedDate";
 
 const Post = ({ post, id }) => {
   const [isPostMenuOpen, setPostMenuOpen] = useState(false);
@@ -52,19 +52,6 @@ const Post = ({ post, id }) => {
     setIsPostEditModalOpen(false);
     setIsPostDeleteModalOpen(false);
   };
-
-  const menuItems = [
-    {
-      name: "Edit",
-      isLink: false,
-      onClick: openPostEditModal,
-    },
-    {
-      name: "Delete",
-      isLink: false,
-      onClick: openPostDeleteModal,
-    },
-  ];
 
   const menuRef = useRef(null);
 
@@ -158,43 +145,15 @@ const Post = ({ post, id }) => {
       id={id}
       className="bg-white w-1/2 rounded py-4 px-4 mb-4 shadow"
     >
-      <div className="flex justify-between items-center">
-        <div className="flex gap-x-2">
-          <button>
-            <img
-              src={post.user.profile.picture}
-              alt="Profile"
-              className="w-10 h-10 rounded-full"
-            />
-          </button>
-          <div className="flex flex-col items-start">
-            <p className="font-bold hover:underline cursor-pointer">
-              {post.user.profile.fullName}
-            </p>
-
-            <FormattedDate
-              className="pl-1 text-sm text-gray-500"
-              date={new Date(post.createdAt)}
-            ></FormattedDate>
-          </div>
-        </div>
-        <div className="relative">
-          <button
-            className="hover:bg-gray-100 rounded-full h-10 w-10 flex justify-center items-center"
-            onClick={togglePostMenu}
-            ref={menuRef}
-          >
-            <MaterialIcon
-              className="material-symbols-outlined text-3xl"
-              iconName={"more_horiz"}
-            />
-          </button>
-          {isPostMenuOpen && <MenuModal menuItems={menuItems} />}
-        </div>
-      </div>
-      <div className="py-2 break-all text-left">
-        <p>{post.content}</p>
-      </div>
+      <PostHeader
+        post={post}
+        togglePostMenu={togglePostMenu}
+        openPostEditModal={openPostEditModal}
+        openPostDeleteModal={openPostDeleteModal}
+        menuRef={menuRef}
+        isPostMenuOpen={isPostMenuOpen}
+      />
+      <PostContent post={post} />
       <div className="flex justify-between py-2">
         {postLikes && (
           <button className="flex gap-x-1 items-center">
