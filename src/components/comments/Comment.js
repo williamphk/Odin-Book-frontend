@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import CommentField from "./CommentField";
 import {
@@ -7,6 +7,8 @@ import {
   updateComment,
   deleteComment,
   getCommentLikeList,
+  createCommentLike,
+  deleteCommentLike,
 } from "../../api";
 import FormattedDate from "../common/FormattedDate";
 import { incrementCreateOrUpdateCount } from "../../slices/commentSlice";
@@ -15,8 +17,12 @@ import MaterialIcon from "../common/MaterialIcon";
 const Comment = ({ comment, postId, commentId, token }) => {
   const [isEdit, setIsEdit] = useState(false);
   const [commentContent, setCommentContent] = useState("");
-  const [isLike, setIsLike] = useState(false);
   const [commentLikes, setCommentLikes] = useState([]);
+  const [isLike, setIsLike] = useState(false);
+  const [userLikeId, setUserLikeId] = useState(null);
+  const [fetchLikesTrigger, setFetchLikesTrigger] = useState(false);
+
+  const user = useSelector((state) => state.auth.user);
 
   const handleEditButton = async () => {
     setIsEdit(!isEdit);
@@ -51,9 +57,30 @@ const Comment = ({ comment, postId, commentId, token }) => {
     };
 
     fetchCommentLikes();
-  }, []);
+  }, [fetchLikesTrigger]);
 
-  const handleLikeButtonClick = () => {};
+  useEffect(() => {
+    const userLike = commentLikes.find((like) => like.user._id === user._id);
+    if (userLike) {
+      setUserLikeId(userLike._id);
+      setIsLike(true);
+    } else {
+      setUserLikeId(null);
+      setIsLike(false);
+    }
+  }, [commentLikes]);
+
+  const handleLikeButtonClick = async () => {
+    if (isLike) {
+      // Delete the like
+      await deleteCommentLike(token, postId, commentId, userLikeId);
+      setFetchLikesTrigger(!fetchLikesTrigger);
+    } else {
+      // Create a new like
+      await createCommentLike(token, postId, commentId);
+      setFetchLikesTrigger(!fetchLikesTrigger);
+    }
+  };
 
   return (
     <div className="flex m-y-1 gap-x-2 mb-1" id={commentId}>

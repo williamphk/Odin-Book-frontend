@@ -145,4 +145,23 @@ export const getCommentLikeList = async (token, postId, commentId) => {
   return response;
 };
 
+export const createCommentLike = async (token, postId, commentId) => {
+  const response = await api.post(
+    "/posts/" + postId + "/comments/" + commentId + "/likes",
+    {},
+    {
+      headers: { Authorization: `Bearer ${token}` },
+    }
+  );
+  return response;
+};
+
+export const deleteCommentLike = async (token, postId, commentId, likeId) => {
+  const response = await api.delete(
+    "/posts/" + postId + "/comments/" + commentId + "/likes/" + likeId,
+    { headers: { Authorization: `Bearer ${token}` } }
+  );
+  return response;
+};
+
 export default api;

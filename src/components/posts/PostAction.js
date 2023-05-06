@@ -8,6 +8,7 @@ const PostAction = ({ handleCommentShow, comments, postId }) => {
   const [postLikes, setPostLikes] = useState([]);
   const [isLike, setIsLike] = useState(false);
   const [userLikeId, setUserLikeId] = useState(null);
+  const [fetchLikesTrigger, setFetchLikesTrigger] = useState(false);
 
   const user = useSelector((state) => state.auth.user);
   const token = useSelector((state) => state.auth.token);
@@ -23,7 +24,7 @@ const PostAction = ({ handleCommentShow, comments, postId }) => {
     };
 
     fetchPostLikes();
-  }, [isLike]);
+  }, [fetchLikesTrigger]);
 
   useEffect(() => {
     const userLike = postLikes.find((like) => like.user._id === user._id);
@@ -36,15 +37,15 @@ const PostAction = ({ handleCommentShow, comments, postId }) => {
     }
   }, [postLikes]);
 
-  const handleLikeButtonClick = () => {
+  const handleLikeButtonClick = async () => {
     if (isLike) {
       // Delete the like
-      deletePostLike(token, postId, userLikeId);
-      setIsLike(false);
+      await deletePostLike(token, postId, userLikeId);
+      setFetchLikesTrigger(!fetchLikesTrigger);
     } else {
       // Create a new like
-      createPostLike(token, postId);
-      setIsLike(true);
+      await createPostLike(token, postId);
+      setFetchLikesTrigger(!fetchLikesTrigger);
     }
   };
 
@@ -60,7 +61,7 @@ const PostAction = ({ handleCommentShow, comments, postId }) => {
             {postLikes.length}
           </button>
         ) : (
-          <div></div>
+          <div className="h-7"></div>
         )}
         <button
           className="hover:underline text-gray-500 text-sm"
