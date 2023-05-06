@@ -1,11 +1,8 @@
 import React from "react";
-import { useSelector } from "react-redux";
 
 import Comment from "./Comment";
 
 const CommentList = ({ postId, comments, token }) => {
-  const user = useSelector((state) => state.auth.user);
-
   return (
     <div>
       <div>

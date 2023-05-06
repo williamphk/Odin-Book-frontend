@@ -269,7 +269,11 @@ const Post = ({ post, id }) => {
       {isCommentShow && (
         <CommentList postId={id} comments={comments} token={token} />
       )}
-      <AddComment postId={id} token={token} />
+      <AddComment
+        postId={id}
+        token={token}
+        setIsCommentShow={setIsCommentShow}
+      />
     </div>
   );
 };

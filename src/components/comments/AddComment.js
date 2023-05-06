@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import CommentField from "./CommentField";
 import { createComment } from "../../api";
 import { incrementCreateOrUpdateCount } from "../../slices/commentSlice";
 
-const AddComment = ({ postId, token }) => {
+const AddComment = ({ postId, token, setIsCommentShow }) => {
+  const [commentContent, setCommentContent] = useState("");
+
   const user = useSelector((state) => state.auth.user);
 
   const dispatch = useDispatch();
@@ -13,6 +15,8 @@ const AddComment = ({ postId, token }) => {
   const onCommentSubmit = async (data) => {
     await createComment(data, token, postId);
     dispatch(incrementCreateOrUpdateCount());
+    setIsCommentShow(true);
+    setCommentContent("");
   };
 
   return (
@@ -24,7 +28,12 @@ const AddComment = ({ postId, token }) => {
           className="w-10 h-10 rounded-full"
         />
       </button>
-      <CommentField postId={postId} onSubmit={onCommentSubmit} />
+      <CommentField
+        postId={postId}
+        onSubmit={onCommentSubmit}
+        commentContent={commentContent}
+        setCommentContent={setCommentContent}
+      />
     </div>
   );
 };

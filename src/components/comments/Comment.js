@@ -27,6 +27,7 @@ const Comment = ({ comment, postId, commentId, token }) => {
     const response = updateComment(token, postId, commentId, data);
     setIsEdit(!isEdit);
     dispatch(incrementCreateOrUpdateCount());
+    setCommentContent("");
     return response;
   };
 
