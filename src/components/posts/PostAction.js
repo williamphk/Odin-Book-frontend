@@ -45,10 +45,11 @@ const PostAction = ({ handleCommentShow, comments, postId }) => {
       setUserLikeId(null);
     }
   }, [postLikes]);
+
   return (
     <div>
       <div className="flex justify-between py-2">
-        {postLikes && (
+        {postLikes.length > 0 ? (
           <button className="flex gap-x-1 items-center">
             <MaterialIcon
               className="material-symbols-outlined text-xl text-purple-500"
@@ -56,6 +57,8 @@ const PostAction = ({ handleCommentShow, comments, postId }) => {
             />
             {postLikes.length}
           </button>
+        ) : (
+          <div></div>
         )}
         <button
           className="hover:underline text-gray-500 text-sm"

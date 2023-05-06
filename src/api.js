@@ -135,4 +135,14 @@ export const deletePostLike = async (token, postId, likeId) => {
   return response;
 };
 
+export const getCommentLikeList = async (token, postId, commentId) => {
+  const response = await api.get(
+    "/posts/" + postId + "/comments/" + commentId + "/likes",
+    {
+      headers: { Authorization: `Bearer ${token}` },
+    }
+  );
+  return response;
+};
+
 export default api;

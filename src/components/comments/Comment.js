@@ -1,14 +1,22 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 
 import CommentField from "./CommentField";
-import { getCommentContent, updateComment, deleteComment } from "../../api";
+import {
+  getCommentContent,
+  updateComment,
+  deleteComment,
+  getCommentLikeList,
+} from "../../api";
 import FormattedDate from "../common/FormattedDate";
 import { incrementCreateOrUpdateCount } from "../../slices/commentSlice";
-import { useDispatch } from "react-redux";
+import MaterialIcon from "../common/MaterialIcon";
 
 const Comment = ({ comment, postId, commentId, token }) => {
   const [isEdit, setIsEdit] = useState(false);
   const [commentContent, setCommentContent] = useState("");
+  const [isLike, setIsLike] = useState(false);
+  const [commentLikes, setCommentLikes] = useState([]);
 
   const handleEditButton = async () => {
     setIsEdit(!isEdit);
@@ -31,6 +39,22 @@ const Comment = ({ comment, postId, commentId, token }) => {
     return response;
   };
 
+  useEffect(() => {
+    const fetchCommentLikes = async () => {
+      try {
+        const fetchedLikes = await getCommentLikeList(token, postId, commentId);
+        setCommentLikes(fetchedLikes.data.likes);
+        console.log(fetchedLikes.data.likes);
+      } catch (err) {
+        setCommentLikes(err);
+      }
+    };
+
+    fetchCommentLikes();
+  }, []);
+
+  const handleLikeButtonClick = () => {};
+
   return (
     <div className="flex m-y-1 gap-x-2 mb-1" id={commentId}>
       <button>
@@ -50,14 +74,30 @@ const Comment = ({ comment, postId, commentId, token }) => {
         />
       ) : (
         <div className="flex flex-col items-start">
-          <div className="flex flex-col bg-gray-100 rounded-xl px-3 py-1 text-sm items-start mb-1">
+          <div className="flex flex-col bg-gray-100 rounded-xl px-3 py-1 text-sm items-start mb-1 relative">
             <button className="font-medium">
               {comment.user.profile.fullName}
             </button>
             <div>{comment.content}</div>
+            {commentLikes.length > 0 && (
+              <button className="absolute top-7 right-0 flex justify-center items-center gap-x-1 rounded-lg bg-white px-0.5 drop-shadow-xl">
+                <MaterialIcon
+                  className={`material-symbols-outlined text-lg text-purple-600`}
+                  iconName={"thumb_up"}
+                />
+                <div>1</div>
+              </button>
+            )}
           </div>
           <div className="flex gap-x-2 pl-2 items-center">
-            <button className="pl-1 text-xs font-medium">Like</button>
+            <button
+              className={`pl-1 text-xs font-medium ${
+                isLike ? "text-purple-600" : "text-black"
+              }`}
+              onClick={handleLikeButtonClick}
+            >
+              Like
+            </button>
             <button
               className="pl-1 text-xs font-medium"
               onClick={handleEditButton}
