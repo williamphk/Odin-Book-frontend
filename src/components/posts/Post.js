@@ -1,28 +1,19 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import PostHeader from "./PostHeader";
 import PostContent from "./PostContent";
 import MaterialIcon from "../common/MaterialIcon";
-import PostModal from "./PostModal";
 import {
-  getPostContent,
-  updatePost,
-  deletePost,
   getCommentList,
   getPostLikeList,
   createPostLike,
   deletePostLike,
 } from "../../api";
-import { incrementCreateOrUpdateCount } from "../../slices/postSlice";
 import CommentList from "../comments/CommentList";
 import AddComment from "../comments/AddComment";
 
 const Post = ({ post, id }) => {
-  const [isPostMenuOpen, setPostMenuOpen] = useState(false);
-  const [isPostEditModalOpen, setIsPostEditModalOpen] = useState(false);
-  const [isPostDeleteModalOpen, setIsPostDeleteModalOpen] = useState(false);
-  const [postContent, setPostContent] = useState("loading...");
   const [isCommentShow, setIsCommentShow] = useState(false);
   const [comments, setComments] = useState([]);
   const [postLikes, setPostLikes] = useState([]);
@@ -35,58 +26,6 @@ const Post = ({ post, id }) => {
   const createOrUpdateCount = useSelector(
     (state) => state.comment.createOrUpdateCount
   );
-
-  const openPostEditModal = async () => {
-    setIsPostEditModalOpen(true);
-    const response = await getPostContent(token, id);
-    setPostContent(response.data.post.content);
-  };
-
-  const openPostDeleteModal = async () => {
-    setIsPostDeleteModalOpen(true);
-    const response = await getPostContent(token, id);
-    setPostContent(response.data.post.content);
-  };
-
-  const closePostModal = () => {
-    setIsPostEditModalOpen(false);
-    setIsPostDeleteModalOpen(false);
-  };
-
-  const menuRef = useRef(null);
-
-  const togglePostMenu = () => {
-    setPostMenuOpen(!isPostMenuOpen);
-  };
-
-  const handleClickOutside = (event) => {
-    // If the menu is mounted in the DOM and the clicked element is not one of the menu items
-    if (menuRef.current && !menuRef.current.contains(event.target)) {
-      setPostMenuOpen(false);
-    }
-  };
-
-  useEffect(() => {
-    document.addEventListener("click", handleClickOutside);
-    return () => {
-      // When the Navbar component is unmounted, the event listener is removed
-      document.removeEventListener("click", handleClickOutside);
-    };
-  }, []);
-
-  const dispatch = useDispatch();
-
-  const onEditSubmit = (data) => {
-    updatePost(data, token, id);
-    closePostModal();
-    dispatch(incrementCreateOrUpdateCount());
-  };
-
-  const onDeleteSubmit = () => {
-    deletePost(token, id);
-    closePostModal();
-    dispatch(incrementCreateOrUpdateCount());
-  };
 
   const handleCommentShow = async () => {
     setIsCommentShow(!isCommentShow);
@@ -145,14 +84,7 @@ const Post = ({ post, id }) => {
       id={id}
       className="bg-white w-1/2 rounded py-4 px-4 mb-4 shadow"
     >
-      <PostHeader
-        post={post}
-        togglePostMenu={togglePostMenu}
-        openPostEditModal={openPostEditModal}
-        openPostDeleteModal={openPostDeleteModal}
-        menuRef={menuRef}
-        isPostMenuOpen={isPostMenuOpen}
-      />
+      <PostHeader post={post} postId={id} />
       <PostContent post={post} />
       <div className="flex justify-between py-2">
         {postLikes && (
@@ -204,27 +136,6 @@ const Post = ({ post, id }) => {
           Comment
         </button>
       </div>
-      {isPostEditModalOpen && (
-        <PostModal
-          title="Edit"
-          value={postContent}
-          setPostContent={setPostContent}
-          closePostModal={closePostModal}
-          requiredInputField={true}
-          button="Save"
-          onSubmit={onEditSubmit}
-        />
-      )}
-      {isPostDeleteModalOpen && (
-        <PostModal
-          title="Delete"
-          closePostModal={closePostModal}
-          button="Confirm"
-          onSubmit={onDeleteSubmit}
-          buttonColor="bg-red-500"
-          buttonHoverColor="bg-red-600"
-        />
-      )}
       {isCommentShow && (
         <CommentList postId={id} comments={comments} token={token} />
       )}
