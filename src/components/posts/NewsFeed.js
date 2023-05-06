@@ -4,6 +4,8 @@ import { useSelector } from "react-redux";
 import { getNewsFeed } from "../../api";
 import Post from "./Post";
 import Loading from "../common/Loading";
+import LeftSidebar from "../layout/LeftSidebar";
+import RightSidebar from "../layout/RightSidebar";
 
 const NewsFeed = () => {
   const token = useSelector((state) => state.auth.token);
@@ -38,12 +40,14 @@ const NewsFeed = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-100 p-3">
+    <div className="min-h-screen bg-gray-100 p-3 flex">
+      <LeftSidebar />
       <div className="container flex flex-col items-center">
         {posts.data.posts.map((post) => (
           <Post post={post} key={post._id} id={post._id} />
         ))}
       </div>
+      <RightSidebar friends={[]} />
     </div>
   );
 };
