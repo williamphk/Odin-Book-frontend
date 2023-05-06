@@ -23,28 +23,30 @@ const PostAction = ({ handleCommentShow, comments, postId }) => {
     };
 
     fetchPostLikes();
-  }, [postLikes, isLike]);
+  }, [isLike]);
+
+  useEffect(() => {
+    const userLike = postLikes.find((like) => like.user._id === user._id);
+    if (userLike) {
+      setUserLikeId(userLike._id);
+      setIsLike(true);
+    } else {
+      setUserLikeId(null);
+      setIsLike(false);
+    }
+  }, [postLikes]);
 
   const handleLikeButtonClick = () => {
     if (isLike) {
       // Delete the like
       deletePostLike(token, postId, userLikeId);
+      setIsLike(false);
     } else {
       // Create a new like
       createPostLike(token, postId);
+      setIsLike(true);
     }
   };
-
-  useEffect(() => {
-    const userLike = postLikes.find((like) => like.user._id === user._id);
-    if (userLike) {
-      setIsLike(true);
-      setUserLikeId(userLike._id);
-    } else {
-      setIsLike(false);
-      setUserLikeId(null);
-    }
-  }, [postLikes]);
 
   return (
     <div>
