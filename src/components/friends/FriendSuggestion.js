@@ -1,17 +1,16 @@
 import React from "react";
 import { useSelector } from "react-redux";
 
-import sendFriendRequest from "../../api";
+import { sendFriendRequest } from "../../api";
 
 const FriendSuggestion = ({ suggestion }) => {
   const token = useSelector((state) => state.auth.token);
 
   const handleAddFriendClick = async (receiverId) => {
     try {
-      console.log(receiverId);
       await sendFriendRequest(token, receiverId);
     } catch (error) {
-      console.error("Error in handleAddFriendClick:", error); // Debugging: log the error
+      console.error("Error in handleAddFriendClick:", error);
     }
   };
 

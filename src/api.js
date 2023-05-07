@@ -178,18 +178,18 @@ export const getFriendSuggestion = async (token, userId) => {
   return response;
 };
 
-export const sendFriendRequest = async (token) => {
+export const sendFriendRequest = async (token, receiverId) => {
   try {
     const response = await api.post(
       "/friend-requests",
-      { receiverId: "123" },
+      { receiverId },
       {
         headers: { Authorization: `Bearer ${token}` },
       }
     );
     return response;
   } catch (error) {
-    console.error("Error in sendFriendRequest:", error); // Debugging: log the error
+    console.error("Error in sendFriendRequest:", error);
     throw error;
   }
 };
