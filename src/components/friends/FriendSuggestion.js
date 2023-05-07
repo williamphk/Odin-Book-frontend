@@ -29,13 +29,19 @@ const FriendSuggestion = ({ suggestion, isSent }) => {
       <button
         onClick={() => handleAddFriendClick(suggestion._id)}
         className={`${
-          isSent ? "bg-blue-500" : "bg-purple-500"
-        } hover:bg-purple-600 rounded-lg p-2 w-[200px] h-[35px] text-white disabled:bg-gray-200 disabled:text-gray-500 relative overflow-hidden
+          isSent
+            ? " bg-gray-200 text-gray-500"
+            : "bg-purple-500 hover:bg-purple-600"
+        } rounded-lg p-2 w-[200px] h-[35px] text-white relative overflow-hidden
         ${
           isSent ? "before:content-['Sent']" : "before:content-['Add_Friend']"
-        } before:absolute  before:top-[5px] before:flex before:justify-center before:items-center
-        after:content-['AFTER'] after:absolute after:top-[50px] after:flex after:justify-center after:items-center`}
-        disabled={isSent}
+        } before:absolute before:top-[0px] before:left-[0px] before:flex before:justify-center before:items-center before:w-full before:h-full before:transition-all
+        ${
+          isSent &&
+          `after:content-['Delete'] after:absolute after:top-[50px] after:left-[0px] after:flex after:justify-center after:items-center after:w-full after:h-full after:transition-all
+        hover:before:top-[-50px] hover:after:top-[0px] hover:after:bg-red-500 hover:after:text-white`
+        }`}
+        // disabled={isSent}
       >
         {/* {isSent ? "Sent" : "Add Friend"} */}
       </button>
