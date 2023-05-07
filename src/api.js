@@ -6,84 +6,124 @@ const api = axios.create({
 });
 
 export const createPost = async (newPost, token) => {
-  const response = await api.post("/posts", newPost, {
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
-    },
-  });
-  return response.data;
+  try {
+    const response = await api.post("/posts", newPost, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error in createPost:", error);
+    throw error;
+  }
 };
 
 export const getNewsFeed = async (token) => {
-  const response = await api.get("/posts/newsfeed", {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
-  return response;
+  try {
+    const response = await api.get("/posts/newsfeed", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response;
+  } catch (error) {
+    console.error("Error in getNewsFeed:", error);
+    throw error;
+  }
 };
 
 export const getPostContent = async (token, postId) => {
-  const response = await api.get("/posts/" + postId, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
-  return response;
+  try {
+    const response = await api.get("/posts/" + postId, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response;
+  } catch (error) {
+    console.error("Error in getPostContent:", error);
+    throw error;
+  }
 };
 
 export const updatePost = async (updatedPost, token, postId) => {
-  const response = await api.put("/posts/" + postId, updatedPost, {
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
-    },
-  });
-  return response;
+  try {
+    const response = await api.put("/posts/" + postId, updatedPost, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response;
+  } catch (error) {
+    console.error("Error in updatePost:", error);
+    throw error;
+  }
 };
 
 export const deletePost = async (token, postId) => {
-  const response = await api.delete("/posts/" + postId, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
-  return response;
+  try {
+    const response = await api.delete("/posts/" + postId, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response;
+  } catch (error) {
+    console.error("Error in deletePost:", error);
+    throw error;
+  }
 };
 
 export const getCommentList = async (token, postId) => {
-  const response = await api.get("/posts/" + postId + "/comments", {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
-  return response;
+  try {
+    const response = await api.get("/posts/" + postId + "/comments", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response;
+  } catch (error) {
+    console.error("Error in getCommentList:", error);
+    throw error;
+  }
 };
 
 export const createComment = async (newComment, token, postId) => {
-  const response = await api.post(
-    "/posts/" + postId + "/comments",
-    newComment,
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    }
-  );
-  return response;
+  try {
+    const response = await api.post(
+      "/posts/" + postId + "/comments",
+      newComment,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    return response;
+  } catch (error) {
+    console.error("Error in createComment:", error);
+    throw error;
+  }
 };
 
 export const getCommentContent = async (token, postId, commentId) => {
-  const response = await api.get(
-    "/posts/" + postId + "/comments/" + commentId,
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    }
-  );
-  return response;
+  try {
+    const response = await api.get(
+      "/posts/" + postId + "/comments/" + commentId,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    return response;
+  } catch (error) {
+    console.error("Error in getCommentContent:", error);
+    throw error;
+  }
 };
 
 export const updateComment = async (
@@ -92,90 +132,136 @@ export const updateComment = async (
   commentId,
   updatedComment
 ) => {
-  const response = await api.put(
-    "/posts/" + postId + "/comments/" + commentId,
-    updatedComment,
-    {
-      headers: { Authorization: `Bearer ${token}` },
-    }
-  );
-  return response;
+  try {
+    const response = await api.put(
+      "/posts/" + postId + "/comments/" + commentId,
+      updatedComment,
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
+    return response;
+  } catch (error) {
+    console.error("Error in updateComment:", error);
+    throw error;
+  }
 };
 
 export const deleteComment = async (token, postId, commentId) => {
-  const response = await api.delete(
-    "/posts/" + postId + "/comments/" + commentId,
-    { headers: { Authorization: `Bearer ${token}` } }
-  );
-  return response;
+  try {
+    const response = await api.delete(
+      "/posts/" + postId + "/comments/" + commentId,
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+    return response;
+  } catch (error) {
+    console.error("Error in deleteComment:", error);
+    throw error;
+  }
 };
 
 export const getPostLikeList = async (token, postId) => {
-  const response = await api.get("/posts/" + postId + "/likes", {
-    headers: { Authorization: `Bearer ${token}` },
-  });
-  return response;
+  try {
+    const response = await api.get("/posts/" + postId + "/likes", {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    return response;
+  } catch (error) {
+    console.error("Error in getPostLikeList:", error);
+    throw error;
+  }
 };
 
 export const createPostLike = async (token, postId) => {
-  const response = await api.post(
-    "/posts/" + postId + "/likes",
-    {},
-    {
-      headers: { Authorization: `Bearer ${token}` },
-    }
-  );
-  return response;
+  try {
+    const response = await api.post(
+      "/posts/" + postId + "/likes",
+      {},
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+    return response;
+  } catch (error) {
+    console.error("Error in createPostLike:", error);
+    throw error;
+  }
 };
 
 export const deletePostLike = async (token, postId, likeId) => {
-  const response = await api.delete("/posts/" + postId + "/likes/" + likeId, {
-    headers: { Authorization: `Bearer ${token}` },
-  });
-  return response;
+  try {
+    const response = await api.delete("/posts/" + postId + "/likes/" + likeId, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    return response;
+  } catch (error) {
+    console.error("Error in deletePostLike:", error);
+    throw error;
+  }
 };
 
 export const getCommentLikeList = async (token, postId, commentId) => {
-  const response = await api.get(
-    "/posts/" + postId + "/comments/" + commentId + "/likes",
-    {
-      headers: { Authorization: `Bearer ${token}` },
-    }
-  );
-  return response;
+  try {
+    const response = await api.get(
+      "/posts/" + postId + "/comments/" + commentId + "/likes",
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+    return response;
+  } catch (error) {
+    console.error("Error in getCommentLikeList:", error);
+    throw error;
+  }
 };
 
 export const createCommentLike = async (token, postId, commentId) => {
-  const response = await api.post(
-    "/posts/" + postId + "/comments/" + commentId + "/likes",
-    {},
-    {
-      headers: { Authorization: `Bearer ${token}` },
-    }
-  );
-  return response;
+  try {
+    const response = await api.post(
+      "/posts/" + postId + "/comments/" + commentId + "/likes",
+      {},
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
+    return response;
+  } catch (error) {
+    console.error("Error in createCommentLike:", error);
+    throw error;
+  }
 };
 
 export const deleteCommentLike = async (token, postId, commentId, likeId) => {
-  const response = await api.delete(
-    "/posts/" + postId + "/comments/" + commentId + "/likes/" + likeId,
-    { headers: { Authorization: `Bearer ${token}` } }
-  );
-  return response;
+  try {
+    const response = await api.delete(
+      "/posts/" + postId + "/comments/" + commentId + "/likes/" + likeId,
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+    return response;
+  } catch (error) {
+    console.error("Error in deleteCommentLike:", error);
+    throw error;
+  }
 };
 
 export const getFriendRequests = async (token) => {
-  const response = await api.get("/friend-requests", {
-    headers: { Authorization: `Bearer ${token}` },
-  });
-  return response;
+  try {
+    const response = await api.get("/friend-requests", {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    return response;
+  } catch (error) {
+    console.error("Error in getFriendRequests:", error);
+    throw error;
+  }
 };
 
 export const getFriendSuggestion = async (token, userId) => {
-  const response = await api.get("/users/" + userId + "/friends/suggestion", {
-    headers: { Authorization: `Bearer ${token}` },
-  });
-  return response;
+  try {
+    const response = await api.get("/users/" + userId + "/friends/suggestion", {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    return response;
+  } catch (error) {
+    console.error("Error in getFriendSuggestion:", error);
+    throw error;
+  }
 };
 
 export const sendFriendRequest = async (token, receiverId) => {
@@ -183,9 +269,7 @@ export const sendFriendRequest = async (token, receiverId) => {
     const response = await api.post(
       "/friend-requests",
       { receiverId },
-      {
-        headers: { Authorization: `Bearer ${token}` },
-      }
+      { headers: { Authorization: `Bearer ${token}` } }
     );
     return response;
   } catch (error) {
