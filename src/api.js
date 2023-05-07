@@ -240,14 +240,14 @@ export const deleteCommentLike = async (token, postId, commentId, likeId) => {
   }
 };
 
-export const getFriendRequests = async (token) => {
+export const getFriendRequestsReceived = async (token) => {
   try {
-    const response = await api.get("/friend-requests", {
+    const response = await api.get("/friend-requests/received", {
       headers: { Authorization: `Bearer ${token}` },
     });
     return response;
   } catch (error) {
-    console.error("Error in getFriendRequests:", error);
+    console.error("Error in getFriendRequestsReceived:", error);
     throw error;
   }
 };
@@ -274,6 +274,18 @@ export const sendFriendRequest = async (token, receiverId) => {
     return response;
   } catch (error) {
     console.error("Error in sendFriendRequest:", error);
+    throw error;
+  }
+};
+
+export const getFriendRequestsSent = async (token) => {
+  try {
+    const response = await api.get("/friend-requests/sent", {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    return response;
+  } catch (error) {
+    console.error("Error in getFriendRequestsSent:", error);
     throw error;
   }
 };

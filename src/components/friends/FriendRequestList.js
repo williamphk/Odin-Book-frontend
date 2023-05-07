@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 
 import FriendRequest from "./FriendRequest";
 import Loading from "../common/Loading";
-import { getFriendRequests } from "../../api";
+import { getFriendRequestsReceived } from "../../api";
 
 const FriendRequestList = () => {
   const token = useSelector((state) => state.auth.token);
@@ -18,7 +18,7 @@ const FriendRequestList = () => {
   useEffect(() => {
     const fetchFriendRequest = async () => {
       try {
-        const fetchedFriendRequests = await getFriendRequests(token);
+        const fetchedFriendRequests = await getFriendRequestsReceived(token);
         setFriendRequest(fetchedFriendRequests.data.friendRequests);
         setIsLoading(false);
       } catch (err) {

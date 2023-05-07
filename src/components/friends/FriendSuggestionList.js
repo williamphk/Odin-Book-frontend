@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 
-import { getFriendSuggestion } from "../../api";
+import { getFriendSuggestion, getFriendRequestsSent } from "../../api";
 import FriendSuggestion from "./FriendSuggestion";
 import Loading from "../common/Loading";
 
@@ -10,7 +10,8 @@ const FriendSuggestionList = () => {
   const user = useSelector((state) => state.auth.user);
   const sendCount = useSelector((state) => state.friendRequest.sendCount);
 
-  const [friendSuggestion, setFriendSuggestion] = useState(null);
+  const [friendSuggestion, setFriendSuggestion] = useState([]);
+  const [friendRequestSent, setFriendRequestSent] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -32,6 +33,23 @@ const FriendSuggestionList = () => {
     fetchFriendRequest();
   }, [token, sendCount]);
 
+  console.log(friendSuggestion);
+
+  useEffect(() => {
+    const fetchedFriendRequestSent = async () => {
+      try {
+        const fetchedFriendRequest = await getFriendRequestsSent(token);
+        setFriendRequestSent(fetchedFriendRequest.data.friendRequests);
+        setIsLoading(false);
+      } catch (err) {
+        setError(err);
+        setIsLoading(false);
+      }
+    };
+
+    fetchedFriendRequestSent();
+  }, [token, sendCount]);
+
   if (isLoading) {
     return <Loading />;
   }
@@ -43,7 +61,15 @@ const FriendSuggestionList = () => {
   return (
     <div className="flex flex-wrap gap-3">
       {friendSuggestion.map((suggestion) => (
-        <FriendSuggestion suggestion={suggestion} key={suggestion._id} />
+        <FriendSuggestion
+          suggestion={suggestion}
+          key={suggestion._id}
+          isSent={friendRequestSent.some(
+            (friendRequest) =>
+              friendRequest.sender === user._id &&
+              friendRequest.receiver === suggestion._id
+          )}
+        />
       ))}
     </div>
   );
