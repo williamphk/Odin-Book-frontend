@@ -1,9 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+
+import { switchToFriends, switchToNewfeed } from "../../slices/pageSlice";
 
 const LeftSidebar = ({ className }) => {
+  const user = useSelector((state) => state.auth.user);
   const friends = useSelector((state) => state.page.friends);
+
+  const dispatch = useDispatch();
 
   return (
     <div className={className}>
@@ -13,24 +18,34 @@ const LeftSidebar = ({ className }) => {
           alt="Profile"
           className="w-10 h-10 rounded-full"
         />
-        <span className="ml-2 font-bold">Your Name</span>
+        <span className="ml-2 font-bold">{user.fullName}</span>
       </div>
       <nav>
         <ul className="space-y-2">
           <li className="flex items-center space-x-2">
-            <button className="text-gray-600">Home</button>
+            <button
+              className="text-gray-600"
+              onClick={() => dispatch(switchToNewfeed())}
+            >
+              <Link to="/">Home</Link>
+            </button>
           </li>
           <li className="flex flex-col items-start space-x-2">
-            <button className="text-gray-600">Friends</button>
+            <button
+              className="text-gray-600"
+              onClick={() => dispatch(switchToFriends())}
+            >
+              <Link to="/friends">Friends</Link>
+            </button>
             {friends && (
               <ul className="flex flex-col items-start">
                 <li>
-                  <Link to="friends/">Friend requests</Link>
+                  <Link to="/friends">Friend requests</Link>
                 </li>
                 <li>
-                  <Link to="friends/suggestions">Friend suggestions</Link>
+                  <Link to="/friends/suggestion">Friend suggestions</Link>
                 </li>
-                <li>All firends</li>
+                <li>All friends</li>
               </ul>
             )}
           </li>

@@ -6,6 +6,8 @@ import jwt_decode from "jwt-decode";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import Navbar from "./components/layout/Navbar";
+import LeftSidebar from "./components/layout/LeftSidebar";
+import RightSidebar from "./components/layout/RightSidebar";
 import LandingPage from "./components/auth/LandingPage";
 import Register from "./components/auth/Register";
 import NewsFeed from "./components/posts/NewsFeed";
@@ -62,18 +64,25 @@ function App() {
     <div className="App">
       <Router>
         {isLoggedIn && <Navbar />}
-        <Routes>
-          <Route path="/register" element={<Register />} />
-          <Route
-            path="/"
-            element={isLoggedIn ? <NewsFeed /> : <LandingPage />}
+        <div className="min-h-screen bg-gray-100 py-3 px-0 lg:px-3 flex justify-between">
+          <LeftSidebar className="flex-col bg-gray-100 w-[330px] hidden lg:flex" />
+          <Routes>
+            <Route path="/register" element={<Register />} />
+            <Route
+              path="/"
+              element={isLoggedIn ? <NewsFeed /> : <LandingPage />}
+            />
+            <Route path="/" element={<ProtectedRoute />}>
+              <Route path="/friends/*" element={<Friends />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/setting" element={<Setting />} />
+            </Route>
+          </Routes>
+          <RightSidebar
+            friends={[]}
+            className="flex-col bg-gray-100 p-4 w-[330px] hidden lg:flex"
           />
-          <Route path="/" element={<ProtectedRoute />}>
-            <Route path="/friends/*" element={<Friends />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/setting" element={<Setting />} />
-          </Route>
-        </Routes>
+        </div>
         <Footer />
       </Router>
     </div>

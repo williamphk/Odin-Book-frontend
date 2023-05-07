@@ -32,8 +32,6 @@ const FriendSuggestionList = () => {
     fetchFriendRequest();
   }, [token, sendCount]);
 
-  console.log(friendSuggestion);
-
   if (isLoading) {
     return <Loading />;
   }
@@ -45,7 +43,7 @@ const FriendSuggestionList = () => {
   return (
     <div className="flex flex-wrap gap-3">
       {friendSuggestion.map((suggestion) => (
-        <FriendSuggestion suggestion={suggestion} />
+        <FriendSuggestion suggestion={suggestion} key={suggestion._id} />
       ))}
     </div>
   );

@@ -1,6 +1,15 @@
 import React from "react";
+import { useSelector } from "react-redux";
 
 const RightSidebar = ({ friends, className }) => {
+  const friendsSwitch = useSelector((state) => state.page.friends);
+
+  console.log(friendsSwitch);
+
+  if (friendsSwitch) {
+    return;
+  }
+
   return (
     <div className={className}>
       <h3 className="font-bold text-lg mb-4">Friends</h3>
