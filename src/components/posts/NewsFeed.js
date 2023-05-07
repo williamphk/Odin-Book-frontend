@@ -20,7 +20,7 @@ const NewsFeed = () => {
     const fetchNewsFeed = async () => {
       try {
         const fetchedPosts = await getNewsFeed(token);
-        setPosts(fetchedPosts);
+        setPosts(fetchedPosts.data.posts);
         setIsLoading(false);
       } catch (err) {
         setError(err);
@@ -43,7 +43,7 @@ const NewsFeed = () => {
     <div className="min-h-screen bg-gray-100 py-3 px-0 lg:px-3 flex justify-center">
       <LeftSidebar className="flex-col bg-gray-100 w-1/2 hidden lg:flex" />
       <div className="container flex flex-col">
-        {posts.data.posts.map((post) => (
+        {posts.map((post) => (
           <Post post={post} key={post._id} id={post._id} />
         ))}
       </div>

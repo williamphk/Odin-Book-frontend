@@ -164,4 +164,11 @@ export const deleteCommentLike = async (token, postId, commentId, likeId) => {
   return response;
 };
 
+export const getFriendRequests = async (token) => {
+  const response = await api.get("/friend-requests", {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  return response;
+};
+
 export default api;

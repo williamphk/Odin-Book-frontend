@@ -4,6 +4,7 @@ import authReducer from "./slices/authSlice";
 import postReducer from "./slices/postSlice";
 import commentReducer from "./slices/commentSlice";
 import pageReducer from "./slices/pageSlice";
+import friendRequestReducer from "./slices/friendSlice";
 
 export const store = configureStore({
   reducer: {
@@ -11,5 +12,6 @@ export const store = configureStore({
     post: postReducer,
     comment: commentReducer,
     page: pageReducer,
+    friendRequest: friendRequestReducer,
   },
 });
