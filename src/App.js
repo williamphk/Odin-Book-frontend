@@ -69,7 +69,7 @@ function App() {
             element={isLoggedIn ? <NewsFeed /> : <LandingPage />}
           />
           <Route path="/" element={<ProtectedRoute />}>
-            <Route path="/friends" element={<Friends />} />
+            <Route path="/friends/*" element={<Friends />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/setting" element={<Setting />} />
           </Route>

@@ -171,4 +171,11 @@ export const getFriendRequests = async (token) => {
   return response;
 };
 
+export const getFriendSuggestion = async (token, userId) => {
+  const response = await api.get("/users/" + userId + "/friends/suggestion", {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  return response;
+};
+
 export default api;
