@@ -104,7 +104,7 @@ const PostHeader = ({ post, postId }) => {
       </div>
       <div className="relative">
         <button
-          className="hover:bg-gray-100 rounded-full h-10 w-10 flex justify-center items-center"
+          className="hover:bg-gray-100 rounded-full h-10 w-10 flex justify-center items-center transition duration-200"
           onClick={togglePostMenu}
           ref={menuRef}
         >

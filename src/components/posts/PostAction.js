@@ -73,7 +73,7 @@ const PostAction = ({ handleCommentShow, comments, postId }) => {
       <div className="flex border-t border-b pt-1 pb-1 mb-3">
         <button
           onClick={handleLikeButtonClick}
-          className="text-gray-500 font-medium hover:bg-gray-100 py-2 rounded w-1/2 flex items-center justify-center gap-x-2"
+          className="text-gray-500 font-medium hover:bg-gray-100 py-2 rounded w-1/2 flex items-center justify-center gap-x-2 transition duration-200"
         >
           <MaterialIcon
             className={`material-symbols-outlined text-xl ${
@@ -93,7 +93,7 @@ const PostAction = ({ handleCommentShow, comments, postId }) => {
           </div>
         </button>
         <button
-          className="text-gray-500 font-medium hover:bg-gray-100 py-2 rounded w-1/2 flex items-center justify-center gap-x-2"
+          className="text-gray-500 font-medium hover:bg-gray-100 py-2 rounded w-1/2 flex items-center justify-center gap-x-2 transition duration-200"
           onClick={handleCommentShow}
         >
           <MaterialIcon
