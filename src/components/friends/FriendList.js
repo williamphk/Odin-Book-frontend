@@ -8,6 +8,7 @@ import { getFriendList } from "../../api";
 const FriendList = () => {
   const token = useSelector((state) => state.auth.token);
   const user = useSelector((state) => state.auth.user);
+  const deleteCount = useSelector((state) => state.user.deleteCount);
 
   const [friends, setFriends] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -26,7 +27,7 @@ const FriendList = () => {
     };
 
     fetchFriend();
-  }, [token]);
+  }, [token, deleteCount]);
 
   if (isLoading) {
     return <Loading />;

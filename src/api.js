@@ -342,4 +342,19 @@ export const getFriendList = async (token, userId) => {
   }
 };
 
+export const deleteFriend = async (token, userId, friendId) => {
+  try {
+    const response = await api.delete(
+      "/users/" + userId + "/friends/" + friendId,
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
+    return response;
+  } catch (error) {
+    console.error("Error in getFriendList:", error);
+    throw error;
+  }
+};
+
 export default api;

@@ -35,7 +35,7 @@ const FriendRequest = ({ friendRequest }) => {
       </button>
       <button
         onClick={handleDeleteButton}
-        className="bg-gray-100 hover:bg-gray-200 text-gray-500 rounded-lg p-2 w-[200px] h-[35px] overflow-hidden flex justify-center items-center transition duration-200"
+        className="bg-gray-100 hover:bg-red-500 hover:text-white text-gray-500 rounded-lg p-2 w-[200px] h-[35px] overflow-hidden flex justify-center items-center transition duration-200"
       >
         Delete
       </button>
