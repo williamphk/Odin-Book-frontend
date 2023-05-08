@@ -45,7 +45,9 @@ const LeftSidebar = ({ className }) => {
                 <li>
                   <Link to="/friends/suggestion">Friend suggestions</Link>
                 </li>
-                <li>All friends</li>
+                <li>
+                  <Link to="/friends/list">All friends</Link>
+                </li>
               </ul>
             )}
           </li>

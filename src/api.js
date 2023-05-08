@@ -330,4 +330,16 @@ export const rejectFriendRequest = async (token, friendRequestId) => {
   }
 };
 
+export const getFriendList = async (token, userId) => {
+  try {
+    const response = await api.get("/users/" + userId + "/friends", {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    return response;
+  } catch (error) {
+    console.error("Error in getFriendList:", error);
+    throw error;
+  }
+};
+
 export default api;
