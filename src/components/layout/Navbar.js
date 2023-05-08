@@ -27,6 +27,7 @@ const Navbar = () => {
   const dispatch = useDispatch();
   const handleLogout = () => {
     dispatch(logout());
+    dispatch(switchToNewfeed());
   };
 
   // Reference the profile menu DOM element.

@@ -18,6 +18,8 @@ import Loading from "./components/common/Loading";
 import Footer from "./components/layout/Footer";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 
+import { switchToFriends, switchToNewfeed } from "./slices/pageSlice";
+
 function App() {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const dispatch = useDispatch();
@@ -55,6 +57,18 @@ function App() {
       return true;
     }
   };
+
+  useEffect(() => {
+    const currentUrl = window.location.href;
+
+    if (currentUrl.includes("/friends")) {
+      // Dispatch an action to update the switchToNewsFeed state
+      dispatch(switchToFriends());
+    } else {
+      // Reset the state or dispatch an action based on other URLs
+      dispatch(switchToNewfeed());
+    }
+  }, []);
 
   if (isLoading) {
     return <Loading />;
