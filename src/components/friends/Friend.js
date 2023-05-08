@@ -11,7 +11,7 @@ const Friend = ({ friend }) => {
   const dispatch = useDispatch();
 
   const handleDeleteButton = async () => {
-    await deleteFriend(token, user._id, friend._id);
+    await deleteFriend(token, user._id, friend.user);
     dispatch(incrementDeleteCount());
   };
 
