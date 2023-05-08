@@ -114,7 +114,7 @@ const Navbar = () => {
             {navItems.map((element, index) => {
               return index === navItems.length - 1 ? (
                 <button
-                  className="text-gray-500 flex flex-col items-center text-xs hover:bg-gray-100 rounded-lg w-32"
+                  className="text-gray-500 flex flex-col items-center text-xs hover:bg-gray-100 rounded-lg w-32 transition duration-200"
                   key={index}
                   onClick={openPostModal}
                 >
@@ -123,7 +123,7 @@ const Navbar = () => {
                 </button>
               ) : (
                 <button
-                  className="flex flex-col items-center hover:bg-gray-100 rounded-lg w-32"
+                  className="flex flex-col items-center hover:bg-gray-100 rounded-lg w-32 transition duration-200"
                   key={index}
                   onClick={navOnClick[element]}
                 >

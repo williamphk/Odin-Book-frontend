@@ -7,7 +7,7 @@ const Modal = ({ menuItems }) => {
       {menuItems.map((element, index) => {
         return element.isLink ? (
           <button
-            className="w-full block hover:bg-purple-600 hover:text-white"
+            className="w-full block hover:bg-purple-600 hover:text-white transition duration-100"
             key={index}
           >
             <Link
@@ -22,7 +22,7 @@ const Modal = ({ menuItems }) => {
             type="button"
             key={index}
             onClick={element.onClick}
-            className="w-full block px-4 py-2 hover:bg-purple-600 hover:text-white"
+            className="w-full block px-4 py-2 hover:bg-purple-600 hover:text-white transition duration-100"
           >
             {element.name}
           </button>
