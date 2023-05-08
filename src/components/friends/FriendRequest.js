@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-import { acceptFriendRequest } from "../../api";
-import { incrementAcceptOrDeleteCount } from "../../slices";
+import { acceptFriendRequest, rejectFriendRequest } from "../../api";
+import { incrementAcceptOrDeleteCount } from "../../slices/friendRequestSlice";
 
 const FriendRequest = ({ friendRequest }) => {
   const token = useSelector((state) => state.auth.token);
@@ -11,6 +11,11 @@ const FriendRequest = ({ friendRequest }) => {
 
   const handleAcceptButton = async () => {
     await acceptFriendRequest(token, friendRequest._id);
+    dispatch(incrementAcceptOrDeleteCount());
+  };
+
+  const handleDeleteButton = async () => {
+    await rejectFriendRequest(token, friendRequest._id);
     dispatch(incrementAcceptOrDeleteCount());
   };
 
@@ -28,7 +33,10 @@ const FriendRequest = ({ friendRequest }) => {
       >
         Confirm
       </button>
-      <button className="bg-gray-100 hover:bg-gray-200 text-gray-500 rounded-lg p-2 w-[200px] h-[35px] overflow-hidden flex justify-center items-center transition duration-200">
+      <button
+        onClick={handleDeleteButton}
+        className="bg-gray-100 hover:bg-gray-200 text-gray-500 rounded-lg p-2 w-[200px] h-[35px] overflow-hidden flex justify-center items-center transition duration-200"
+      >
         Delete
       </button>
     </div>
