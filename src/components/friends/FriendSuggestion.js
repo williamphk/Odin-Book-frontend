@@ -35,7 +35,7 @@ const FriendSuggestion = ({ suggestion, isSent, friendRequestId }) => {
         className={`${
           isSent
             ? " bg-gray-200 text-gray-500"
-            : "bg-purple-500 hover:bg-purple-600 text-white"
+            : "bg-purple-500 hover:bg-purple-600 text-white transition duration-200"
         } rounded-lg p-2 w-[200px] h-[35px] relative overflow-hidden
         ${
           isSent ? "before:content-['Sent']" : "before:content-['Add_Friend']"

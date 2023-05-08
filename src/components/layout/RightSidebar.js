@@ -4,8 +4,6 @@ import { useSelector } from "react-redux";
 const RightSidebar = ({ friends, className }) => {
   const friendsSwitch = useSelector((state) => state.page.friends);
 
-  console.log(friendsSwitch);
-
   if (friendsSwitch) {
     return;
   }

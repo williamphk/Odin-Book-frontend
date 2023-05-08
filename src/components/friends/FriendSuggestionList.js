@@ -16,7 +16,7 @@ const FriendSuggestionList = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetchFriendRequest = async () => {
+    const fetchFriendSuggestion = async () => {
       try {
         const fetchedFriendSuggestion = await getFriendSuggestion(
           token,
@@ -30,7 +30,7 @@ const FriendSuggestionList = () => {
       }
     };
 
-    fetchFriendRequest();
+    fetchFriendSuggestion();
   }, [token, sendCount]);
 
   useEffect(() => {
@@ -70,7 +70,8 @@ const FriendSuggestionList = () => {
         <FriendSuggestion
           suggestion={suggestion}
           key={suggestion._id}
-          isSent={matchingFriendRequest(suggestion)}
+          //  convert to truthy or falsy value
+          isSent={!!matchingFriendRequest(suggestion)}
           friendRequestId={matchingFriendRequest(suggestion)?._id}
         />
       ))}

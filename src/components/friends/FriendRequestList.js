@@ -11,7 +11,7 @@ const FriendRequestList = () => {
     (state) => state.friendRequest.acceptOrDeleteCount
   );
 
-  const [friendRequests, setFriendRequest] = useState(null);
+  const [friendRequests, setFriendRequest] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -39,14 +39,14 @@ const FriendRequestList = () => {
   }
 
   return (
-    <div>
-      {friendRequests.map((friendRequest) => {
+    <div className="flex flex-wrap gap-3">
+      {friendRequests.map((friendRequest) => (
         <FriendRequest
-          friendRequests={friendRequests}
+          friendRequest={friendRequest}
           key={friendRequest._id}
           id={friendRequest._id}
-        />;
-      })}
+        />
+      ))}
     </div>
   );
 };
