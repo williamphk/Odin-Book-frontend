@@ -290,4 +290,16 @@ export const getFriendRequestsSent = async (token) => {
   }
 };
 
+export const deleteFriendRequest = async (token, friendRequestId) => {
+  try {
+    const response = await api.delete("/friend-requests/" + friendRequestId, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    return response;
+  } catch (error) {
+    console.error("Error in deleteFriendRequest:", error);
+    throw error;
+  }
+};
+
 export default api;

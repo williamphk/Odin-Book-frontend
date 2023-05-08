@@ -64,8 +64,15 @@ function App() {
     <div className="App">
       <Router>
         {isLoggedIn && <Navbar />}
-        <div className="min-h-screen bg-gray-100 py-3 px-0 lg:px-3 flex justify-between">
-          <LeftSidebar className="flex-col bg-gray-100 w-[330px] hidden lg:flex" />
+        <div
+          className={`${
+            isLoggedIn &&
+            "min-h-screen bg-gray-100 py-3 px-0 lg:px-3 flex justify-between"
+          }`}
+        >
+          {isLoggedIn && (
+            <LeftSidebar className="flex-col bg-gray-100 w-[330px] hidden lg:flex" />
+          )}
           <Routes>
             <Route path="/register" element={<Register />} />
             <Route
@@ -78,10 +85,12 @@ function App() {
               <Route path="/setting" element={<Setting />} />
             </Route>
           </Routes>
-          <RightSidebar
-            friends={[]}
-            className="flex-col bg-gray-100 p-4 w-[330px] hidden lg:flex"
-          />
+          {isLoggedIn && (
+            <RightSidebar
+              friends={[]}
+              className="flex-col bg-gray-100 p-4 w-[330px] hidden lg:flex"
+            />
+          )}
         </div>
         <Footer />
       </Router>

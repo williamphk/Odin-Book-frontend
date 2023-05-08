@@ -33,8 +33,6 @@ const FriendSuggestionList = () => {
     fetchFriendRequest();
   }, [token, sendCount]);
 
-  console.log(friendSuggestion);
-
   useEffect(() => {
     const fetchedFriendRequestSent = async () => {
       try {
@@ -50,6 +48,14 @@ const FriendSuggestionList = () => {
     fetchedFriendRequestSent();
   }, [token, sendCount]);
 
+  const matchingFriendRequest = (suggestion) => {
+    return friendRequestSent.find(
+      (friendRequest) =>
+        friendRequest.sender === user._id &&
+        friendRequest.receiver === suggestion._id
+    );
+  };
+
   if (isLoading) {
     return <Loading />;
   }
@@ -64,11 +70,8 @@ const FriendSuggestionList = () => {
         <FriendSuggestion
           suggestion={suggestion}
           key={suggestion._id}
-          isSent={friendRequestSent.some(
-            (friendRequest) =>
-              friendRequest.sender === user._id &&
-              friendRequest.receiver === suggestion._id
-          )}
+          isSent={matchingFriendRequest(suggestion)}
+          friendRequestId={matchingFriendRequest(suggestion)?._id}
         />
       ))}
     </div>
