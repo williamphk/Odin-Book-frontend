@@ -302,4 +302,32 @@ export const deleteFriendRequest = async (token, friendRequestId) => {
   }
 };
 
+export const acceptFriendRequest = async (token, friendRequestId) => {
+  try {
+    const response = await api.put(
+      "/friend-requests/" + friendRequestId + "/accept",
+      {},
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+    return response;
+  } catch (error) {
+    console.error("Error in acceptFriendRequest:", error);
+    throw error;
+  }
+};
+
+export const rejectFriendRequest = async (token, friendRequestId) => {
+  try {
+    const response = await api.put(
+      "/friend-requests/" + friendRequestId + "/reject",
+      {},
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+    return response;
+  } catch (error) {
+    console.error("Error in rejectFriendRequest:", error);
+    throw error;
+  }
+};
+
 export default api;

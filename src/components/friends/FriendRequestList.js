@@ -41,11 +41,7 @@ const FriendRequestList = () => {
   return (
     <div className="flex flex-wrap gap-3">
       {friendRequests.map((friendRequest) => (
-        <FriendRequest
-          friendRequest={friendRequest}
-          key={friendRequest._id}
-          id={friendRequest._id}
-        />
+        <FriendRequest friendRequest={friendRequest} key={friendRequest._id} />
       ))}
     </div>
   );
