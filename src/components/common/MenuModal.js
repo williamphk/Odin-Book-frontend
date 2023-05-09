@@ -9,6 +9,7 @@ const Modal = ({ menuItems }) => {
           <button
             className="w-full block hover:bg-purple-600 hover:text-white transition duration-100"
             key={index}
+            onClick={element.onClick}
           >
             <Link
               className="w-full block px-4 py-2 hover:bg-purple-600 hover:text-white"

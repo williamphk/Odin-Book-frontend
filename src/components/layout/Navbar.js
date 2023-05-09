@@ -8,7 +8,12 @@ import PostModal from "../posts/PostModal";
 import MaterialIcon from "../common/MaterialIcon";
 import { createPost } from "../../api";
 import { incrementCreateOrUpdateCount } from "../../slices/postSlice";
-import { switchToFriends, switchToNewfeed } from "../../slices/pageSlice";
+import {
+  switchToFriends,
+  switchToNewfeed,
+  switchToProfile,
+  switchToSetting,
+} from "../../slices/pageSlice";
 
 const Navbar = () => {
   const [isMenuOpen, setMenuOpen] = useState(false);
@@ -74,14 +79,24 @@ const Navbar = () => {
     />
   ));
 
+  const handleProfileClick = () => {
+    dispatch(switchToProfile());
+  };
+
+  const handleSettingClick = () => {
+    dispatch(switchToSetting());
+  };
+
   const menuItems = [
     {
       name: "Profile",
       isLink: true,
+      onClick: handleProfileClick,
     },
     {
       name: "Setting",
       isLink: true,
+      onClick: handleSettingClick,
     },
     {
       name: "Logout",
