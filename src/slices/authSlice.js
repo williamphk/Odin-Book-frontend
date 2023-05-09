@@ -81,7 +81,7 @@ const authSlice = createSlice({
       state.error = null;
       // Store the token & user in localStorage
       localStorage.setItem("token", action.payload.token);
-      localStorage.setItem("user", action.payload.userResponse);
+      localStorage.setItem("user", JSON.stringify(action.payload.userResponse));
     });
     builder.addCase(signUp.rejected, (state, action) => {
       // Handle the registration error case
