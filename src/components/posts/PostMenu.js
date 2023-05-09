@@ -68,14 +68,14 @@ const PostMenu = ({ postId }) => {
     setIsPostDeleteModalOpen(false);
   };
 
-  const onEditSubmit = (data) => {
-    updatePost(data, token, postId);
+  const onEditSubmit = async (data) => {
+    await updatePost(data, token, postId);
     closePostModal();
     dispatch(incrementCreateOrUpdateCount());
   };
 
-  const onDeleteSubmit = () => {
-    deletePost(token, postId);
+  const onDeleteSubmit = async () => {
+    await deletePost(token, postId);
     closePostModal();
     dispatch(incrementCreateOrUpdateCount());
   };
@@ -111,9 +111,9 @@ const PostMenu = ({ postId }) => {
           title="Delete"
           closePostModal={closePostModal}
           button="Confirm"
-          onSubmit={onDeleteSubmit}
           buttonColor="bg-red-500"
           buttonHoverColor="bg-red-600"
+          onSubmit={onDeleteSubmit}
         />
       )}
     </div>
