@@ -38,10 +38,13 @@ const FriendList = () => {
   }
 
   return (
-    <div className="flex flex-wrap gap-3">
-      {friends.map((friend) => (
-        <Friend friend={friend} key={friend._id} />
-      ))}
+    <div className="flex flex-col gap-y-2">
+      <h2 className="flex text-xl font-medium">All friends</h2>
+      <div className="flex flex-wrap gap-3">
+        {friends.map((friend) => (
+          <Friend friend={friend} key={friend._id} />
+        ))}
+      </div>
     </div>
   );
 };
