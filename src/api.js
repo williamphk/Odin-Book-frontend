@@ -346,13 +346,23 @@ export const deleteFriend = async (token, userId, friendId) => {
   try {
     const response = await api.delete(
       "/users/" + userId + "/friends/" + friendId,
-      {
-        headers: { Authorization: `Bearer ${token}` },
-      }
+      { headers: { Authorization: `Bearer ${token}` } }
     );
     return response;
   } catch (error) {
     console.error("Error in getFriendList:", error);
+    throw error;
+  }
+};
+
+export const deleteAccount = async (token, userId) => {
+  try {
+    const response = await api.delete("/users/" + userId, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    return response;
+  } catch (error) {
+    console.error("Error in deleteAccount:", error);
     throw error;
   }
 };

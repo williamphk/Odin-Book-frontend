@@ -1,6 +1,16 @@
 import React from "react";
+import { useSelector } from "react-redux";
+
+import { deleteAccount } from "../../api";
 
 const Setting = () => {
+  const token = useSelector((state) => state.auth.token);
+  const user = useSelector((state) => state.auth.user);
+
+  const handleDeleteButtonClick = async () => {
+    await deleteAccount(token, user._id);
+  };
+
   return (
     <div className="container w-3/4">
       <div className="bg-white flex flex-col items-start p-6 w-full text-left rounded-lg">
@@ -14,11 +24,14 @@ const Setting = () => {
           content and information that you've shared on Odin-book, including
           your profile, friends, posts, comments and likes.
         </p>
-        <div className="pt-3 flex gap-x-3 self-end">
+        <div className="pt-8 flex gap-x-3 self-end">
           <button className="bg-gray-200 hover:bg-gray-300 px-6 py-2 rounded-lg">
             Cancel
           </button>
-          <button className="bg-red-500 hover:bg-red-600 px-6 py-2 text-white rounded-lg">
+          <button
+            onClick={handleDeleteButtonClick}
+            className="bg-red-500 hover:bg-red-600 px-6 py-2 text-white rounded-lg"
+          >
             Continue to account deletion
           </button>
         </div>
