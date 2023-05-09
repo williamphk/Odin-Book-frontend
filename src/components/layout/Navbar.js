@@ -146,7 +146,7 @@ const Navbar = () => {
           <div className="relative flex justify-end self-center">
             <button onClick={toggleProfileMenu} ref={menuRef}>
               <img
-                src="https://via.placeholder.com/32"
+                src={user.picture}
                 alt="Profile"
                 className="w-10 h-10 rounded-full"
               />

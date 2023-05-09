@@ -14,7 +14,7 @@ const LeftSidebar = ({ className }) => {
     <div className={className}>
       <div className="flex items-center mb-4">
         <img
-          src="https://via.placeholder.com/40"
+          src={user.picture}
           alt="Profile"
           className="w-10 h-10 rounded-full"
         />
