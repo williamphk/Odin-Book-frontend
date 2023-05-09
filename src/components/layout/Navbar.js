@@ -18,8 +18,8 @@ const Navbar = () => {
   const newsfeed = useSelector((state) => state.page.newsfeed);
   const friends = useSelector((state) => state.page.friends);
 
-  const onSubmit = (data) => {
-    createPost(data, token);
+  const onSubmit = async (data) => {
+    await createPost(data, token);
     closePostModal();
     dispatch(incrementCreateOrUpdateCount());
   };

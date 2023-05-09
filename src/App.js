@@ -81,11 +81,11 @@ function App() {
         <div
           className={`${
             isLoggedIn &&
-            "min-h-screen bg-gray-100 py-3 px-0 lg:px-3 flex justify-between"
+            "min-h-screen bg-gray-100 py-3 px-0 sm:px-3 flex justify-center lg:justify-between"
           }`}
         >
           {isLoggedIn && (
-            <LeftSidebar className="flex-col bg-gray-100 w-[330px] hidden lg:flex" />
+            <LeftSidebar className="flex-col bg-gray-100 w-[330px] hidden sm:flex" />
           )}
           <Routes>
             <Route path="/register" element={<Register />} />
