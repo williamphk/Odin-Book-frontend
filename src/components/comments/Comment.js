@@ -125,18 +125,22 @@ const Comment = ({ comment, postId, commentId, token }) => {
             >
               Like
             </button>
-            <button
-              className="pl-1 text-xs font-medium"
-              onClick={handleEditButton}
-            >
-              Edit
-            </button>
-            <button
-              className="pl-1 text-xs font-medium"
-              onClick={handleDeleteButton}
-            >
-              Delete
-            </button>
+            {user._id === comment.user._id && (
+              <button
+                className="pl-1 text-xs font-medium"
+                onClick={handleEditButton}
+              >
+                Edit
+              </button>
+            )}
+            {user._id === comment.user._id && (
+              <button
+                className="pl-1 text-xs font-medium"
+                onClick={handleDeleteButton}
+              >
+                Delete
+              </button>
+            )}
             <FormattedDate
               className="pl-1 text-xs text-gray-500"
               date={new Date(comment.createdAt)}
