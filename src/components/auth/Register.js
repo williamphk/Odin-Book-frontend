@@ -21,7 +21,7 @@ const Register = () => {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const errorState = useSelector((state) => state.auth.error);
 
-  const onSubmit = async (data) => {
+  const onSubmit = (data) => {
     if (data.password !== data.confirmPassword) {
       setError("confirmPassword", {
         type: "manual",
@@ -30,15 +30,18 @@ const Register = () => {
       return;
     }
     try {
-      await dispatch(signUp(data));
+      dispatch(signUp(data));
       // Redirect to homepage
-      if (isLoggedIn) {
-        navigate("/");
-      }
     } catch (error) {
       console.error("Error during registration:", error);
     }
   };
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      navigate("/");
+    }
+  }, [isLoggedIn]);
 
   useEffect(() => {
     if (errorState && errorState.errors) {
