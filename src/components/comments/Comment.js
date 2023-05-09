@@ -112,7 +112,7 @@ const Comment = ({ comment, postId, commentId, token }) => {
                   className={`material-symbols-outlined text-lg text-purple-600`}
                   iconName={"thumb_up"}
                 />
-                <div>1</div>
+                <div>{commentLikes.length}</div>
               </button>
             )}
           </div>
