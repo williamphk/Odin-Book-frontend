@@ -379,9 +379,9 @@ export const getUser = async (token, userId) => {
   }
 };
 
-export const getUserPost = async (token) => {
+export const getUserPost = async (token, userId) => {
   try {
-    const response = await api.get("/posts", {
+    const response = await api.get("/users/" + userId + "/posts", {
       headers: { Authorization: `Bearer ${token}` },
     });
     return response;

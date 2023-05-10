@@ -35,7 +35,7 @@ const Profile = () => {
   useEffect(() => {
     const fetchUserPost = async () => {
       try {
-        const fetchedPosts = await getUserPost(token);
+        const fetchedPosts = await getUserPost(token, userId ?? user._id);
         setPosts(fetchedPosts.data.posts);
         setIsLoading(false);
       } catch (err) {
