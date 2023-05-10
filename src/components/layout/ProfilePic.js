@@ -53,7 +53,7 @@ const ProfilePic = () => {
 
   const menuItems = [
     {
-      name: "Profile",
+      name: "profile",
       isLink: true,
       onClick: handleProfileClick,
     },

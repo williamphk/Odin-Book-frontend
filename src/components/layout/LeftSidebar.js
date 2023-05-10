@@ -7,8 +7,13 @@ import { switchToFriends, switchToNewfeed } from "../../slices/pageSlice";
 const LeftSidebar = ({ className }) => {
   const user = useSelector((state) => state.auth.user);
   const friends = useSelector((state) => state.page.friends);
+  const profile = useSelector((state) => state.page.profile);
 
   const dispatch = useDispatch();
+
+  if (profile) {
+    return;
+  }
 
   return (
     <div className={className}>

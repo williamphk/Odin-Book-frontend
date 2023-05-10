@@ -18,7 +18,7 @@ const Setting = () => {
   };
 
   return (
-    <div className="container w-3/4">
+    <div className="w-3/4">
       <div className="bg-white flex flex-col items-start p-6 w-full text-left rounded-lg">
         <div className="border-b w-full">
           <h2 className="flex text-xl font-medium">Setting</h2>

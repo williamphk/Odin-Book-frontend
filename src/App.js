@@ -72,6 +72,9 @@ function App() {
     } else if (currentUrl.includes("/setting")) {
       // Dispatch an action to update the switchToNewsFeed state
       dispatch(switchToSetting());
+    } else if (currentUrl.includes("/profile")) {
+      // Dispatch an action to update the switchToNewsFeed state
+      dispatch(switchToProfile());
     } else {
       // Reset the state or dispatch an action based on other URLs
       dispatch(switchToNewfeed());
