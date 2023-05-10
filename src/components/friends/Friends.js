@@ -6,7 +6,7 @@ import FriendList from "./FriendList";
 
 const Friends = () => {
   return (
-    <div className="flex flex-col w-3/4">
+    <div className="flex flex-col w-3/4 py-3 sm:pr-3">
       <Routes>
         <Route path="/suggestion" element={<FriendSuggestionList />} />
         <Route path="/list" element={<FriendList />} />

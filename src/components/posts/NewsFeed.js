@@ -38,7 +38,7 @@ const NewsFeed = () => {
   }
 
   return (
-    <div className="container flex flex-col max-w-[660px]">
+    <div className="container flex flex-col max-w-[660px] py-3 sm:pr-3">
       {posts.map((post) => (
         <Post post={post} key={post._id} id={post._id} />
       ))}

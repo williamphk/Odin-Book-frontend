@@ -92,11 +92,11 @@ function App() {
         <div
           className={`${
             isLoggedIn &&
-            "min-h-screen bg-gray-100 py-3 px-0 sm:px-3 flex justify-center lg:justify-between"
+            "min-h-screen bg-gray-100 flex justify-center lg:justify-between"
           }`}
         >
           {isLoggedIn && (
-            <LeftSidebar className="flex-col bg-gray-100 w-[330px] hidden sm:flex" />
+            <LeftSidebar className="flex-col bg-gray-100 w-[330px] hidden sm:flex py-3 pl-0 sm:pl-3" />
           )}
           <Routes>
             <Route path="/register" element={<Register />} />
@@ -113,7 +113,7 @@ function App() {
           {isLoggedIn && (
             <RightSidebar
               friends={[]}
-              className="flex-col bg-gray-100 p-4 w-[330px] hidden lg:flex"
+              className="flex-col bg-gray-100 w-[330px] hidden lg:flex py-3 pr-0 sm:pr-3 "
             />
           )}
         </div>
