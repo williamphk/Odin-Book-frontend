@@ -2,20 +2,22 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const Modal = ({ menuItems }) => {
+  const capitalizeString = (string) => {
+    let capitalizedString = string.substr(0, 1).toUpperCase();
+    return (capitalizedString += string.replace(string.substr(0, 1), ""));
+  };
+
   return (
-    <div className="absolute top-full right-1 w-36 mt-1 p-1 bg-white rounded-md shadow-lg text-gray-700">
+    <div className="absolute top-full right-1 w-36 mt-1 p-1 bg-white rounded-md shadow-3xl text-gray-800">
       {menuItems.map((element, index) => {
         return element.isLink ? (
           <button
-            className="w-full block hover:bg-purple-600 hover:text-white transition duration-100"
+            className="w-full block hover:bg-gray-200 rounded-md transition duration-50"
             key={index}
             onClick={element.onClick}
           >
-            <Link
-              className="w-full block px-4 py-2 hover:bg-purple-600 hover:text-white"
-              to={"/" + element.name}
-            >
-              {element.name}
+            <Link className="w-full block px-4 py-2" to={"/" + element.name}>
+              {capitalizeString(element.name)}
             </Link>
           </button>
         ) : (
@@ -23,7 +25,7 @@ const Modal = ({ menuItems }) => {
             type="button"
             key={index}
             onClick={element.onClick}
-            className="w-full block px-4 py-2 hover:bg-purple-600 hover:text-white transition duration-100"
+            className="w-full block px-4 py-2 hover:bg-gray-200 rounded-md transition duration-50"
           >
             {element.name}
           </button>
