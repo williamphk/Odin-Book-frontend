@@ -1,10 +1,42 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 
 import MaterialIcon from "../common/MaterialIcon";
+import { getUser } from "../../api";
+import Loading from "../common/Loading";
 
 const Profile = () => {
+  const [profile, setProfile] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  const token = useSelector((state) => state.auth.token);
   const user = useSelector((state) => state.auth.user);
+
+  const { userId } = useParams();
+
+  useEffect(() => {
+    try {
+      const fetchUserProfile = async () => {
+        const fetchedProfile = await getUser(token, userId || user._id);
+        setProfile(fetchedProfile.data.user.profile);
+        setIsLoading(false);
+      };
+      fetchUserProfile();
+    } catch (err) {
+      setError(err);
+      setIsLoading(false);
+    }
+  }, []);
+
+  if (isLoading) {
+    return <Loading />;
+  }
+
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  }
 
   return (
     <div className="flex flex-col w-full text-left">
@@ -13,7 +45,7 @@ const Profile = () => {
           <div className="absolute bottom-12 left-60">
             <div className="flex relative">
               <img
-                src={user.picture}
+                src={profile.picture}
                 alt="Profile"
                 className="object-cover w-48 h-48 rounded-full border-4 border-white"
               />
@@ -26,7 +58,7 @@ const Profile = () => {
             </div>
           </div>
           <div className="pl-[450px]">
-            <h2 className="flex text-3xl font-medium">{user.fullName}</h2>
+            <h2 className="flex text-3xl font-medium">{profile.fullName}</h2>
             <div className="text-gray-500">1 friend</div>
           </div>
         </div>

@@ -367,4 +367,16 @@ export const deleteAccount = async (token, userId) => {
   }
 };
 
+export const getUser = async (token, userId) => {
+  try {
+    const response = await api.get("/users/" + userId, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    return response;
+  } catch (error) {
+    console.error("Error in deleteAccount:", error);
+    throw error;
+  }
+};
+
 export default api;
