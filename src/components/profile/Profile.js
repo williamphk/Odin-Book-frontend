@@ -28,7 +28,7 @@ const Profile = () => {
       setError(err);
       setIsLoading(false);
     }
-  }, []);
+  }, [userId]);
 
   if (isLoading) {
     return <Loading />;
@@ -63,9 +63,13 @@ const Profile = () => {
           </div>
         </div>
         <div className="flex items-center">
-          <button className="bg-gray-200 px-4 py-2 rounded">
-            Edit profile
-          </button>
+          {userId
+            ? userId === user._id
+            : user._id && (
+                <button className="bg-gray-200 px-4 py-2 rounded">
+                  Edit profile
+                </button>
+              )}
         </div>
       </div>
       <div className="flex w-full bg-white relative h-12 px-60">
@@ -78,18 +82,34 @@ const Profile = () => {
         <div className="w-[40%]">
           <div className="w-full bg-white rounded shadow p-3 flex flex-col gap-y-4">
             <div>Intro</div>
-            <div className="text-sm rounded bg-gray-200 hover:bg-gray-300 py-1">
-              <button className="w-full">Add work</button>
-            </div>
-            <div className="text-sm rounded bg-gray-200 hover:bg-gray-300 py-1">
-              <button className="w-full">Add eduation</button>
-            </div>
-            <div className="text-sm rounded bg-gray-200 hover:bg-gray-300 py-1">
-              <button className="w-full">Add current city</button>
-            </div>
-            <div className="text-sm rounded bg-gray-200 hover:bg-gray-300 py-1">
-              <button className="w-full">Edit details</button>
-            </div>
+            {userId
+              ? userId === user._id
+              : user._id && (
+                  <div className="text-sm rounded bg-gray-200 hover:bg-gray-300 py-1">
+                    <button className="w-full">Add work</button>
+                  </div>
+                )}
+            {userId
+              ? userId === user._id
+              : user._id && (
+                  <div className="text-sm rounded bg-gray-200 hover:bg-gray-300 py-1">
+                    <button className="w-full">Add eduation</button>
+                  </div>
+                )}
+            {userId
+              ? userId === user._id
+              : user._id && (
+                  <div className="text-sm rounded bg-gray-200 hover:bg-gray-300 py-1">
+                    <button className="w-full">Add current city</button>
+                  </div>
+                )}
+            {userId
+              ? userId === user._id
+              : user._id && (
+                  <div className="text-sm rounded bg-gray-200 hover:bg-gray-300 py-1">
+                    <button className="w-full">Edit details</button>
+                  </div>
+                )}
           </div>
           <div>Friends</div>
         </div>
