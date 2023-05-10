@@ -1,14 +1,20 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 import { deleteAccount } from "../../api";
+import { logout } from "../../slices/authSlice";
+import { switchToNewfeed } from "../../slices/pageSlice";
 
 const Setting = () => {
   const token = useSelector((state) => state.auth.token);
   const user = useSelector((state) => state.auth.user);
 
+  const dispatch = useDispatch();
+
   const handleDeleteButtonClick = async () => {
     await deleteAccount(token, user._id);
+    dispatch(logout());
+    dispatch(switchToNewfeed());
   };
 
   return (

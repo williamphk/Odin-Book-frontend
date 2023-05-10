@@ -18,7 +18,12 @@ import Loading from "./components/common/Loading";
 import Footer from "./components/layout/Footer";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 
-import { switchToFriends, switchToNewfeed } from "./slices/pageSlice";
+import {
+  switchToFriends,
+  switchToNewfeed,
+  switchToSetting,
+  switchToProfile,
+} from "./slices/pageSlice";
 
 function App() {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
@@ -64,6 +69,9 @@ function App() {
     if (currentUrl.includes("/friends")) {
       // Dispatch an action to update the switchToNewsFeed state
       dispatch(switchToFriends());
+    } else if (currentUrl.includes("/setting")) {
+      // Dispatch an action to update the switchToNewsFeed state
+      dispatch(switchToSetting());
     } else {
       // Reset the state or dispatch an action based on other URLs
       dispatch(switchToNewfeed());
@@ -114,4 +122,4 @@ function App() {
 
 export default App;
 
-//Todo: Profile page, setting page, clicking profile pic to profile page, modal to show sucess/fail message, mobile menu, like modal, friends menu state
+//Todo: Profile page, clicking profile pic to profile page, modal to show sucess/fail message, mobile menu, like modal, friends menu state left sidebar

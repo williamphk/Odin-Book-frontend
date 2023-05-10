@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../slices/authSlice";
 
+import SiteNameAndLogo from "./SiteNameAndLogo";
 import MenuModal from "../common/MenuModal";
 import PostModal from "../posts/PostModal";
 import MaterialIcon from "../common/MaterialIcon";
@@ -94,7 +95,7 @@ const Navbar = () => {
       onClick: handleProfileClick,
     },
     {
-      name: "Setting",
+      name: "setting",
       isLink: true,
       onClick: handleSettingClick,
     },
@@ -119,12 +120,7 @@ const Navbar = () => {
     <header className="sticky top-0 shadow-md bg-white z-10">
       <nav className="px-4">
         <div className="grid grid-cols-3">
-          <div className="self-center">
-            <h1 className="lg:flex justify-start text-purple-500 font-bold text-3xl hidden">
-              <Link to="/">Odin-book</Link>
-            </h1>
-          </div>
-
+          <SiteNameAndLogo />
           <div className="flex justify-center items-center gap-x-4">
             {navItems.map((element, index) => {
               return index === navItems.length - 1 ? (
