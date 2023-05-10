@@ -1,12 +1,9 @@
 import React from "react";
-import { useSelector } from "react-redux";
 
 import FormattedDate from "../common/FormattedDate";
 import PostMenu from "./PostMenu";
 
-const PostHeader = ({ post, postId }) => {
-  const user = useSelector((state) => state.auth.user);
-
+const PostHeader = ({ post, postId, token, user }) => {
   return (
     <div className="flex justify-between items-center">
       <div className="flex gap-x-2">
@@ -28,7 +25,7 @@ const PostHeader = ({ post, postId }) => {
           ></FormattedDate>
         </div>
       </div>
-      {user._id === post.user._id && <PostMenu postId={postId} />}
+      {user._id === post.user._id && <PostMenu postId={postId} token={token} />}
     </div>
   );
 };

@@ -7,10 +7,12 @@ import Loading from "../common/Loading";
 
 const NewsFeed = () => {
   const token = useSelector((state) => state.auth.token);
+  const user = useSelector((state) => state.auth.user);
+
   const createOrUpdateCount = useSelector(
     (state) => state.post.createOrUpdateCount
   );
-  const [posts, setPosts] = useState(null);
+  const [posts, setPosts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -40,7 +42,13 @@ const NewsFeed = () => {
   return (
     <div className="container flex flex-col max-w-[660px] py-3 sm:pr-3">
       {posts.map((post) => (
-        <Post post={post} key={post._id} id={post._id} />
+        <Post
+          post={post}
+          key={post._id}
+          id={post._id}
+          token={token}
+          user={user}
+        />
       ))}
     </div>
   );

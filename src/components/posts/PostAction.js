@@ -4,14 +4,11 @@ import { useSelector } from "react-redux";
 import MaterialIcon from "../common/MaterialIcon";
 import { getPostLikeList, createPostLike, deletePostLike } from "../../api";
 
-const PostAction = ({ handleCommentShow, comments, postId }) => {
+const PostAction = ({ handleCommentShow, comments, postId, user, token }) => {
   const [postLikes, setPostLikes] = useState([]);
   const [isLike, setIsLike] = useState(false);
   const [userLikeId, setUserLikeId] = useState(null);
   const [fetchLikesTrigger, setFetchLikesTrigger] = useState(false);
-
-  const user = useSelector((state) => state.auth.user);
-  const token = useSelector((state) => state.auth.token);
 
   useEffect(() => {
     const fetchPostLikes = async () => {

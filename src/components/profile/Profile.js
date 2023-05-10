@@ -3,13 +3,15 @@ import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
 import MaterialIcon from "../common/MaterialIcon";
-import { getUser } from "../../api";
+import { getUser, getUserPost } from "../../api";
 import Loading from "../common/Loading";
+import Post from "../posts/Post";
 
 const Profile = () => {
-  const [profile, setProfile] = useState(null);
+  const [profile, setProfile] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [posts, setPosts] = useState([]);
 
   const token = useSelector((state) => state.auth.token);
   const user = useSelector((state) => state.auth.user);
@@ -17,18 +19,33 @@ const Profile = () => {
   const { userId } = useParams();
 
   useEffect(() => {
-    try {
-      const fetchUserProfile = async () => {
-        const fetchedProfile = await getUser(token, userId || user._id);
+    const fetchUserProfile = async () => {
+      try {
+        const fetchedProfile = await getUser(token, userId ?? user._id);
         setProfile(fetchedProfile.data.user.profile);
         setIsLoading(false);
-      };
-      fetchUserProfile();
-    } catch (err) {
-      setError(err);
-      setIsLoading(false);
-    }
+      } catch (err) {
+        setError(err);
+        setIsLoading(false);
+      }
+    };
+    fetchUserProfile();
   }, [userId]);
+
+  useEffect(() => {
+    const fetchUserPost = async () => {
+      try {
+        const fetchedPosts = await getUserPost(token);
+        setPosts(fetchedPosts.data.posts);
+        setIsLoading(false);
+      } catch (err) {
+        setError(err);
+        setIsLoading(false);
+      }
+    };
+
+    fetchUserPost();
+  }, [token]);
 
   if (isLoading) {
     return <Loading />;
@@ -113,7 +130,17 @@ const Profile = () => {
           </div>
           <div>Friends</div>
         </div>
-        <div className="w-[60%] bg-white rounded shadow">Posts</div>
+        <div className="w-[60%]">
+          {posts.map((post) => (
+            <Post
+              post={post}
+              key={post._id}
+              id={post._id}
+              token={token}
+              user={user}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );

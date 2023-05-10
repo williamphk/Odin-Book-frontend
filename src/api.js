@@ -374,7 +374,19 @@ export const getUser = async (token, userId) => {
     });
     return response;
   } catch (error) {
-    console.error("Error in deleteAccount:", error);
+    console.error("Error in getUser:", error);
+    throw error;
+  }
+};
+
+export const getUserPost = async (token) => {
+  try {
+    const response = await api.get("/posts", {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    return response;
+  } catch (error) {
+    console.error("Error in getUserPost:", error);
     throw error;
   }
 };

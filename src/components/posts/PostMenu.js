@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import MaterialIcon from "../common/MaterialIcon";
 import MenuModal from "../common/MenuModal";
@@ -8,14 +8,13 @@ import PostModal from "./PostModal";
 import { getPostContent, updatePost, deletePost } from "../../api";
 import { incrementCreateOrUpdateCount } from "../../slices/postSlice";
 
-const PostMenu = ({ postId }) => {
+const PostMenu = ({ postId, token }) => {
   const [isPostMenuOpen, setPostMenuOpen] = useState(false);
   const [isPostEditModalOpen, setIsPostEditModalOpen] = useState(false);
   const [isPostDeleteModalOpen, setIsPostDeleteModalOpen] = useState(false);
   const [postContent, setPostContent] = useState("loading...");
 
   const dispatch = useDispatch();
-  const token = useSelector((state) => state.auth.token);
 
   const openPostEditModal = async () => {
     setIsPostEditModalOpen(true);

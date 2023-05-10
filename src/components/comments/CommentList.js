@@ -2,7 +2,7 @@ import React from "react";
 
 import Comment from "./Comment";
 
-const CommentList = ({ postId, comments, token }) => {
+const CommentList = ({ postId, comments, token, user }) => {
   return (
     <div>
       <div>
@@ -13,6 +13,7 @@ const CommentList = ({ postId, comments, token }) => {
             commentId={comment._id}
             key={comment._id}
             token={token}
+            user={user}
           />
         ))}
       </div>

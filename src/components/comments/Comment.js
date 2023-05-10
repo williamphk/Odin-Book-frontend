@@ -14,15 +14,13 @@ import FormattedDate from "../common/FormattedDate";
 import { incrementCreateOrUpdateCount } from "../../slices/commentSlice";
 import MaterialIcon from "../common/MaterialIcon";
 
-const Comment = ({ comment, postId, commentId, token }) => {
+const Comment = ({ comment, postId, commentId, token, user }) => {
   const [isEdit, setIsEdit] = useState(false);
   const [commentContent, setCommentContent] = useState("");
   const [commentLikes, setCommentLikes] = useState([]);
   const [isLike, setIsLike] = useState(false);
   const [userLikeId, setUserLikeId] = useState(null);
   const [fetchLikesTrigger, setFetchLikesTrigger] = useState(false);
-
-  const user = useSelector((state) => state.auth.user);
 
   const handleEditButton = async () => {
     setIsEdit(!isEdit);
