@@ -13,6 +13,7 @@ import {
 import FormattedDate from "../common/FormattedDate";
 import { incrementCreateOrUpdateCount } from "../../slices/commentSlice";
 import MaterialIcon from "../common/MaterialIcon";
+import ProfilePic from "../common/ProfilePic";
 
 const Comment = ({ comment, postId, commentId, token, user }) => {
   const [isEdit, setIsEdit] = useState(false);
@@ -82,13 +83,14 @@ const Comment = ({ comment, postId, commentId, token, user }) => {
 
   return (
     <div className="flex m-y-1 gap-x-2 mb-1" id={commentId}>
-      <button>
-        <img
-          src={comment.user.profile.picture}
-          alt="Profile picture"
-          className="w-10 h-10 rounded-full"
+      <div className="items-start">
+        <ProfilePic
+          picture={comment.user.profile.picture}
+          id={comment.user._id}
+          className="w-10 h-10 object-cover rounded-full"
         />
-      </button>
+      </div>
+
       {isEdit ? (
         <CommentField
           postId={postId}

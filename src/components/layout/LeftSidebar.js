@@ -2,6 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
+import ProfilePic from "../common/ProfilePic";
+
 import { switchToFriends, switchToNewfeed } from "../../slices/pageSlice";
 
 const LeftSidebar = ({ className }) => {
@@ -18,10 +20,10 @@ const LeftSidebar = ({ className }) => {
   return (
     <div className={className}>
       <div className="flex items-center mb-4">
-        <img
-          src={user.picture}
-          alt="Profile"
-          className="w-10 h-10 rounded-full"
+        <ProfilePic
+          picture={user.picture}
+          id={user._id}
+          className="w-10 h-10 object-cover rounded-full"
         />
         <span className="ml-2 font-bold">{user.fullName}</span>
       </div>

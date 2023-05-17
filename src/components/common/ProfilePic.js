@@ -1,8 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+
+import { switchToProfile } from "../../slices/pageSlice";
 
 const ProfilePic = ({ picture, id, className }) => {
-  const handleOnClick = () => {};
+  const dispatch = useDispatch();
+
+  const handleOnClick = () => {
+    dispatch(switchToProfile());
+  };
 
   return (
     <button onClick={handleOnClick}>

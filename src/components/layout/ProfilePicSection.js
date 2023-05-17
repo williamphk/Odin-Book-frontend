@@ -75,9 +75,10 @@ const ProfilePicSection = () => {
         <img
           src={user.picture}
           alt="Profile"
-          className="w-10 h-10 rounded-full"
+          className="w-10 h-10 object-cover rounded-full"
         />
       </button>
+
       {isMenuOpen && <MenuModal menuItems={menuItems} />}
     </div>
   );

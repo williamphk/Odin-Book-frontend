@@ -2,18 +2,17 @@ import React from "react";
 
 import FormattedDate from "../common/FormattedDate";
 import PostMenu from "./PostMenu";
+import ProfilePic from "../common/ProfilePic";
 
 const PostHeader = ({ post, postId, token, user }) => {
   return (
     <div className="flex justify-between items-center">
       <div className="flex gap-x-2">
-        <button>
-          <img
-            src={post.user.profile.picture}
-            alt="Profile"
-            className="w-10 h-10 rounded-full"
-          />
-        </button>
+        <ProfilePic
+          picture={post.user.profile.picture}
+          id={post.user._id}
+          className="w-10 h-10 object-cover rounded-full"
+        />
         <div className="flex flex-col items-start">
           <p className="font-bold hover:underline cursor-pointer">
             {post.user.profile.fullName}
