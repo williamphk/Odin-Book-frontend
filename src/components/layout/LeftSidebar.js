@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
 import ProfilePic from "../common/ProfilePic";
+import UserName from "../common/UserName";
 
 import { switchToFriends, switchToNewfeed } from "../../slices/pageSlice";
 
@@ -25,7 +26,11 @@ const LeftSidebar = ({ className }) => {
           id={user._id}
           className="w-10 h-10 object-cover rounded-full"
         />
-        <span className="ml-2 font-bold">{user.fullName}</span>
+        <UserName
+          name={user.fullName}
+          id={user._id}
+          className="ml-2 font-bold"
+        />
       </div>
       <nav>
         <ul className="space-y-2">

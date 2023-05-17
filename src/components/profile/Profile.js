@@ -7,6 +7,7 @@ import { getUser, getUserPost, getFriendList } from "../../api";
 import Loading from "../common/Loading";
 import Post from "../posts/Post";
 import ProfilePic from "../common/ProfilePic";
+import UserName from "../common/UserName";
 
 const Profile = () => {
   const [profile, setProfile] = useState({});
@@ -83,12 +84,14 @@ const Profile = () => {
                 alt="Profile"
                 className="object-cover w-48 h-48 rounded-full border-4 border-white"
               />
-              <button className="w-8 h-8 rounded-full bg-gray-200 hover:bg-gray-300 flex justify-center items-center absolute right-3 bottom-3">
-                <MaterialIcon
-                  className="material-symbols-outlined text-xl text-black"
-                  iconName={"photo_camera"}
-                />
-              </button>
+              {(!userId || userId === user._id) && (
+                <button className="w-8 h-8 rounded-full bg-gray-200 hover:bg-gray-300 flex justify-center items-center absolute right-3 bottom-3">
+                  <MaterialIcon
+                    className="material-symbols-outlined text-xl text-black"
+                    iconName={"photo_camera"}
+                  />
+                </button>
+              )}
             </div>
           </div>
           <div className="pl-[450px]">
@@ -97,13 +100,11 @@ const Profile = () => {
           </div>
         </div>
         <div className="flex items-center">
-          {userId
-            ? userId === user._id
-            : user._id && (
-                <button className="bg-gray-200 px-4 py-2 rounded-lg">
-                  Edit profile
-                </button>
-              )}
+          {(!userId || userId === user._id) && (
+            <button className="bg-gray-200 px-4 py-2 rounded-lg">
+              Edit profile
+            </button>
+          )}
         </div>
       </div>
       <div className="flex w-full bg-white relative h-12 px-48 shadow">
@@ -115,47 +116,44 @@ const Profile = () => {
       <div className="flex px-32 gap-x-4 px-48 pt-4">
         <div className="w-[43%] flex flex-col gap-4">
           <div className="w-full bg-white rounded-lg shadow p-3 flex flex-col gap-y-4">
-            <div>Intro</div>
-            {userId
-              ? userId === user._id
-              : user._id && (
-                  <div className="text-sm rounded-lg bg-gray-200 hover:bg-gray-300 py-1">
-                    <button className="w-full">Add work</button>
-                  </div>
-                )}
-            {userId
-              ? userId === user._id
-              : user._id && (
-                  <div className="text-sm rounded-lg bg-gray-200 hover:bg-gray-300 py-1">
-                    <button className="w-full">Add eduation</button>
-                  </div>
-                )}
-            {userId
-              ? userId === user._id
-              : user._id && (
-                  <div className="text-sm rounded-lg bg-gray-200 hover:bg-gray-300 py-1">
-                    <button className="w-full">Add current city</button>
-                  </div>
-                )}
-            {userId
-              ? userId === user._id
-              : user._id && (
-                  <div className="text-sm rounded-lg bg-gray-200 hover:bg-gray-300 py-1">
-                    <button className="w-full">Edit details</button>
-                  </div>
-                )}
+            <div className="font-bold">Intro</div>
+            {(!userId || userId === user._id) && (
+              <div className="text-sm rounded-lg bg-gray-200 hover:bg-gray-300 py-1">
+                <button className="w-full">Add work</button>
+              </div>
+            )}
+            {(!userId || userId === user._id) && (
+              <div className="text-sm rounded-lg bg-gray-200 hover:bg-gray-300 py-1">
+                <button className="w-full">Add eduation</button>
+              </div>
+            )}
+            {(!userId || userId === user._id) && (
+              <div className="text-sm rounded-lg bg-gray-200 hover:bg-gray-300 py-1">
+                <button className="w-full">Add current city</button>
+              </div>
+            )}
+            {(!userId || userId === user._id) && (
+              <div className="text-sm rounded-lg bg-gray-200 hover:bg-gray-300 py-1">
+                <button className="w-full">Edit details</button>
+              </div>
+            )}
           </div>
           <div className="w-full bg-white rounded-lg shadow p-3 flex flex-col">
-            <div>Friends</div>
-            <div>
+            <div className="font-bold">Friends</div>
+            <div className="text-gray-500">{friends.length} friends</div>
+            <div className="flex gap-x-2 mt-3">
               {friends.map((friend) => (
-                <div>
+                <div className="flex flex-col">
                   <ProfilePic
                     picture={friend.picture}
                     id={friend.user._id}
                     className="object-cover w-28 h-28 rounded-lg ring-1 ring-gray-100"
                   />
-                  <div className="text-sm text-left">{friend.fullName}</div>
+                  <UserName
+                    name={friend.fullName}
+                    id={friend.user._id}
+                    className="text-sm text-left"
+                  />
                 </div>
               ))}
             </div>

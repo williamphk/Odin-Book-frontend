@@ -14,6 +14,7 @@ import FormattedDate from "../common/FormattedDate";
 import { incrementCreateOrUpdateCount } from "../../slices/commentSlice";
 import MaterialIcon from "../common/MaterialIcon";
 import ProfilePic from "../common/ProfilePic";
+import UserName from "../common/UserName";
 
 const Comment = ({ comment, postId, commentId, token, user }) => {
   const [isEdit, setIsEdit] = useState(false);
@@ -102,9 +103,11 @@ const Comment = ({ comment, postId, commentId, token, user }) => {
       ) : (
         <div className="flex flex-col items-start">
           <div className="flex flex-col bg-gray-100 rounded-xl px-3 py-1 text-sm items-start mb-1 relative">
-            <button className="font-medium">
-              {comment.user.profile.fullName}
-            </button>
+            <UserName
+              name={comment.user.profile.fullName}
+              id={comment.user._id}
+              className="font-medium"
+            />
             <div>{comment.content}</div>
             {commentLikes.length > 0 && (
               <button className="absolute top-7 right-0 flex justify-center items-center gap-x-1 rounded-lg bg-white px-0.5 drop-shadow-xl">

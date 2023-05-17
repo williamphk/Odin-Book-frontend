@@ -3,6 +3,7 @@ import React from "react";
 import FormattedDate from "../common/FormattedDate";
 import PostMenu from "./PostMenu";
 import ProfilePic from "../common/ProfilePic";
+import UserName from "../common/UserName";
 
 const PostHeader = ({ post, postId, token, user }) => {
   return (
@@ -14,12 +15,14 @@ const PostHeader = ({ post, postId, token, user }) => {
           className="w-10 h-10 object-cover rounded-full"
         />
         <div className="flex flex-col items-start">
-          <p className="font-bold hover:underline cursor-pointer">
-            {post.user.profile.fullName}
-          </p>
+          <UserName
+            name={post.user.profile.fullName}
+            id={post.user._id}
+            className="font-bold hover:underline cursor-pointer"
+          />
 
           <FormattedDate
-            className="pl-1 text-sm text-gray-500"
+            className="text-sm text-gray-500"
             date={new Date(post.createdAt)}
           ></FormattedDate>
         </div>

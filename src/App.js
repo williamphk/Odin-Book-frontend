@@ -126,4 +126,4 @@ function App() {
 
 export default App;
 
-//Todo: Profile page, clicking profile pic to profile page, modal to show sucess/fail message, mobile menu, like modal, friends menu state left sidebar
+//Todo: Profile page, modal to show sucess/fail message, mobile menu, like modal, friends menu state left sidebar
