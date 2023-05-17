@@ -2,7 +2,7 @@ import React from "react";
 
 import SiteNameAndLogo from "./SiteNameAndLogo";
 import NavButton from "./NavButton";
-import ProfilePic from "./ProfilePic";
+import ProfilePicSection from "./ProfilePicSection";
 
 const Navbar = () => {
   return (
@@ -11,7 +11,7 @@ const Navbar = () => {
         <div className="grid grid-cols-3">
           <SiteNameAndLogo />
           <NavButton />
-          <ProfilePic />
+          <ProfilePicSection />
         </div>
       </nav>
     </header>

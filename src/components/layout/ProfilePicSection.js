@@ -9,7 +9,7 @@ import {
   switchToSetting,
 } from "../../slices/pageSlice";
 
-const ProfilePic = () => {
+const ProfilePicSection = () => {
   const user = useSelector((state) => state.auth.user);
 
   const dispatch = useDispatch();
@@ -83,4 +83,4 @@ const ProfilePic = () => {
   );
 };
 
-export default ProfilePic;
+export default ProfilePicSection;

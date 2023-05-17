@@ -6,6 +6,7 @@ import MaterialIcon from "../common/MaterialIcon";
 import { getUser, getUserPost, getFriendList } from "../../api";
 import Loading from "../common/Loading";
 import Post from "../posts/Post";
+import ProfilePic from "../common/ProfilePic";
 
 const Profile = () => {
   const [profile, setProfile] = useState({});
@@ -149,14 +150,12 @@ const Profile = () => {
             <div>
               {friends.map((friend) => (
                 <div>
-                  <button>
-                    <img
-                      src={friend.picture}
-                      alt="Profile"
-                      className="object-cover w-28 h-28 rounded-lg ring-1 ring-gray-100"
-                    />
-                    <div className="text-sm text-left">{friend.fullName}</div>
-                  </button>
+                  <ProfilePic
+                    picture={friend.picture}
+                    id={friend.user._id}
+                    className="object-cover w-28 h-28 rounded-lg ring-1 ring-gray-100"
+                  />
+                  <div className="text-sm text-left">{friend.fullName}</div>
                 </div>
               ))}
             </div>
