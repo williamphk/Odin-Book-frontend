@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import CommentField from "./CommentField";
 import {
@@ -55,7 +55,7 @@ const Comment = ({ comment, postId, commentId, token, user }) => {
     };
 
     fetchCommentLikes();
-  }, [fetchLikesTrigger]);
+  }, [fetchLikesTrigger, token, postId, commentId]);
 
   useEffect(() => {
     const userLike = commentLikes.find((like) => like.user._id === user._id);
@@ -66,7 +66,7 @@ const Comment = ({ comment, postId, commentId, token, user }) => {
       setUserLikeId(null);
       setIsLike(false);
     }
-  }, [commentLikes]);
+  }, [commentLikes, user._id]);
 
   const handleLikeButtonClick = async () => {
     if (isLike) {

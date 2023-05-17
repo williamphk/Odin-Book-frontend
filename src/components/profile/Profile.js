@@ -30,7 +30,7 @@ const Profile = () => {
       }
     };
     fetchUserProfile();
-  }, [userId]);
+  }, [token, userId, user._id]);
 
   useEffect(() => {
     const fetchUserPost = async () => {
@@ -45,7 +45,7 @@ const Profile = () => {
     };
 
     fetchUserPost();
-  }, [token]);
+  }, [token, userId, user._id]);
 
   if (isLoading) {
     return <Loading />;

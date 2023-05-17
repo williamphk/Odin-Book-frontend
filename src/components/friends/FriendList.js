@@ -27,7 +27,7 @@ const FriendList = () => {
     };
 
     fetchFriend();
-  }, [token, deleteCount]);
+  }, [token, deleteCount, user._id]);
 
   if (isLoading) {
     return <Loading />;

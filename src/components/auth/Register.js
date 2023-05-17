@@ -41,7 +41,7 @@ const Register = () => {
     if (isLoggedIn) {
       navigate("/");
     }
-  }, [isLoggedIn]);
+  }, [isLoggedIn, navigate]);
 
   useEffect(() => {
     if (errorState && errorState.errors) {
@@ -49,7 +49,7 @@ const Register = () => {
         setError(error.path, { message: error.msg });
       });
     }
-  }, [errorState]);
+  }, [errorState, setError]);
 
   return (
     <div className="min-h-screen moving-gradient flex flex-col items-center justify-center gap-10 ">

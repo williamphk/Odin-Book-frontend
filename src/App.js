@@ -79,7 +79,7 @@ function App() {
       // Reset the state or dispatch an action based on other URLs
       dispatch(switchToNewfeed());
     }
-  }, []);
+  }, [dispatch]);
 
   if (isLoading) {
     return <Loading />;

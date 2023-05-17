@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
 
 import MaterialIcon from "../common/MaterialIcon";
 import { getPostLikeList, createPostLike, deletePostLike } from "../../api";
@@ -21,7 +20,7 @@ const PostAction = ({ handleCommentShow, comments, postId, user, token }) => {
     };
 
     fetchPostLikes();
-  }, [fetchLikesTrigger]);
+  }, [fetchLikesTrigger, token, postId]);
 
   useEffect(() => {
     const userLike = postLikes.find((like) => like.user._id === user._id);
@@ -32,7 +31,7 @@ const PostAction = ({ handleCommentShow, comments, postId, user, token }) => {
       setUserLikeId(null);
       setIsLike(false);
     }
-  }, [postLikes]);
+  }, [postLikes, user._id]);
 
   const handleLikeButtonClick = async () => {
     if (isLike) {

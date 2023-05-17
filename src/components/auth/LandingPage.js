@@ -30,7 +30,7 @@ const LandingPage = () => {
     if (errorState && errorState.password) {
       setError("password", { message: errorState.password });
     }
-  }, [errorState]);
+  }, [errorState, setError]);
 
   return (
     <div className="min-h-screen moving-gradient flex flex-col items-center justify-center gap-10">

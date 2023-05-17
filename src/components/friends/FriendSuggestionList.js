@@ -31,7 +31,7 @@ const FriendSuggestionList = () => {
     };
 
     fetchFriendSuggestion();
-  }, [token, sendCount]);
+  }, [token, sendCount, user._id]);
 
   useEffect(() => {
     const fetchedFriendRequestSent = async () => {

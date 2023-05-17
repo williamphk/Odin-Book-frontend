@@ -31,7 +31,7 @@ const Post = ({ post, id, token, user }) => {
     };
 
     fetchComments();
-  }, [isCommentShow, createOrUpdateCount]);
+  }, [isCommentShow, createOrUpdateCount, id, token]);
 
   return (
     <div
