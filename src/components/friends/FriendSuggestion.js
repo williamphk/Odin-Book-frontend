@@ -3,6 +3,8 @@ import { useSelector, useDispatch } from "react-redux";
 
 import { sendFriendRequest, deleteFriendRequest } from "../../api";
 import { incrementSendCount } from "../../slices/friendRequestSlice";
+import ProfilePic from "../common/ProfilePic";
+import UserName from "../common/UserName";
 
 const FriendSuggestion = ({ suggestion, isSent, friendRequestId }) => {
   const token = useSelector((state) => state.auth.token);
@@ -24,12 +26,20 @@ const FriendSuggestion = ({ suggestion, isSent, friendRequestId }) => {
 
   return (
     <div className="shadow-sm flex flex-col bg-white rounded-lg w-[220px] pb-3 items-center justify-center">
-      <img
-        src={suggestion.profile.picture}
-        alt="Profile"
-        className="h-[230px] w-full rounded-t-lg bg-purple-200"
-      />
-      <div className="my-2">{suggestion.profile.fullName}</div>
+      <div className="flex flex-col w-full h-[230px] overflow-hidden">
+        <ProfilePic
+          picture={suggestion.profile.picture}
+          id={suggestion._id}
+          className="w-full rounded-t-lg"
+        />
+      </div>
+      <div className="flex flex-col w-full">
+        <UserName
+          name={suggestion.profile.fullName}
+          id={suggestion._id}
+          className="my-2 hover:underline"
+        />
+      </div>
       <button
         onClick={() => handleAddFriendClick(suggestion._id)}
         className={`${
