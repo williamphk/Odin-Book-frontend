@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
 import MaterialIcon from "../common/MaterialIcon";
-import { getUser, getUserPost } from "../../api";
+import { getUser, getUserPost, getFriendList } from "../../api";
 import Loading from "../common/Loading";
 import Post from "../posts/Post";
 
@@ -12,6 +12,7 @@ const Profile = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [posts, setPosts] = useState([]);
+  const [friends, setFriends] = useState([]);
 
   const token = useSelector((state) => state.auth.token);
   const user = useSelector((state) => state.auth.user);
@@ -45,6 +46,21 @@ const Profile = () => {
     };
 
     fetchUserPost();
+  }, [token, userId, user._id]);
+
+  useEffect(() => {
+    const fetchFriend = async () => {
+      try {
+        const fetchedFriends = await getFriendList(token, userId ?? user._id);
+        setFriends(fetchedFriends.data.friends);
+        setIsLoading(false);
+      } catch (err) {
+        setError(err);
+        setIsLoading(false);
+      }
+    };
+
+    fetchFriend();
   }, [token, userId, user._id]);
 
   if (isLoading) {
@@ -83,54 +99,70 @@ const Profile = () => {
           {userId
             ? userId === user._id
             : user._id && (
-                <button className="bg-gray-200 px-4 py-2 rounded">
+                <button className="bg-gray-200 px-4 py-2 rounded-lg">
                   Edit profile
                 </button>
               )}
         </div>
       </div>
-      <div className="flex w-full bg-white relative h-12 px-60">
+      <div className="flex w-full bg-white relative h-12 px-48 shadow">
         <div className="border-t flex w-full">
           <button className="bg-gray-200 px-4 py-2">Home</button>
           <button className="px-4 py-2">Friends</button>
         </div>
       </div>
-      <div className="flex px-32 gap-x-4 px-60 pt-6">
-        <div className="w-[40%]">
-          <div className="w-full bg-white rounded shadow p-3 flex flex-col gap-y-4">
+      <div className="flex px-32 gap-x-4 px-48 pt-4">
+        <div className="w-[43%] flex flex-col gap-4">
+          <div className="w-full bg-white rounded-lg shadow p-3 flex flex-col gap-y-4">
             <div>Intro</div>
             {userId
               ? userId === user._id
               : user._id && (
-                  <div className="text-sm rounded bg-gray-200 hover:bg-gray-300 py-1">
+                  <div className="text-sm rounded-lg bg-gray-200 hover:bg-gray-300 py-1">
                     <button className="w-full">Add work</button>
                   </div>
                 )}
             {userId
               ? userId === user._id
               : user._id && (
-                  <div className="text-sm rounded bg-gray-200 hover:bg-gray-300 py-1">
+                  <div className="text-sm rounded-lg bg-gray-200 hover:bg-gray-300 py-1">
                     <button className="w-full">Add eduation</button>
                   </div>
                 )}
             {userId
               ? userId === user._id
               : user._id && (
-                  <div className="text-sm rounded bg-gray-200 hover:bg-gray-300 py-1">
+                  <div className="text-sm rounded-lg bg-gray-200 hover:bg-gray-300 py-1">
                     <button className="w-full">Add current city</button>
                   </div>
                 )}
             {userId
               ? userId === user._id
               : user._id && (
-                  <div className="text-sm rounded bg-gray-200 hover:bg-gray-300 py-1">
+                  <div className="text-sm rounded-lg bg-gray-200 hover:bg-gray-300 py-1">
                     <button className="w-full">Edit details</button>
                   </div>
                 )}
           </div>
-          <div>Friends</div>
+          <div className="w-full bg-white rounded-lg shadow p-3 flex flex-col">
+            <div>Friends</div>
+            <div>
+              {friends.map((friend) => (
+                <div>
+                  <button>
+                    <img
+                      src={friend.picture}
+                      alt="Profile"
+                      className="object-cover w-28 h-28 rounded-lg ring-1 ring-gray-100"
+                    />
+                    <div className="text-sm text-left">{friend.fullName}</div>
+                  </button>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
-        <div className="w-[60%]">
+        <div className="w-[57%]">
           {posts.map((post) => (
             <Post
               post={post}
