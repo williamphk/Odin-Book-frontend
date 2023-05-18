@@ -74,15 +74,15 @@ const Profile = () => {
   }
 
   return (
-    <div className="flex flex-col w-full text-left">
-      <div className="flex justify-between w-full bg-white mt-48 relative h-48 pr-60">
-        <div className="flex items-center">
-          <div className="absolute bottom-12 left-60">
+    <div className="flex flex-col w-full md:text-left">
+      <div className="flex flex-col items-center md:flex-row md:justify-between w-full bg-white md:mt-48 mt-32 relative h-48 md:pr-60 pt-24 md:pt-0 pb-32">
+        <div className="flex items-center flex-col md:flex-row">
+          <div className="absolute md:bottom-12 md:left-60 bottom-36">
             <div className="flex relative">
               <img
                 src={profile.picture}
                 alt="Profile"
-                className="object-cover w-48 h-48 rounded-full border-4 border-white"
+                className="object-cover md:w-48 md:h-48 w-44 h-44 rounded-full border-4 border-white"
               />
               {(!userId || userId === user._id) && (
                 <button className="w-8 h-8 rounded-full bg-gray-200 hover:bg-gray-300 flex justify-center items-center absolute right-3 bottom-3">
@@ -94,12 +94,12 @@ const Profile = () => {
               )}
             </div>
           </div>
-          <div className="pl-[450px]">
+          <div className="md:pl-[450px]">
             <h2 className="flex text-3xl font-medium">{profile.fullName}</h2>
             <div className="text-gray-500">1 friend</div>
           </div>
         </div>
-        <div className="flex items-center">
+        <div className="flex items-center mt-2 md:mt-0">
           {(!userId || userId === user._id) && (
             <button className="bg-gray-200 px-4 py-2 rounded-lg">
               Edit profile
@@ -107,14 +107,14 @@ const Profile = () => {
           )}
         </div>
       </div>
-      <div className="flex w-full bg-white relative h-12 px-48 shadow">
-        <div className="border-t flex w-full">
+      <div className="flex w-full bg-white relative h-12 md:px-48 shadow">
+        <div className="border-t flex w-full justify-center md:justify-start">
           <button className="bg-gray-200 px-4 py-2">Home</button>
           <button className="px-4 py-2">Friends</button>
         </div>
       </div>
-      <div className="flex px-32 gap-x-4 px-48 pt-4">
-        <div className="w-[43%] flex flex-col gap-4">
+      <div className="flex flex-col md:flex-row gap-x-4 md:px-48 pt-4">
+        <div className="md:w-[43%] w-full flex flex-col gap-4">
           <div className="w-full bg-white rounded-lg shadow p-3 flex flex-col gap-y-4">
             <div className="font-bold">Intro</div>
             {(!userId || userId === user._id) && (
@@ -159,7 +159,7 @@ const Profile = () => {
             </div>
           </div>
         </div>
-        <div className="w-[57%]">
+        <div className="md:w-[57%] w-full">
           {posts.map((post) => (
             <Post
               post={post}
