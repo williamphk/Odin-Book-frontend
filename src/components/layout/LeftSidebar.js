@@ -9,6 +9,7 @@ import { switchToFriends, switchToNewfeed } from "../../slices/pageSlice";
 
 const LeftSidebar = ({ className }) => {
   const user = useSelector((state) => state.auth.user);
+  const newsfeed = useSelector((state) => state.page.newsfeed);
   const friends = useSelector((state) => state.page.friends);
   const profile = useSelector((state) => state.page.profile);
 
@@ -20,37 +21,53 @@ const LeftSidebar = ({ className }) => {
 
   return (
     <div className={className}>
-      <div className="flex items-center mb-4">
-        <ProfilePic
-          picture={user.picture}
-          id={user._id}
-          className="w-10 h-10 object-cover rounded-full"
-        />
-        <UserName
-          name={user.fullName}
-          id={user._id}
-          className="ml-2 font-bold"
-        />
-      </div>
+      <button className="flex items-center py-2 px-2 hover:bg-gray-200 transition duration-200 rounded-lg">
+        <Link className="flex items-center w-full" to="/profile">
+          <ProfilePic
+            picture={user.picture}
+            id={user._id}
+            className="w-10 h-10 object-cover rounded-full"
+          />
+          <UserName
+            name={user.fullName}
+            id={user._id}
+            className="ml-2 font-bold"
+          />
+        </Link>
+      </button>
       <nav>
-        <ul className="space-y-2">
+        <ul>
           <li className="flex items-center space-x-2">
             <button
-              className="text-gray-600"
+              className="flex text-gray-600 w-full hover:bg-gray-200 transition duration-200 py-2 rounded-lg"
               onClick={() => dispatch(switchToNewfeed())}
             >
-              <Link to="/">Home</Link>
+              <Link
+                to="/"
+                className={`${
+                  newsfeed && "text-purple-600 border-l-2 border-purple-500"
+                } px-2 w-full flex`}
+              >
+                Home
+              </Link>
             </button>
           </li>
           <li className="flex flex-col items-start space-x-2">
             <button
-              className="text-gray-600"
+              className="flex text-gray-600 w-full hover:bg-gray-200 transition duration-200 py-2 rounded-lg"
               onClick={() => dispatch(switchToFriends())}
             >
-              <Link to="/friends">Friends</Link>
+              <Link
+                to="/friends"
+                className={`${
+                  friends && "text-purple-600 border-l-2 border-purple-500"
+                } px-2 w-full flex`}
+              >
+                Friends
+              </Link>
             </button>
             {friends && (
-              <ul className="flex flex-col items-start">
+              <ul className="flex flex-col items-start pl-2">
                 <li>
                   <Link to="/friends">Friend requests</Link>
                 </li>
@@ -64,22 +81,34 @@ const LeftSidebar = ({ className }) => {
             )}
           </li>
           <li className="flex items-center space-x-2">
-            <button className="text-gray-600">Ad Center</button>
+            <button className="flex text-gray-600 w-full hover:bg-gray-200 transition duration-200 py-2 px-2 rounded-lg">
+              Ad Center
+            </button>
           </li>
           <li className="flex items-center space-x-2">
-            <button className="text-gray-600">Most Recent</button>
+            <button className="flex text-gray-600 w-full hover:bg-gray-200 transition duration-200 py-2 px-2 rounded-lg">
+              Most Recent
+            </button>
           </li>
           <li className="flex items-center space-x-2">
-            <button className="text-gray-600">Groups</button>
+            <button className="flex text-gray-600 w-full hover:bg-gray-200 transition duration-200 py-2 px-2 rounded-lg">
+              Groups
+            </button>
           </li>
           <li className="flex items-center space-x-2">
-            <button className="text-gray-600">Marketplace</button>
+            <button className="flex text-gray-600 w-full hover:bg-gray-200 transition duration-200 py-2 px-2 rounded-lg">
+              Marketplace
+            </button>
           </li>
           <li className="flex items-center space-x-2">
-            <button className="text-gray-600">Watch</button>
+            <button className="flex text-gray-600 w-full hover:bg-gray-200 transition duration-200 py-2 px-2 rounded-lg">
+              Watch
+            </button>
           </li>
           <li className="flex items-center space-x-2">
-            <button className="text-gray-600">See more</button>
+            <button className="flex text-gray-600 w-full hover:bg-gray-200 transition duration-200 py-2 px-2 rounded-lg">
+              See more
+            </button>
           </li>
         </ul>
       </nav>
