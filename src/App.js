@@ -17,13 +17,7 @@ import Setting from "./components/settings/Setting";
 import Loading from "./components/common/Loading";
 import Footer from "./components/layout/Footer";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
-
-import {
-  switchToFriends,
-  switchToNewfeed,
-  switchToSetting,
-  switchToProfile,
-} from "./slices/pageSlice";
+import NavigationHandler from "./NavigationHandler";
 
 function App() {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
@@ -63,24 +57,6 @@ function App() {
     }
   };
 
-  useEffect(() => {
-    const currentUrl = window.location.href;
-
-    if (currentUrl.includes("/friends")) {
-      // Dispatch an action to update the switchToNewsFeed state
-      dispatch(switchToFriends());
-    } else if (currentUrl.includes("/setting")) {
-      // Dispatch an action to update the switchToNewsFeed state
-      dispatch(switchToSetting());
-    } else if (currentUrl.includes("/profile")) {
-      // Dispatch an action to update the switchToNewsFeed state
-      dispatch(switchToProfile());
-    } else {
-      // Reset the state or dispatch an action based on other URLs
-      dispatch(switchToNewfeed());
-    }
-  }, [dispatch]);
-
   if (isLoading) {
     return <Loading />;
   }
@@ -88,6 +64,7 @@ function App() {
   return (
     <div className="App">
       <Router>
+        <NavigationHandler />
         {isLoggedIn && <Navbar />}
         <div
           className={`${
