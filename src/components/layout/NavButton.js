@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import { useMediaQuery } from "react-responsive";
 
 import MaterialIcon from "../common/MaterialIcon";
 import { switchToFriends, switchToNewfeed } from "../../slices/pageSlice";
@@ -8,7 +9,7 @@ import PostModal from "../posts/PostModal";
 import { createPost } from "../../api";
 import { incrementCreateOrUpdateCount } from "../../slices/postSlice";
 
-const NavButton = () => {
+const NavButton = ({ setIsMobileMenuOpen, isMobileMenuOpen }) => {
   const [isPostModalOpen, setIsPostModalOpen] = useState(false);
 
   const user = useSelector((state) => state.auth.user);
@@ -37,9 +38,19 @@ const NavButton = () => {
     Friends: friends,
   };
 
+  const isMobile = useMediaQuery({
+    query: "(max-width: 639px)",
+  });
+
   const navOnClick = {
-    Home: () => dispatch(switchToNewfeed()),
-    Friends: () => dispatch(switchToFriends()),
+    Home: () => {
+      dispatch(switchToNewfeed());
+    },
+    Friends: () => {
+      setIsMobileMenuOpen(!isMobileMenuOpen);
+      if (isMobile) return;
+      dispatch(switchToFriends());
+    },
   };
 
   const onSubmit = async (data) => {
@@ -56,6 +67,23 @@ const NavButton = () => {
     setIsPostModalOpen(false);
   };
 
+  const menuRef = useRef(null);
+
+  const handleClickOutside = (event) => {
+    // If the menu is mounted in the DOM and the clicked element is not one of the menu items
+    if (menuRef.current && !menuRef.current.contains(event.target)) {
+      setIsMobileMenuOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("click", handleClickOutside);
+    return () => {
+      // When the Navbar component is unmounted, the event listener is removed
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
+
   return (
     <div className="flex justify-center items-center gap-x-4">
       {navItems.map((element, index) => {
@@ -68,11 +96,44 @@ const NavButton = () => {
             {navIcons[index]}
             <div className="hidden sm:block">{element}</div>
           </button>
+        ) : index === 1 ? (
+          <button
+            className="flex flex-col items-center hover:bg-gray-100 rounded-lg w-32 transition duration-200"
+            key={index}
+            onClick={navOnClick[element]}
+            ref={menuRef}
+          >
+            {isMobile ? (
+              <div
+                className={`${
+                  navSelected[element]
+                    ? "text-purple-500 border-b-2 border-purple-500"
+                    : "text-gray-500"
+                } text-xs w-full`}
+              >
+                {navIcons[index]}
+                <div className="hidden sm:block">{element}</div>
+              </div>
+            ) : (
+              <Link
+                to={navRoutes[element]}
+                className={`${
+                  navSelected[element]
+                    ? "text-purple-500 border-b-2 border-purple-500"
+                    : "text-gray-500"
+                } text-xs w-full`}
+              >
+                {navIcons[index]}
+                <div className="hidden sm:block">{element}</div>
+              </Link>
+            )}
+          </button>
         ) : (
           <button
             className="flex flex-col items-center hover:bg-gray-100 rounded-lg w-32 transition duration-200"
             key={index}
             onClick={navOnClick[element]}
+            ref={menuRef}
           >
             <Link
               to={navRoutes[element]}
