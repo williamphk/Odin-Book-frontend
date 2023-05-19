@@ -10,7 +10,7 @@ const Friends = ({ friends }) => {
       <div className="text-gray-500">{friends.length} friends</div>
       <div className="flex gap-x-2 mt-3">
         {friends.map((friend) => (
-          <div className="flex flex-col">
+          <div className="flex flex-col" key={friend.user._id}>
             <ProfilePic
               picture={friend.picture}
               id={friend.user._id}

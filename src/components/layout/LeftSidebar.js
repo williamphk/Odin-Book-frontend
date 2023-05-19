@@ -21,8 +21,8 @@ const LeftSidebar = ({ className }) => {
 
   return (
     <div className={className}>
-      <button className="flex items-center py-2 px-2 hover:bg-gray-200 transition duration-200 rounded-lg">
-        <Link className="flex items-center w-full" to="/profile">
+      <div className="flex items-center py-2 px-2 hover:bg-gray-200 transition duration-200 rounded-lg">
+        <div className="flex items-center w-full">
           <ProfilePic
             picture={user.picture}
             id={user._id}
@@ -33,8 +33,8 @@ const LeftSidebar = ({ className }) => {
             id={user._id}
             className="ml-2 font-bold"
           />
-        </Link>
-      </button>
+        </div>
+      </div>
       <nav>
         <ul>
           <li className="flex items-center space-x-2">
