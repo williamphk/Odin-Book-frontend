@@ -8,6 +8,7 @@ import Post from "../posts/Post";
 import Intro from "./Intro";
 import Friends from "./Friends";
 import Heading from "./Heading";
+import Nav from "./Nav";
 
 const Profile = () => {
   const [profile, setProfile] = useState({});
@@ -81,12 +82,7 @@ const Profile = () => {
         profile={profile}
         friends={friends}
       />
-      <div className="flex w-full bg-white relative h-12 md:px-[5%] lg:px-[15%] shadow">
-        <div className="border-t flex w-full justify-center md:justify-start">
-          <button className="bg-gray-200 px-4 py-2">Home</button>
-          <button className="px-4 py-2">Friends</button>
-        </div>
-      </div>
+      <Nav />
       <div className="flex flex-col md:flex-row gap-x-4 md:px-[5%] lg:px-[15%] pt-4 gap-4">
         <div className="md:w-[43%] w-full flex flex-col gap-4">
           <Intro user={user} userId={userId} />
