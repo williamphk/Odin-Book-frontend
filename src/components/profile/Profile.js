@@ -74,10 +74,10 @@ const Profile = () => {
   }
 
   return (
-    <div className="flex flex-col w-full md:text-left">
-      <div className="flex flex-col items-center md:flex-row md:justify-between w-full bg-white md:mt-48 mt-32 relative h-48 md:pr-60 pt-24 md:pt-0 pb-32">
-        <div className="flex items-center flex-col md:flex-row">
-          <div className="absolute md:bottom-12 md:left-60 bottom-36">
+    <div className="flex flex-col w-full lg:text-left">
+      <div className="flex flex-col items-center lg:flex-row lg:justify-between w-full bg-white lg:mt-48 mt-32 relative h-48 lg:pr-60 pt-24 lg:pt-0 pb-32">
+        <div className="flex items-center flex-col lg:flex-row">
+          <div className="absolute lg:bottom-12 lg:left-60 bottom-36">
             <div className="flex relative">
               <img
                 src={profile.picture}
@@ -94,7 +94,7 @@ const Profile = () => {
               )}
             </div>
           </div>
-          <div className="md:pl-[450px]">
+          <div className="lg:pl-[450px]">
             <h2 className="flex text-3xl font-medium">{profile.fullName}</h2>
             <div className="text-gray-500">1 friend</div>
           </div>
