@@ -391,4 +391,22 @@ export const getUserPost = async (token, userId) => {
   }
 };
 
+export const updateProfilePic = async (token, userId, file) => {
+  try {
+    const formData = new FormData();
+    formData.append("profile_picture", file);
+
+    const response = await api.put("/users/" + userId + "/picture", formData, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    return response;
+  } catch (error) {
+    console.error("Error in updateProfilePic:", error);
+    throw error;
+  }
+};
+
 export default api;

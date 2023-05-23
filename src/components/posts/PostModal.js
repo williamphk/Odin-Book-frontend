@@ -12,10 +12,12 @@ const PostModal = ({
   setPostContent,
   closePostModal,
   requiredInputField,
+  requiredFileUpload,
   button,
   onSubmit,
   buttonColor,
   buttonHoverColor,
+  setSelectedFile,
 }) => {
   const {
     register,
@@ -36,7 +38,7 @@ const PostModal = ({
           <h2 className="text-xl font-bold">{title}</h2>
           <button onClick={closePostModal}>
             <MaterialIcon
-              className="material-symbols-outlined text-4xl"
+              className="material-symbols-outlined text-4xl hover:bg-gray-100 rounded-lg"
               iconName={closeIcon}
             />
           </button>
@@ -57,6 +59,14 @@ const PostModal = ({
               validation={{
                 required: "Content is required",
               }}
+            />
+          )}
+          {requiredFileUpload && (
+            <input
+              type="file"
+              id="profile_picture"
+              name="profile_picture"
+              onChange={(event) => setSelectedFile(event.target.files[0])}
             />
           )}
           <button

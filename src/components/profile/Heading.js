@@ -5,23 +5,30 @@ import MaterialIcon from "../common/MaterialIcon";
 import PostModal from "../posts/PostModal";
 
 import { updateProfilePic } from "../../api";
-import { incrementCreateOrUpdateCount } from "../../slices/profileSlice";
+import { incrementUpdatePictureCount } from "../../slices/profileSlice";
 
 const Heading = ({ user, userId, profile, friends }) => {
   const [isProfilePicModalOpen, setIsProfilePicModalOpen] = useState(false);
+  const [selectedFile, setSelectedFile] = useState(null);
 
   const token = useSelector((state) => state.auth.token);
 
   const dispatch = useDispatch();
+
+  const handleCameraButtonClick = () => {
+    setIsProfilePicModalOpen(true);
+  };
 
   const closeProfilePicModal = () => {
     setIsProfilePicModalOpen(false);
   };
 
   const onSubmit = async () => {
-    await updateProfilePic(token);
-    closeProfilePicModal();
-    dispatch(incrementCreateOrUpdateCount());
+    if (selectedFile) {
+      await updateProfilePic(token, userId ?? user._id, selectedFile);
+      closeProfilePicModal();
+      dispatch(incrementUpdatePictureCount());
+    }
   };
 
   return (
@@ -35,7 +42,10 @@ const Heading = ({ user, userId, profile, friends }) => {
               className="object-cover md:w-48 md:h-48 w-44 h-44 rounded-full border-4 border-white"
             />
             {(!userId || userId === user._id) && (
-              <button className="w-8 h-8 rounded-full bg-gray-200 hover:bg-gray-300 flex justify-center items-center absolute right-3 bottom-3">
+              <button
+                onClick={handleCameraButtonClick}
+                className="w-8 h-8 rounded-full bg-gray-200 hover:bg-gray-300 flex justify-center items-center absolute right-3 bottom-3"
+              >
                 <MaterialIcon
                   className="material-symbols-outlined text-xl text-black"
                   iconName={"photo_camera"}
@@ -58,11 +68,13 @@ const Heading = ({ user, userId, profile, friends }) => {
       </div>
       {isProfilePicModalOpen && (
         <PostModal
-          title="Delete"
+          title="Update Profile Picture"
           closePostModal={closeProfilePicModal}
+          requiredFileUpload={true}
           button="Confirm"
-          buttonColor="bg-red-500"
-          buttonHoverColor="bg-red-600"
+          buttonColor="bg-purple-500"
+          buttonHoverColor="bg-purple-600"
+          setSelectedFile={setSelectedFile}
           onSubmit={onSubmit}
         />
       )}
@@ -70,6 +82,5 @@ const Heading = ({ user, userId, profile, friends }) => {
   );
 };
 
-//api and redux
-
+//api
 export default Heading;

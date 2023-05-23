@@ -14,7 +14,11 @@ const ProfilePic = ({ picture, id, className }) => {
   return (
     <button onClick={handleOnClick}>
       <Link className="w-full" to={"/profile/" + id}>
-        <img src={picture} alt="Profile" className={className} />
+        <img
+          src={`http://localhost:3000/uploads/${picture}`}
+          alt="Profile1"
+          className={className}
+        />
       </Link>
     </button>
   );
