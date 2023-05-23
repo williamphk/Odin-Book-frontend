@@ -1,8 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import MaterialIcon from "../common/MaterialIcon";
+import PostModal from "../posts/PostModal";
+
+import { updateProfilePic } from "../../api";
+import { incrementCreateOrUpdateCount } from "../../slices/profileSlice";
 
 const Heading = ({ user, userId, profile, friends }) => {
+  const [isProfilePicModalOpen, setIsProfilePicModalOpen] = useState(false);
+
+  const token = useSelector((state) => state.auth.token);
+
+  const dispatch = useDispatch();
+
+  const closeProfilePicModal = () => {
+    setIsProfilePicModalOpen(false);
+  };
+
+  const onSubmit = async () => {
+    await updateProfilePic(token);
+    closeProfilePicModal();
+    dispatch(incrementCreateOrUpdateCount());
+  };
+
   return (
     <div className="flex flex-col items-center lg:flex-row lg:justify-between w-full bg-white lg:mt-48 mt-32 relative h-48 lg:pr-60 pt-24 lg:pt-0 pb-32 lg:pb-0">
       <div className="flex items-center flex-col lg:flex-row">
@@ -35,8 +56,20 @@ const Heading = ({ user, userId, profile, friends }) => {
           </button>
         )}
       </div>
+      {isProfilePicModalOpen && (
+        <PostModal
+          title="Delete"
+          closePostModal={closeProfilePicModal}
+          button="Confirm"
+          buttonColor="bg-red-500"
+          buttonHoverColor="bg-red-600"
+          onSubmit={onSubmit}
+        />
+      )}
     </div>
   );
 };
+
+//api and redux
 
 export default Heading;
