@@ -22,7 +22,7 @@ const FriendRequest = ({ friendRequest }) => {
   };
 
   return (
-    <div className="shadow-sm flex flex-col bg-white rounded-lg w-[220px] pb-3 items-center justify-center">
+    <div className="shadow-lg flex flex-col bg-white rounded-lg w-[220px] pb-3 items-center justify-center">
       <div className="flex flex-col w-full h-[230px] overflow-hidden">
         <ProfilePic
           picture={friendRequest.sender.profile.picture}

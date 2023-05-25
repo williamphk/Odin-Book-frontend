@@ -68,15 +68,19 @@ const FriendSuggestionList = () => {
     <div className="flex flex-col gap-y-2">
       <h2 className="flex text-xl font-medium">Friend Suggestions</h2>
       <div className="flex flex-wrap gap-3">
-        {friendSuggestion.map((suggestion) => (
-          <FriendSuggestion
-            suggestion={suggestion}
-            key={suggestion._id}
-            //  convert to truthy or falsy value
-            isSent={!!matchingFriendRequest(suggestion)}
-            friendRequestId={matchingFriendRequest(suggestion)?._id}
-          />
-        ))}
+        {friendSuggestion.length === 0 ? (
+          <div>No friend suggestions yet</div>
+        ) : (
+          friendSuggestion.map((suggestion) => (
+            <FriendSuggestion
+              suggestion={suggestion}
+              key={suggestion._id}
+              //  convert to truthy or falsy value
+              isSent={!!matchingFriendRequest(suggestion)}
+              friendRequestId={matchingFriendRequest(suggestion)?._id}
+            />
+          ))
+        )}
       </div>
     </div>
   );
