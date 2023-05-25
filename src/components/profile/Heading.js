@@ -5,8 +5,13 @@ import MaterialIcon from "../common/MaterialIcon";
 import PostModal from "../posts/PostModal";
 import ProfilePic from "../common/ProfilePic";
 import FriendButton from "../friends/FriendButton";
+import FriendSuggestionButton from "../friends/FriendSuggestionButton";
 
-import { updateProfilePic, getFriendList } from "../../api";
+import {
+  updateProfilePic,
+  getFriendList,
+  getFriendRequestsSent,
+} from "../../api";
 import { incrementUpdatePictureCount } from "../../slices/profileSlice";
 import { updateUser } from "../../slices/authSlice";
 
@@ -14,6 +19,7 @@ const Heading = ({ user, userId, profile, friends }) => {
   const [isProfilePicModalOpen, setIsProfilePicModalOpen] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
   const [userFriends, setUserFriends] = useState([]);
+  const [friendRequestSent, setFriendRequestSent] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -21,6 +27,7 @@ const Heading = ({ user, userId, profile, friends }) => {
   const acceptOrDeleteCount = useSelector(
     (state) => state.friendRequest.acceptOrDeleteCount
   );
+  const sendCount = useSelector((state) => state.friendRequest.sendCount);
 
   const dispatch = useDispatch();
 
@@ -66,6 +73,29 @@ const Heading = ({ user, userId, profile, friends }) => {
   const isOwnProfile = !userId || userId === user._id;
   const isFriend = userFriends.some((element) => element.user._id === userId);
 
+  useEffect(() => {
+    const fetchedFriendRequestSent = async () => {
+      try {
+        const fetchedFriendRequest = await getFriendRequestsSent(token);
+        setFriendRequestSent(fetchedFriendRequest.data.friendRequests);
+        setIsLoading(false);
+      } catch (err) {
+        setError(err);
+        setIsLoading(false);
+      }
+    };
+
+    fetchedFriendRequestSent();
+  }, [token, sendCount]);
+
+  const matchingFriendRequest = (suggestionId) => {
+    return friendRequestSent.find(
+      (friendRequest) =>
+        friendRequest.sender === user._id &&
+        friendRequest.receiver === suggestionId
+    );
+  };
+
   return (
     <div className="flex flex-col items-center lg:flex-row lg:justify-between w-full bg-white lg:mt-48 mt-32 relative h-48 lg:pr-60 pt-24 lg:pt-0 pb-32 lg:pb-0">
       <div className="flex items-center flex-col lg:flex-row">
@@ -96,11 +126,17 @@ const Heading = ({ user, userId, profile, friends }) => {
       </div>
       <div className="flex items-center mt-2 md:mt-0">
         {isOwnProfile ? (
-          "Edit Profile"
+          <button className="bg-gray-200 px-4 py-2 rounded-lg hover:bg-gray-300">
+            Edit profile
+          </button>
         ) : isFriend ? (
           <FriendButton friendId={userId} />
         ) : (
-          "Add Friend"
+          <FriendSuggestionButton
+            suggestionId={userId}
+            isSent={!!matchingFriendRequest(userId)}
+            friendRequestId={matchingFriendRequest(userId)?._id}
+          />
         )}
       </div>
       {isProfilePicModalOpen && (

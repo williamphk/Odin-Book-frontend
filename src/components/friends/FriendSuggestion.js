@@ -22,7 +22,7 @@ const FriendSuggestion = ({ suggestion, isSent, friendRequestId }) => {
         />
       </div>
       <FriendSuggestionButton
-        suggestion={suggestion}
+        suggestionId={suggestion._id}
         isSent={isSent}
         friendRequestId={friendRequestId}
       />

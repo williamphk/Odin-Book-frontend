@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { sendFriendRequest, deleteFriendRequest } from "../../api";
 import { incrementSendCount } from "../../slices/friendRequestSlice";
 
-const FriendSuggestionButton = ({ suggestion, isSent, friendRequestId }) => {
+const FriendSuggestionButton = ({ suggestionId, isSent, friendRequestId }) => {
   const token = useSelector((state) => state.auth.token);
 
   const dispatch = useDispatch();
@@ -24,7 +24,7 @@ const FriendSuggestionButton = ({ suggestion, isSent, friendRequestId }) => {
 
   return (
     <button
-      onClick={() => handleAddFriendClick(suggestion._id)}
+      onClick={() => handleAddFriendClick(suggestionId)}
       className={`${
         isSent
           ? " bg-gray-200 text-gray-500"
