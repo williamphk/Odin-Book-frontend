@@ -38,10 +38,8 @@ const FriendSuggestionList = () => {
       try {
         const fetchedFriendRequest = await getFriendRequestsSent(token);
         setFriendRequestSent(fetchedFriendRequest.data.friendRequests);
-        setIsLoading(false);
       } catch (err) {
         setError(err);
-        setIsLoading(false);
       }
     };
 
