@@ -16,7 +16,7 @@ const ProfilePic = ({ picture, id, className }) => {
       <Link className="w-full" to={"/profile/" + id}>
         <img
           src={`http://localhost:3000/uploads/${picture}`}
-          alt="Profile1"
+          alt="Profile"
           className={className}
         />
       </Link>

@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const profileSlice = createSlice({
-  name: "user",
+  name: "profile",
   initialState: {
     updatePictureCount: 0,
     updateInfoCount: 0,

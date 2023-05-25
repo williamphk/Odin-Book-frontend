@@ -3,9 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 
 import MaterialIcon from "../common/MaterialIcon";
 import PostModal from "../posts/PostModal";
+import ProfilePic from "../common/ProfilePic";
 
 import { updateProfilePic } from "../../api";
 import { incrementUpdatePictureCount } from "../../slices/profileSlice";
+import { updateUser } from "../../slices/authSlice";
 
 const Heading = ({ user, userId, profile, friends }) => {
   const [isProfilePicModalOpen, setIsProfilePicModalOpen] = useState(false);
@@ -25,9 +27,17 @@ const Heading = ({ user, userId, profile, friends }) => {
 
   const onSubmit = async () => {
     if (selectedFile) {
-      await updateProfilePic(token, userId ?? user._id, selectedFile);
+      const response = await updateProfilePic(
+        token,
+        userId ?? user._id,
+        selectedFile
+      );
       closeProfilePicModal();
+      const updatedUser = { ...user, picture: response.data.picture };
+      dispatch(updateUser(updatedUser));
+      localStorage.setItem("user", JSON.stringify(updatedUser));
       dispatch(incrementUpdatePictureCount());
+      console.log(response);
     }
   };
 
@@ -36,9 +46,9 @@ const Heading = ({ user, userId, profile, friends }) => {
       <div className="flex items-center flex-col lg:flex-row">
         <div className="absolute lg:bottom-12 lg:left-60 bottom-36">
           <div className="flex relative">
-            <img
-              src={profile.picture}
-              alt="Profile"
+            <ProfilePic
+              picture={profile.picture}
+              id={userId || user._id}
               className="object-cover md:w-48 md:h-48 w-44 h-44 rounded-full border-4 border-white"
             />
             {(!userId || userId === user._id) && (

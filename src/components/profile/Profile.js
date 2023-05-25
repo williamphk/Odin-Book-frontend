@@ -19,6 +19,9 @@ const Profile = () => {
 
   const token = useSelector((state) => state.auth.token);
   const user = useSelector((state) => state.auth.user);
+  const updatePictureCount = useSelector(
+    (state) => state.profile.updatePictureCount
+  );
 
   const { userId } = useParams();
 
@@ -34,7 +37,7 @@ const Profile = () => {
       }
     };
     fetchUserProfile();
-  }, [token, userId, user._id]);
+  }, [token, userId, user._id, updatePictureCount]);
 
   useEffect(() => {
     const fetchUserPost = async () => {
@@ -49,7 +52,7 @@ const Profile = () => {
     };
 
     fetchUserPost();
-  }, [token, userId, user._id]);
+  }, [token, userId, user._id, updatePictureCount]);
 
   useEffect(() => {
     const fetchFriend = async () => {
