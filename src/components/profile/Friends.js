@@ -6,7 +6,7 @@ import UserName from "../common/UserName";
 const Friends = ({ friends }) => {
   return (
     <div className="w-full bg-white rounded-lg shadow p-3 flex flex-col">
-      <div className="font-bold">Friends</div>
+      <div className="font-bold text-lg">Friends</div>
       <div className="text-gray-500">{friends.length} friends</div>
       <div className="flex gap-x-2 mt-3">
         {friends.map((friend) => (

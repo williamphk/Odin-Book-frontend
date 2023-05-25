@@ -37,7 +37,7 @@ const Post = ({ post, id, token, user }) => {
     <div
       key={post._id}
       id={id}
-      className="bg-white w-full rounded p-4 mb-4 shadow"
+      className="bg-white w-full rounded-lg p-4 mb-4 shadow"
     >
       <PostHeader post={post} postId={id} user={user} token={token} />
       <PostContent post={post} />

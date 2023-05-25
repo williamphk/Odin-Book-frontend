@@ -92,15 +92,24 @@ const Profile = () => {
           <Friends friends={friends} />
         </div>
         <div className="md:w-[57%] w-full">
-          {posts.map((post) => (
-            <Post
-              post={post}
-              key={post._id}
-              id={post._id}
-              token={token}
-              user={user}
-            />
-          ))}
+          <div className="w-full bg-white rounded-lg shadow p-3 font-bold text-lg mb-4">
+            Posts
+          </div>
+          {posts.length === 0 ? (
+            <div className="text-center text-gray-500 font-bold text-lg">
+              No posts available
+            </div>
+          ) : (
+            posts.map((post) => (
+              <Post
+                post={post}
+                key={post._id}
+                id={post._id}
+                token={token}
+                user={user}
+              />
+            ))
+          )}
         </div>
       </div>
     </div>
