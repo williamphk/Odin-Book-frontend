@@ -21,7 +21,7 @@ const Friend = ({ friend }) => {
           className="my-2 hover:underline"
         />
       </div>
-      <FriendButton friend={friend} />
+      <FriendButton friendId={friend.user._id} />
     </div>
   );
 };

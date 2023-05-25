@@ -2,17 +2,17 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import { deleteFriend } from "../../api";
-import { incrementDeleteCount } from "../../slices/userSlice";
+import { incrementAcceptOrDeleteCount } from "../../slices/friendRequestSlice";
 
-const FriendButton = ({ friend }) => {
+const FriendButton = ({ friendId }) => {
   const token = useSelector((state) => state.auth.token);
   const user = useSelector((state) => state.auth.user);
 
   const dispatch = useDispatch();
 
   const handleDeleteButton = async () => {
-    await deleteFriend(token, user._id, friend.user);
-    dispatch(incrementDeleteCount());
+    await deleteFriend(token, user._id, friendId);
+    dispatch(incrementAcceptOrDeleteCount());
   };
 
   return (

@@ -22,6 +22,9 @@ const Profile = () => {
   const updatePictureCount = useSelector(
     (state) => state.profile.updatePictureCount
   );
+  const acceptOrDeleteCount = useSelector(
+    (state) => state.friendRequest.acceptOrDeleteCount
+  );
 
   const { userId } = useParams();
 
@@ -67,7 +70,7 @@ const Profile = () => {
     };
 
     fetchFriend();
-  }, [token, userId, user._id]);
+  }, [token, userId, user._id, acceptOrDeleteCount]);
 
   if (isLoading) {
     return <Loading />;
