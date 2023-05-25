@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { deleteFriend } from "../../api";
 import { incrementDeleteCount } from "../../slices/userSlice";
 
-const DeleteButton = ({ friend }) => {
+const FriendButton = ({ friend }) => {
   const token = useSelector((state) => state.auth.token);
   const user = useSelector((state) => state.auth.user);
 
@@ -25,4 +25,4 @@ const DeleteButton = ({ friend }) => {
   );
 };
 
-export default DeleteButton;
+export default FriendButton;

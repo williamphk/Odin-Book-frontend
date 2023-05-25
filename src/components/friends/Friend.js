@@ -2,7 +2,7 @@ import React from "react";
 
 import ProfilePic from "../common/ProfilePic";
 import UserName from "../common/UserName";
-import DeleteButton from "./DeleteButton";
+import FriendButton from "./FriendButton";
 
 const Friend = ({ friend }) => {
   return (
@@ -21,7 +21,7 @@ const Friend = ({ friend }) => {
           className="my-2 hover:underline"
         />
       </div>
-      <DeleteButton friend={friend} />
+      <FriendButton friend={friend} />
     </div>
   );
 };
