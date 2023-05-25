@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { signUp } from "../../slices/authSlice";
 import { useForm } from "react-hook-form";
@@ -16,6 +16,8 @@ const Register = () => {
     formState: { errors },
   } = useForm();
 
+  const [isRegisterLoading, setIsRegisterLoading] = useState(false);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
@@ -30,8 +32,8 @@ const Register = () => {
       return;
     }
     try {
+      setIsRegisterLoading(true);
       dispatch(signUp(data));
-      // Redirect to homepage
     } catch (error) {
       console.error("Error during registration:", error);
     }
@@ -47,6 +49,7 @@ const Register = () => {
     if (errorState && errorState.errors) {
       errorState.errors.forEach((error) => {
         setError(error.path, { message: error.msg });
+        setIsRegisterLoading(false);
       });
     }
   }, [errorState, setError]);
@@ -173,7 +176,7 @@ const Register = () => {
             className="bg-pink-600 text-white hover:bg-purple-800 w-full px-6 py-2 rounded font-semibold mr-4 shadow-md transition duration-200"
             type="submit"
           >
-            Register
+            {isRegisterLoading ? "Loading..." : "Register"}
           </button>
         </form>
         {/* login button */}

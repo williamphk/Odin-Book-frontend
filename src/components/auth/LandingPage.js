@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -16,10 +16,18 @@ const LandingPage = () => {
     formState: { errors },
   } = useForm();
 
+  const [isLoginLoading, setIsLoginLoading] = useState(false);
+  const [isTestLoginLoading, setIsTestLoginLoading] = useState(false);
+
   const dispatch = useDispatch();
   const errorState = useSelector((state) => state.auth.error);
 
   const onSubmit = (data) => {
+    if (data.email === "test@test.com") {
+      setIsTestLoginLoading(true);
+    } else {
+      setIsLoginLoading(true);
+    }
     dispatch(loginUser(data));
   };
 
@@ -76,7 +84,7 @@ const LandingPage = () => {
           />
           {/* login button */}
           <button className="bg-purple-600 text-white hover:bg-purple-800 w-full px-6 py-2 rounded font-semibold mr-4 shadow-md transition duration-200">
-            Login
+            {isLoginLoading ? "Loading..." : "Login"}
           </button>
         </form>
         <div className="flex space-x-4">
@@ -98,7 +106,7 @@ const LandingPage = () => {
             onSubmit({ email: "test@test.com", password: "12345678aA!" })
           }
         >
-          Login with Test Account
+          {isTestLoginLoading ? "Loading..." : "Login with Test Account"}
         </button>
       </div>
     </div>
