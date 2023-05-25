@@ -41,6 +41,9 @@ const Heading = ({ user, userId, profile, friends }) => {
     }
   };
 
+  const isOwnProfile = !userId || userId === user._id;
+  const isFriend = user.friends.includes(userId);
+
   return (
     <div className="flex flex-col items-center lg:flex-row lg:justify-between w-full bg-white lg:mt-48 mt-32 relative h-48 lg:pr-60 pt-24 lg:pt-0 pb-32 lg:pb-0">
       <div className="flex items-center flex-col lg:flex-row">
@@ -70,11 +73,9 @@ const Heading = ({ user, userId, profile, friends }) => {
         </div>
       </div>
       <div className="flex items-center mt-2 md:mt-0">
-        {(!userId || userId === user._id) && (
-          <button className="bg-gray-200 px-4 py-2 rounded-lg">
-            Edit profile
-          </button>
-        )}
+        <button className="bg-gray-200 px-4 py-2 rounded-lg hover:bg-gray-300">
+          {isOwnProfile ? "Edit Profile" : isFriend ? "Unfriend" : "Add Friend"}
+        </button>
       </div>
       {isProfilePicModalOpen && (
         <PostModal
