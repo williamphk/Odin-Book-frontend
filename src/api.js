@@ -318,9 +318,8 @@ export const acceptFriendRequest = async (token, friendRequestId) => {
 
 export const rejectFriendRequest = async (token, friendRequestId) => {
   try {
-    const response = await api.put(
+    const response = await api.delete(
       "/friend-requests/" + friendRequestId + "/reject",
-      {},
       { headers: { Authorization: `Bearer ${token}` } }
     );
     return response;
