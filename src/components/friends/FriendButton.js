@@ -20,10 +20,16 @@ const FriendButton = ({ friendId, setIsRequestSuccess, setMessage }) => {
         setMessage("Friend removed.");
         setTimeout(() => setIsRequestSuccess(null), 3500);
       } else {
-        // The request failed
-        console.error("Error deleting friend:", response);
+        // The request failed, but did not throw an error
+        setIsRequestSuccess(false);
+        setMessage("Failed to remove friend.");
+        setTimeout(() => setIsRequestSuccess(null), 3500);
       }
     } catch (err) {
+      // The request failed and threw an error
+      setIsRequestSuccess(false);
+      setMessage("Failed to remove friend due to a network error.");
+      setTimeout(() => setIsRequestSuccess(null), 3500);
       console.error("Error deleting friend:", err);
     }
   };
