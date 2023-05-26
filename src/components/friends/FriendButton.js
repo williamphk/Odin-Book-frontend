@@ -12,7 +12,7 @@ const FriendButton = ({ friendId, setIsRequestSuccess, setMessage }) => {
 
   const handleDeleteButton = async () => {
     try {
-      const response = await deleteFriend(token, user._id, friendId);
+      const response = await deleteFriend();
       if (response.status >= 200 && response.status < 300) {
         // The request was successful
         dispatch(incrementAcceptOrDeleteCount());

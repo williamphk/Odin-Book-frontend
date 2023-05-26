@@ -60,7 +60,9 @@ const FriendList = () => {
           ))
         )}
       </div>
-      {isRequestSuccess && <ResponseModal status={true} message={message} />}
+      {isRequestSuccess !== null && (
+        <ResponseModal status={isRequestSuccess} message={message} />
+      )}
     </div>
   );
 };
