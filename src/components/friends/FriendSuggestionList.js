@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { getFriendSuggestion, getFriendRequestsSent } from "../../api";
 import FriendSuggestion from "./FriendSuggestion";
 import Loading from "../common/Loading";
+import ResponseModal from "../common/ResponseModal";
 
 const FriendSuggestionList = () => {
   const token = useSelector((state) => state.auth.token);
@@ -14,6 +15,8 @@ const FriendSuggestionList = () => {
   const [friendRequestSent, setFriendRequestSent] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [isRequestSuccess, setIsRequestSuccess] = useState(null);
+  const [message, setMessage] = useState("");
 
   useEffect(() => {
     const fetchFriendSuggestion = async () => {
@@ -76,10 +79,15 @@ const FriendSuggestionList = () => {
               //  convert to truthy or falsy value
               isSent={!!matchingFriendRequest(suggestion)}
               friendRequestId={matchingFriendRequest(suggestion)?._id}
+              setIsRequestSuccess={setIsRequestSuccess}
+              setMessage={setMessage}
             />
           ))
         )}
       </div>
+      {isRequestSuccess !== null && (
+        <ResponseModal status={isRequestSuccess} message={message} />
+      )}
     </div>
   );
 };

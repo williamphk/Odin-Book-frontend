@@ -1,26 +1,67 @@
-import React from "react";
+import React, { useRef, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import { sendFriendRequest, deleteFriendRequest } from "../../api";
 import { incrementSendCount } from "../../slices/friendRequestSlice";
 
-const FriendSuggestionButton = ({ suggestionId, isSent, friendRequestId }) => {
+const FriendSuggestionButton = ({
+  suggestionId,
+  isSent,
+  friendRequestId,
+  setIsRequestSuccess,
+  setMessage,
+}) => {
   const token = useSelector((state) => state.auth.token);
 
   const dispatch = useDispatch();
 
+  const timer = useRef(null);
+
   const handleAddFriendClick = async (receiverId) => {
+    setIsRequestSuccess(null);
+    clearTimeout(timer.current);
     try {
       if (!isSent) {
-        await sendFriendRequest(token, receiverId);
+        const response = await sendFriendRequest(token, receiverId);
+        if (response.status >= 200 && response.status < 300) {
+          // The request was successful
+          setIsRequestSuccess(true);
+          setMessage("Friend request sent.");
+          timer.current = setTimeout(() => setIsRequestSuccess(null), 3500);
+        } else {
+          // The request failed, but did not throw an error
+          setIsRequestSuccess(false);
+          setMessage("Failed to send friend request.");
+          timer.current = setTimeout(() => setIsRequestSuccess(null), 3500);
+        }
       } else {
-        await deleteFriendRequest(token, friendRequestId);
+        const response = await deleteFriendRequest(token, friendRequestId);
+        if (response.status >= 200 && response.status < 300) {
+          // The request was successful
+          setIsRequestSuccess(true);
+          setMessage("Friend request removed.");
+          timer.current = setTimeout(() => setIsRequestSuccess(null), 3500);
+        } else {
+          // The request failed, but did not throw an error
+          setIsRequestSuccess(false);
+          setMessage("Failed to remove friend request.");
+          timer.current = setTimeout(() => setIsRequestSuccess(null), 3500);
+        }
       }
       dispatch(incrementSendCount());
     } catch (error) {
-      console.error("Error in handleAddFriendClick:", error);
+      setIsRequestSuccess(false);
+      setMessage(
+        "Failed to send/remove friend request due to a network error."
+      );
+      timer.current = setTimeout(() => setIsRequestSuccess(null), 3500);
+      console.error("Error in sending/removing friend request:", error);
     }
   };
+
+  useEffect(() => {
+    return () => clearTimeout(timer.current);
+  }, []);
 
   return (
     <button

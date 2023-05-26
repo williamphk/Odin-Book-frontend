@@ -22,7 +22,7 @@ const ResponseModal = ({ status, message }) => {
           iconName="check_circle"
           className="material-symbols-outlined text-2xl text-white mt-2"
         />
-        <div className="mt-2 w-44">
+        <div className="mt-2 min-w-44">
           <div className="font-bold">{status ? "Success!" : "Failed!"}</div>
           <div>{message}</div>
         </div>

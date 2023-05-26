@@ -4,7 +4,13 @@ import ProfilePic from "../common/ProfilePic";
 import UserName from "../common/UserName";
 import FriendSuggestionButton from "./FriendSuggestionButton";
 
-const FriendSuggestion = ({ suggestion, isSent, friendRequestId }) => {
+const FriendSuggestion = ({
+  suggestion,
+  isSent,
+  friendRequestId,
+  setIsRequestSuccess,
+  setMessage,
+}) => {
   return (
     <div className="shadow-lg flex flex-col bg-white rounded-lg w-[220px] pb-3 items-center justify-center">
       <div className="flex flex-col w-full h-[230px] overflow-hidden">
@@ -25,6 +31,8 @@ const FriendSuggestion = ({ suggestion, isSent, friendRequestId }) => {
         suggestionId={suggestion._id}
         isSent={isSent}
         friendRequestId={friendRequestId}
+        setIsRequestSuccess={setIsRequestSuccess}
+        setMessage={setMessage}
       />
     </div>
   );
