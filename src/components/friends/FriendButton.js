@@ -1,27 +1,42 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import { deleteFriend } from "../../api";
 import { incrementAcceptOrDeleteCount } from "../../slices/friendRequestSlice";
 
-const FriendButton = ({ friendId }) => {
+const FriendButton = ({ friendId, setIsRequestSuccess, setMessage }) => {
   const token = useSelector((state) => state.auth.token);
   const user = useSelector((state) => state.auth.user);
 
   const dispatch = useDispatch();
 
   const handleDeleteButton = async () => {
-    await deleteFriend(token, user._id, friendId);
-    dispatch(incrementAcceptOrDeleteCount());
+    try {
+      const response = await deleteFriend(token, user._id, friendId);
+      if (response.status >= 200 && response.status < 300) {
+        // The request was successful
+        dispatch(incrementAcceptOrDeleteCount());
+        setIsRequestSuccess(true);
+        setMessage("Friend removed.");
+        setTimeout(() => setIsRequestSuccess(null), 3500);
+      } else {
+        // The request failed
+        console.error("Error deleting friend:", response);
+      }
+    } catch (err) {
+      console.error("Error deleting friend:", err);
+    }
   };
 
   return (
-    <button
-      onClick={handleDeleteButton}
-      className="bg-gray-100 hover:bg-red-500 hover:text-white text-gray-500 rounded-lg p-2 w-[200px] h-[35px] overflow-hidden flex justify-center items-center transition duration-200"
-    >
-      Delete
-    </button>
+    <div>
+      <button
+        onClick={handleDeleteButton}
+        className="bg-gray-100 hover:bg-red-500 hover:text-white text-gray-500 rounded-lg p-2 w-[200px] h-[35px] overflow-hidden flex justify-center items-center transition duration-200"
+      >
+        Delete
+      </button>
+    </div>
   );
 };
 

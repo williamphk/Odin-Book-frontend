@@ -4,7 +4,7 @@ import ProfilePic from "../common/ProfilePic";
 import UserName from "../common/UserName";
 import FriendButton from "./FriendButton";
 
-const Friend = ({ friend }) => {
+const Friend = ({ friend, setIsRequestSuccess, setMessage }) => {
   return (
     <div className="shadow-lg flex flex-col bg-white rounded-lg w-[220px] pb-3 items-center justify-center">
       <div className="flex flex-col w-full h-[230px] overflow-hidden">
@@ -21,7 +21,11 @@ const Friend = ({ friend }) => {
           className="my-2 hover:underline"
         />
       </div>
-      <FriendButton friendId={friend.user._id} />
+      <FriendButton
+        friendId={friend.user._id}
+        setIsRequestSuccess={setIsRequestSuccess}
+        setMessage={setMessage}
+      />
     </div>
   );
 };

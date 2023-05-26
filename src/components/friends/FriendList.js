@@ -3,6 +3,8 @@ import { useSelector } from "react-redux";
 
 import Friend from "./Friend";
 import Loading from "../common/Loading";
+import ResponseModal from "../common/ResponseModal";
+
 import { getFriendList } from "../../api";
 
 const FriendList = () => {
@@ -15,6 +17,8 @@ const FriendList = () => {
   const [friends, setFriends] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [isRequestSuccess, setIsRequestSuccess] = useState(null);
+  const [message, setMessage] = useState("");
 
   useEffect(() => {
     const fetchFriend = async () => {
@@ -46,9 +50,17 @@ const FriendList = () => {
         {friends.length === 0 ? (
           <div>No friends yet</div>
         ) : (
-          friends.map((friend) => <Friend friend={friend} key={friend._id} />)
+          friends.map((friend) => (
+            <Friend
+              friend={friend}
+              key={friend._id}
+              setIsRequestSuccess={setIsRequestSuccess}
+              setMessage={setMessage}
+            />
+          ))
         )}
       </div>
+      {isRequestSuccess && <ResponseModal status={true} message={message} />}
     </div>
   );
 };
