@@ -89,7 +89,7 @@ const PostModal = ({
               rows={6}
               isTextArea={true}
               labeltext="Post content"
-              inputClassName="mx-4 text-xl focus:outline-none"
+              inputClassName="mx-4 text-xl focus:outline-none resize-none"
               validation={{
                 required: "Content is required",
               }}
