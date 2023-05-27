@@ -14,6 +14,7 @@ const InputField = ({
   validation,
   requiredError,
   isTextArea = false,
+  handleKeyPress,
 }) => {
   const { onChange, ...rest } = register(id, validation);
 
@@ -42,6 +43,7 @@ const InputField = ({
           onChange={handleChange}
           aria-label={labeltext}
           rows={rows}
+          onKeyDown={handleKeyPress}
           {...rest}
         />
       ) : (

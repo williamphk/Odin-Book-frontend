@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 
 import MaterialIcon from "../common/MaterialIcon";
@@ -15,14 +15,38 @@ const CommentField = ({
     handleSubmit,
     setError,
     watch,
+    reset,
     formState: { errors },
   } = useForm();
 
-  const allFieldValues = watch();
+  const [isDisable, setIsDisable] = useState(true);
+
+  const content = watch("content");
+
+  const handleKeyPress = (event) => {
+    if (event.key === "Enter" && !event.shiftKey) {
+      event.preventDefault();
+      // Disable button after submitted by keyboard
+      setIsDisable(true);
+      handleSubmit(onSubmit)();
+    }
+  };
+
+  const onSubmitWrapper = (data) => {
+    // Disable button after submitted
+    setIsDisable(true);
+    onSubmit(data);
+  };
+
+  // Disable button if no content
+  useEffect(() => {
+    console.log(!!content);
+    setIsDisable(!content);
+  }, [content]);
 
   return (
     <form
-      onSubmit={handleSubmit(onSubmit)}
+      onSubmit={handleSubmit(onSubmitWrapper)}
       className="relative w-full flex justify-end"
     >
       <InputField
@@ -40,14 +64,15 @@ const CommentField = ({
         validation={{
           required: "Content is required",
         }}
+        handleKeyPress={handleKeyPress}
       />
       <button
-        disabled={!allFieldValues.content}
+        disabled={isDisable}
         className="absolute bottom-0 right-1 w-[28px] h-[28px] mb-1 hover:bg-gray-200 disabled:bg-transparent rounded-full flex justify-center items-center"
       >
         <MaterialIcon
           className={`material-symbols-outlined text-xl ${
-            allFieldValues.content ? "text-purple-500" : "text-gray-500"
+            !isDisable ? "text-purple-500" : "text-gray-500"
           } absolute`}
           iconName={"send"}
         />
