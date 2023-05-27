@@ -72,10 +72,14 @@ const Comment = ({ comment, postId, commentId, token, user }) => {
 
   const handleLikeButtonClick = async () => {
     if (isLike) {
+      // Optimistic updates the like button
+      setIsLike(false);
       // Delete the like
       await deleteCommentLike(token, postId, commentId, userLikeId);
       setFetchLikesTrigger(!fetchLikesTrigger);
     } else {
+      // Optimistic updates the like button
+      setIsLike(true);
       // Create a new like
       await createCommentLike(token, postId, commentId);
       setFetchLikesTrigger(!fetchLikesTrigger);
