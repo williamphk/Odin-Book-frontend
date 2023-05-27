@@ -9,11 +9,14 @@ import Intro from "./Intro";
 import Friends from "./Friends";
 import Heading from "./Heading";
 import Nav from "./Nav";
+import SkeletonPost from "../posts/SkeletonPost";
 
 const Profile = () => {
   const [profile, setProfile] = useState({});
   const [friends, setFriends] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [isPostsLoading, setIsPostsLoading] = useState(true);
+
   const [error, setError] = useState(null);
   const [posts, setPosts] = useState([]);
 
@@ -48,6 +51,9 @@ const Profile = () => {
         const fetchedPosts = await getUserPost(token, userId ?? user._id);
         setPosts(fetchedPosts.data.posts);
         setIsLoading(false);
+        if (fetchedPosts.data.posts.length === 0) {
+          setIsPostsLoading(false);
+        }
       } catch (err) {
         setError(err);
         setIsLoading(false);
@@ -98,21 +104,33 @@ const Profile = () => {
           <div className="w-full bg-white rounded-lg shadow p-3 font-bold text-lg mb-4">
             Posts
           </div>
-          {posts.length === 0 ? (
-            <div className="text-center text-gray-500 font-bold text-lg">
-              No posts available
+          {isPostsLoading ? (
+            <div>
+              {Array(5)
+                .fill()
+                .map((element, index) => (
+                  <SkeletonPost key={index} />
+                ))}
             </div>
-          ) : (
-            posts.map((post) => (
-              <Post
-                post={post}
-                key={post._id}
-                id={post._id}
-                token={token}
-                user={user}
-              />
-            ))
-          )}
+          ) : null}
+          <div className={`${isPostsLoading && "hidden"}`}>
+            {posts.length === 0 ? (
+              <div className="text-center text-gray-500 font-bold text-lg">
+                No posts available
+              </div>
+            ) : (
+              posts.map((post) => (
+                <Post
+                  post={post}
+                  key={post._id}
+                  id={post._id}
+                  token={token}
+                  user={user}
+                  setIsLoading={setIsPostsLoading}
+                />
+              ))
+            )}
+          </div>
         </div>
       </div>
     </div>

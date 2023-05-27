@@ -101,11 +101,13 @@ const Heading = ({ user, userId, profile, friends }) => {
       <div className="flex items-center flex-col lg:flex-row">
         <div className="absolute lg:bottom-12 lg:left-60 bottom-36">
           <div className="flex relative">
-            <ProfilePic
-              picture={profile.picture}
-              id={userId || user._id}
-              className="object-cover md:w-48 md:h-48 w-44 h-44 rounded-full border-4 border-white"
-            />
+            {profile.picture && (
+              <ProfilePic
+                picture={profile.picture}
+                id={userId || user._id}
+                className="object-cover md:w-48 md:h-48 w-44 h-44 rounded-full border-4 border-white"
+              />
+            )}
             {(!userId || userId === user._id) && (
               <button
                 onClick={handleCameraButtonClick}
