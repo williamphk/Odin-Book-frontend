@@ -6,43 +6,55 @@ import { getPostLikeList, createPostLike, deletePostLike } from "../../api";
 const PostAction = ({ handleCommentShow, comments, postId, user, token }) => {
   const [postLikes, setPostLikes] = useState([]);
   const [isLike, setIsLike] = useState(false);
-  const [userLikeId, setUserLikeId] = useState(null);
   const [fetchLikesTrigger, setFetchLikesTrigger] = useState(false);
+  const [likeCount, setLikeCount] = useState(0);
 
   useEffect(() => {
     const fetchPostLikes = async () => {
       try {
         const fetchedLikes = await getPostLikeList(token, postId);
         setPostLikes(fetchedLikes.data.likes);
+        setLikeCount(fetchedLikes.data.likes.length);
       } catch (err) {
-        setPostLikes(err);
+        setPostLikes([]);
+        console.error("There was an error fetching the post likes: ", err);
       }
     };
 
     fetchPostLikes();
   }, [fetchLikesTrigger, token, postId]);
 
+  console.log(postLikes);
   useEffect(() => {
     const userLike = postLikes.find((like) => like.user._id === user._id);
     if (userLike) {
-      setUserLikeId(userLike._id);
       setIsLike(true);
     } else {
-      setUserLikeId(null);
       setIsLike(false);
     }
   }, [postLikes, user._id]);
 
   const handleLikeButtonClick = async () => {
     if (isLike) {
-      // Optimistic updates the like button
+      // Optimistic updates the like button and like count
       setIsLike(false);
-      // Delete the like
-      await deletePostLike(token, postId, userLikeId);
-      setFetchLikesTrigger(!fetchLikesTrigger);
+      setLikeCount(likeCount - 1);
+      // Get the userLikeId directly instead of using state as will cause issues when clicking too fast
+      const userLikeId = postLikes.find(
+        (like) => like.user._id === user._id
+      )?._id;
+      // checking if the userLikeId exists as the postLikes state may cause issue
+      if (userLikeId) {
+        // Delete the like
+        await deletePostLike(token, postId, userLikeId);
+        setFetchLikesTrigger(!fetchLikesTrigger);
+      } else {
+        console.error("User like ID is undefined, cannot delete like.");
+      }
     } else {
-      // Optimistic updates the like button
+      // Optimistic updates the like button and like count
       setIsLike(true);
+      setLikeCount(likeCount + 1);
       // Create a new like
       await createPostLike(token, postId);
       setFetchLikesTrigger(!fetchLikesTrigger);
@@ -58,7 +70,7 @@ const PostAction = ({ handleCommentShow, comments, postId, user, token }) => {
               className="material-symbols-outlined text-xl text-purple-500"
               iconName={"thumb_up"}
             />
-            {postLikes.length}
+            {likeCount}
           </button>
         ) : (
           <div className="h-7"></div>
