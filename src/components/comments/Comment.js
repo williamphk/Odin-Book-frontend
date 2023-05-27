@@ -38,7 +38,7 @@ const Comment = ({ comment, postId, commentId, token, user }) => {
   };
 
   const onSubmit = async (data) => {
-    const response = updateComment(token, postId, commentId, data);
+    const response = await updateComment(token, postId, commentId, data);
     setIsEdit(!isEdit);
     dispatch(incrementCreateOrUpdateCount());
     setCommentContent("");
