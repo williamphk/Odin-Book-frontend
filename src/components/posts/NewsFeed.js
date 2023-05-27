@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 
 import { getNewsFeed } from "../../api";
 import Post from "./Post";
-import Loading from "../common/Loading";
+import SkeletonPost from "./SkeletonPost";
 
 const NewsFeed = () => {
   const token = useSelector((state) => state.auth.token);
@@ -32,7 +32,15 @@ const NewsFeed = () => {
   }, [token, createOrUpdateCount]);
 
   if (isLoading) {
-    return <Loading />;
+    return (
+      <div className="container flex flex-col max-w-[660px] py-3 sm:pr-3">
+        {Array(5)
+          .fill()
+          .map((element, index) => (
+            <SkeletonPost key={index} />
+          ))}
+      </div>
+    );
   }
 
   if (error) {
