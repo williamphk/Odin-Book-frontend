@@ -10,6 +10,7 @@ import Friends from "./Friends";
 import Heading from "./Heading";
 import Nav from "./Nav";
 import SkeletonPost from "../posts/SkeletonPost";
+import AddPost from "../posts/AddPost";
 
 const Profile = () => {
   const [profile, setProfile] = useState({});
@@ -27,6 +28,9 @@ const Profile = () => {
   );
   const acceptOrDeleteCount = useSelector(
     (state) => state.friendRequest.acceptOrDeleteCount
+  );
+  const createOrUpdateCount = useSelector(
+    (state) => state.post.createOrUpdateCount
   );
 
   const { userId } = useParams();
@@ -61,7 +65,7 @@ const Profile = () => {
     };
 
     fetchUserPost();
-  }, [token, userId, user._id, updatePictureCount]);
+  }, [token, userId, user._id, createOrUpdateCount]);
 
   useEffect(() => {
     const fetchFriend = async () => {
@@ -104,6 +108,7 @@ const Profile = () => {
           <div className="w-full bg-white rounded-lg shadow p-3 font-bold text-lg mb-4">
             Posts
           </div>
+          <AddPost user={user} />
           {isPostsLoading ? (
             <div>
               {Array(5)
