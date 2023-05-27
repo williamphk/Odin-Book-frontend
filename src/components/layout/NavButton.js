@@ -4,8 +4,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { useMediaQuery } from "react-responsive";
 
 import MaterialIcon from "../common/MaterialIcon";
-import { switchToFriends, switchToNewfeed } from "../../slices/pageSlice";
 import PostModal from "../posts/PostModal";
+
+import { switchToFriends, switchToNewfeed } from "../../slices/pageSlice";
 import { createPost } from "../../api";
 import { incrementCreateOrUpdateCount } from "../../slices/postSlice";
 

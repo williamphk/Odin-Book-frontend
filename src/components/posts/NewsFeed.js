@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { getNewsFeed } from "../../api";
 import Post from "./Post";
 import SkeletonPost from "./SkeletonPost";
+import AddPost from "./AddPost";
 
 const NewsFeed = () => {
   const token = useSelector((state) => state.auth.token);
@@ -37,6 +38,7 @@ const NewsFeed = () => {
 
   return (
     <div className="container flex flex-col max-w-[660px] py-3 sm:pr-3">
+      <AddPost user={user} />
       {isLoading ? (
         <div>
           {Array(5)

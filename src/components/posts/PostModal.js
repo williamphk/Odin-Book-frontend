@@ -34,7 +34,7 @@ const PostModal = ({
     <div className="add-post-modal">
       <div className="modal-overlay" onClick={closePostModal}></div>
       <div className="modal-content">
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between mb-4">
           <h2 className="text-xl font-bold">{title}</h2>
           <button onClick={closePostModal}>
             <MaterialIcon
@@ -71,11 +71,11 @@ const PostModal = ({
           )}
           <button
             className={`${
-              buttonColor || "bg-blue-500"
-            } text-white px-4 py-2 rounded shadow-md ${
+              buttonColor || "bg-purple-500"
+            } text-white px-4 py-2 rounded-md shadow-md mt-6 w-20 ${
               buttonHoverColor
                 ? "hover:" + buttonHoverColor
-                : "hover:bg-blue-600"
+                : "hover:bg-purple-600"
             }
             transition duration-200`}
           >
