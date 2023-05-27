@@ -58,14 +58,24 @@ const PostModal = ({
             />
           </button>
         </div>
-        <div className="flex mx-4 my-4 items-center">
-          <ProfilePic
-            picture={user.picture}
-            id={user._id}
-            className="object-cover w-10 h-10 rounded-full"
-          />
-          <div className="ml-2">{user.fullName}</div>
-        </div>
+        {requiredInputField && (
+          <div className="flex mx-4 my-4 items-center">
+            <ProfilePic
+              picture={user.picture}
+              id={user._id}
+              className="object-cover w-10 h-10 rounded-full"
+            />
+            <div className="ml-2">{user.fullName}</div>
+          </div>
+        )}
+        {title === "Delete" && (
+          <div className="p-4 flex flex-col gap-y-2">
+            <div className="font-bold">
+              Once the post is deleted, it cannot be recovered.
+            </div>
+            <div>Continue to delete this post?</div>
+          </div>
+        )}
         <form className="flex flex-col" onSubmit={handleSubmit(onSubmit)}>
           {requiredInputField && (
             <InputField
@@ -102,7 +112,7 @@ const PostModal = ({
                 : "hover:bg-purple-600"
             }
             transition duration-200 disabled:bg-gray-300 disabled:text-gray-400`}
-            disabled={!allFieldValues.content}
+            disabled={requiredInputField && !allFieldValues.content}
           >
             {button}
           </button>
