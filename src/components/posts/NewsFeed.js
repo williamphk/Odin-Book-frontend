@@ -21,27 +21,15 @@ const NewsFeed = () => {
       try {
         const fetchedPosts = await getNewsFeed(token);
         setPosts(fetchedPosts.data.posts);
-        setIsLoading(false);
+        //setIsLoading(false);
       } catch (err) {
         setError(err);
-        setIsLoading(false);
+        //setIsLoading(false);
       }
     };
 
     fetchNewsFeed();
   }, [token, createOrUpdateCount]);
-
-  if (isLoading) {
-    return (
-      <div className="container flex flex-col max-w-[660px] py-3 sm:pr-3">
-        {Array(5)
-          .fill()
-          .map((element, index) => (
-            <SkeletonPost key={index} />
-          ))}
-      </div>
-    );
-  }
 
   if (error) {
     return <div>Error: {error.message}</div>;
@@ -49,15 +37,27 @@ const NewsFeed = () => {
 
   return (
     <div className="container flex flex-col max-w-[660px] py-3 sm:pr-3">
-      {posts.map((post) => (
-        <Post
-          post={post}
-          key={post._id}
-          id={post._id}
-          token={token}
-          user={user}
-        />
-      ))}
+      {isLoading ? (
+        <div>
+          {Array(5)
+            .fill()
+            .map((element, index) => (
+              <SkeletonPost key={index} />
+            ))}
+        </div>
+      ) : null}
+      <div className={`${isLoading && "hidden"}`}>
+        {posts.map((post) => (
+          <Post
+            post={post}
+            key={post._id}
+            id={post._id}
+            token={token}
+            user={user}
+            setIsLoading={setIsLoading}
+          />
+        ))}
+      </div>
     </div>
   );
 };

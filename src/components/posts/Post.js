@@ -8,7 +8,7 @@ import { getCommentList } from "../../api";
 import CommentList from "../comments/CommentList";
 import AddComment from "../comments/AddComment";
 
-const Post = ({ post, id, token, user }) => {
+const Post = ({ post, id, token, user, setIsLoading }) => {
   const [isCommentShow, setIsCommentShow] = useState(false);
   const [comments, setComments] = useState([]);
 
@@ -47,6 +47,7 @@ const Post = ({ post, id, token, user }) => {
         postId={id}
         user={user}
         token={token}
+        setIsLoading={setIsLoading}
       />
       {isCommentShow && (
         <CommentList

@@ -3,7 +3,14 @@ import React, { useState, useEffect } from "react";
 import MaterialIcon from "../common/MaterialIcon";
 import { getPostLikeList, createPostLike, deletePostLike } from "../../api";
 
-const PostAction = ({ handleCommentShow, comments, postId, user, token }) => {
+const PostAction = ({
+  handleCommentShow,
+  comments,
+  postId,
+  user,
+  token,
+  setIsLoading,
+}) => {
   const [postLikes, setPostLikes] = useState([]);
   const [isLike, setIsLike] = useState(false);
   const [fetchLikesTrigger, setFetchLikesTrigger] = useState(false);
@@ -15,6 +22,7 @@ const PostAction = ({ handleCommentShow, comments, postId, user, token }) => {
         const fetchedLikes = await getPostLikeList(token, postId);
         setPostLikes(fetchedLikes.data.likes);
         setLikeCount(fetchedLikes.data.likes.length);
+        setIsLoading(false);
       } catch (err) {
         setPostLikes([]);
         console.error("There was an error fetching the post likes: ", err);
@@ -24,7 +32,7 @@ const PostAction = ({ handleCommentShow, comments, postId, user, token }) => {
     fetchPostLikes();
   }, [fetchLikesTrigger, token, postId]);
 
-  console.log(postLikes);
+  //console.log(postLikes);
   useEffect(() => {
     const userLike = postLikes.find((like) => like.user._id === user._id);
     if (userLike) {
