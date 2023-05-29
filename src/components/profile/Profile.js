@@ -49,7 +49,7 @@ const Profile = () => {
     <div className="flex flex-col w-full lg:text-left">
       <Heading
         user={user}
-        userId={user._id}
+        userId={userId}
         profile={profile}
         friends={friends}
       />
