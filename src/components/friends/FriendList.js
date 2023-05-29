@@ -7,7 +7,7 @@ import ResponseModal from "../common/ResponseModal";
 
 import { getFriendList } from "../../api";
 
-const FriendList = () => {
+const FriendList = ({ userId }) => {
   const token = useSelector((state) => state.auth.token);
   const user = useSelector((state) => state.auth.user);
   const acceptOrDeleteCount = useSelector(
@@ -15,6 +15,7 @@ const FriendList = () => {
   );
 
   const [friends, setFriends] = useState([]);
+  const [userFriends, setUserFriends] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [isRequestSuccess, setIsRequestSuccess] = useState(null);
@@ -23,7 +24,7 @@ const FriendList = () => {
   useEffect(() => {
     const fetchFriend = async () => {
       try {
-        const fetchedFriends = await getFriendList(token, user._id);
+        const fetchedFriends = await getFriendList(token, userId);
         setFriends(fetchedFriends.data.friends);
         setIsLoading(false);
       } catch (err) {
@@ -33,7 +34,22 @@ const FriendList = () => {
     };
 
     fetchFriend();
-  }, [token, acceptOrDeleteCount, user._id]);
+  }, [token, acceptOrDeleteCount, userId]);
+
+  useEffect(() => {
+    const fetchFriend = async () => {
+      try {
+        const fetchedFriends = await getFriendList(token, user._id);
+        setUserFriends(fetchedFriends.data.friends);
+        setIsLoading(false);
+      } catch (err) {
+        setError(err);
+        setIsLoading(false);
+      }
+    };
+
+    fetchFriend();
+  }, [token, acceptOrDeleteCount, userId]);
 
   if (isLoading) {
     return <Loading />;
@@ -42,6 +58,8 @@ const FriendList = () => {
   if (error) {
     return <div>Error: {error.message}</div>;
   }
+
+  console.log(friends);
 
   return (
     <div className="flex flex-col gap-y-2">
@@ -56,6 +74,9 @@ const FriendList = () => {
               key={friend._id}
               setIsRequestSuccess={setIsRequestSuccess}
               setMessage={setMessage}
+              isFriend={userFriends.some(
+                (element) => element.user._id === friend.user._id
+              )}
             />
           ))
         )}

@@ -15,7 +15,7 @@ function NavigationHandler() {
   useEffect(() => {
     const currentPath = location.pathname;
 
-    if (currentPath.includes("/friends")) {
+    if (currentPath.includes("/friends") && !currentPath.includes("/profile")) {
       dispatch(switchToFriends());
     } else if (currentPath.includes("/setting")) {
       dispatch(switchToSetting());
