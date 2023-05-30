@@ -9,37 +9,15 @@ const pageSlice = createSlice({
     setting: false,
   },
   reducers: {
-    switchToFriends: (state) => {
-      state.newsfeed = false;
-      state.friends = true;
-      state.profile = false;
-      state.setting = false;
-    },
-    switchToNewfeed: (state) => {
-      state.newsfeed = true;
-      state.friends = false;
-      state.profile = false;
-      state.setting = false;
-    },
-    switchToProfile: (state) => {
-      state.newsfeed = false;
-      state.friends = false;
-      state.profile = true;
-      state.setting = false;
-    },
-    switchToSetting: (state) => {
-      state.newsfeed = false;
-      state.friends = false;
-      state.profile = false;
-      state.setting = true;
+    switchComponent: (state, action) => {
+      const { payload } = action;
+      state.newsfeed = payload === "newsfeed";
+      state.friends = payload === "friends";
+      state.profile = payload === "profile";
+      state.setting = payload === "setting";
     },
   },
 });
 
-export const {
-  switchToFriends,
-  switchToNewfeed,
-  switchToProfile,
-  switchToSetting,
-} = pageSlice.actions;
+export const { switchComponent } = pageSlice.actions;
 export default pageSlice.reducer;

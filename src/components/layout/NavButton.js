@@ -6,7 +6,7 @@ import { useMediaQuery } from "react-responsive";
 import MaterialIcon from "../common/MaterialIcon";
 import PostModal from "../posts/PostModal";
 
-import { switchToFriends, switchToNewfeed } from "../../slices/pageSlice";
+import { switchComponent } from "../../slices/pageSlice";
 import { createPost } from "../../api";
 import { incrementCreateOrUpdateCount } from "../../slices/postSlice";
 
@@ -45,12 +45,12 @@ const NavButton = ({ setIsMobileMenuOpen, isMobileMenuOpen }) => {
 
   const navOnClick = {
     Home: () => {
-      dispatch(switchToNewfeed());
+      dispatch(switchComponent("newfeed"));
     },
     Friends: () => {
       setIsMobileMenuOpen(!isMobileMenuOpen);
       if (isMobile) return;
-      dispatch(switchToFriends());
+      dispatch(switchComponent("friends"));
     },
   };
 

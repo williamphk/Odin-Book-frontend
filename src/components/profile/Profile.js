@@ -6,10 +6,9 @@ import { useLocation } from "react-router-dom";
 import Heading from "./Heading";
 import Nav from "./Nav";
 import Home from "./Home";
+import FriendList from "../friends/FriendList";
 
 import { getUser } from "../../api";
-
-import FriendList from "../friends/FriendList";
 
 const Profile = () => {
   const [profile, setProfile] = useState({});

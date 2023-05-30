@@ -1,12 +1,7 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import {
-  switchToFriends,
-  switchToSetting,
-  switchToProfile,
-  switchToNewfeed,
-} from "./slices/pageSlice";
+import { switchComponent } from "./slices/pageSlice";
 
 function NavigationHandler() {
   const dispatch = useDispatch();
@@ -16,13 +11,13 @@ function NavigationHandler() {
     const currentPath = location.pathname;
 
     if (currentPath.includes("/friends") && !currentPath.includes("/profile")) {
-      dispatch(switchToFriends());
+      dispatch(switchComponent("friends"));
     } else if (currentPath.includes("/setting")) {
-      dispatch(switchToSetting());
+      dispatch(switchComponent("setting"));
     } else if (currentPath.includes("/profile")) {
-      dispatch(switchToProfile());
+      dispatch(switchComponent("profile"));
     } else {
-      dispatch(switchToNewfeed());
+      dispatch(switchComponent("newfeed"));
     }
   }, [dispatch, location]);
 

@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 
-import { getNewsFeed } from "../../api";
 import Post from "./Post";
 import SkeletonPost from "./SkeletonPost";
 import AddPost from "./AddPost";
+
+import { getNewsFeed } from "../../api";
 
 const NewsFeed = () => {
   const token = useSelector((state) => state.auth.token);

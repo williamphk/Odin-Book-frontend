@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import ProfilePic from "../common/ProfilePic";
 import UserName from "../common/UserName";
 
-import { switchToFriends, switchToNewfeed } from "../../slices/pageSlice";
+import { switchComponent } from "../../slices/pageSlice";
 
 const LeftSidebar = ({ className }) => {
   const user = useSelector((state) => state.auth.user);
@@ -40,7 +40,7 @@ const LeftSidebar = ({ className }) => {
           <li className="flex items-center space-x-2">
             <button
               className="flex text-gray-600 w-full hover:bg-gray-200 transition duration-200 py-2 rounded-lg"
-              onClick={() => dispatch(switchToNewfeed())}
+              onClick={() => dispatch(switchComponent("newfeed"))}
             >
               <Link
                 to="/"
@@ -55,7 +55,7 @@ const LeftSidebar = ({ className }) => {
           <li className="flex flex-col items-start space-x-2">
             <button
               className="flex text-gray-600 w-full hover:bg-gray-200 transition duration-200 py-2 rounded-lg"
-              onClick={() => dispatch(switchToFriends())}
+              onClick={() => dispatch(switchComponent("friends"))}
             >
               <Link
                 to="/friends"

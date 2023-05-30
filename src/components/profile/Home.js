@@ -2,13 +2,14 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
-import { getUser, getUserPost, getFriendList } from "../../api";
 import Loading from "../common/Loading";
 import Post from "../posts/Post";
 import Intro from "./Intro";
 import Friends from "./Friends";
 import SkeletonPost from "../posts/SkeletonPost";
 import AddPost from "../posts/AddPost";
+
+import { getUserPost, getFriendList } from "../../api";
 
 const Home = ({ user, setFriends, friends }) => {
   const [isLoading, setIsLoading] = useState(true);

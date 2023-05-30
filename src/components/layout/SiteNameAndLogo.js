@@ -2,13 +2,13 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
-import { switchToNewfeed } from "../../slices/pageSlice";
+import { switchComponent } from "../../slices/pageSlice";
 
 const SiteNameAndLogo = () => {
   const dispatch = useDispatch();
 
   const handleSiteNameAndLogoClick = () => {
-    dispatch(switchToNewfeed());
+    dispatch(switchComponent("newfeed"));
   };
 
   return (

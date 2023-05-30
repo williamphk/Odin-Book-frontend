@@ -3,11 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../slices/authSlice";
 
 import MenuModal from "../common/MenuModal";
-import {
-  switchToNewfeed,
-  switchToProfile,
-  switchToSetting,
-} from "../../slices/pageSlice";
+import { switchComponent } from "../../slices/pageSlice";
 
 const ProfilePicSection = () => {
   const user = useSelector((state) => state.auth.user);
@@ -36,7 +32,7 @@ const ProfilePicSection = () => {
 
   const handleLogout = () => {
     dispatch(logout());
-    dispatch(switchToNewfeed());
+    dispatch(switchComponent("newfeed"));
   };
 
   const toggleProfileMenu = () => {
@@ -44,11 +40,11 @@ const ProfilePicSection = () => {
   };
 
   const handleProfileClick = () => {
-    dispatch(switchToProfile());
+    dispatch(switchComponent("profile"));
   };
 
   const handleSettingClick = () => {
-    dispatch(switchToSetting());
+    dispatch(switchComponent("setting"));
   };
 
   const menuItems = [

@@ -4,9 +4,10 @@ import { useSelector } from "react-redux";
 import PostHeader from "./PostHeader";
 import PostContent from "./PostContent";
 import PostAction from "./PostAction";
-import { getCommentList } from "../../api";
 import CommentList from "../comments/CommentList";
 import AddComment from "../comments/AddComment";
+
+import { getCommentList } from "../../api";
 
 const Post = ({ post, id, token, user, setIsLoading }) => {
   const [isCommentShow, setIsCommentShow] = useState(false);
