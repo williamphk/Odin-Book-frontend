@@ -17,7 +17,11 @@ const pageSlice = createSlice({
       state.profile = payload === "profile";
       state.profileFriends = payload === "profileFriends";
       state.setting = payload === "setting";
-      window.scrollTo(0, 0);
+
+      (payload === "newsfeed" ||
+        payload === "friends" ||
+        payload === "setting") &&
+        window.scrollTo(0, 0);
     },
   },
 });

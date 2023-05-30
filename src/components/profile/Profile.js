@@ -55,7 +55,7 @@ const Profile = () => {
       <Nav />
       {userId === "friends" ||
       (userId !== "friends" && currentPath.includes("/friends")) ? (
-        <div className="flex flex-col md:flex-row gap-x-4 md:px-[5%] lg:px-[15%] pt-4 gap-4">
+        <div className="flex flex-col md:flex-row gap-x-4 md:px-[5%] lg:px-[15%] pt-4 gap-4 mb-8">
           <FriendList
             userId={
               userId === "friends" ? (userId = user._id) : userId ?? user._id

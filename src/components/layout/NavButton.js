@@ -45,7 +45,7 @@ const NavButton = ({ setIsMobileMenuOpen, isMobileMenuOpen }) => {
 
   const navOnClick = {
     Home: () => {
-      dispatch(switchComponent("newfeed"));
+      dispatch(switchComponent("newsfeed"));
     },
     Friends: () => {
       setIsMobileMenuOpen(!isMobileMenuOpen);

@@ -98,6 +98,7 @@ const PostModal = ({
           {requiredFileUpload && (
             <input
               type="file"
+              className="mx-4 mt-4"
               id="profile_picture"
               name="profile_picture"
               onChange={(event) => setSelectedFile(event.target.files[0])}
