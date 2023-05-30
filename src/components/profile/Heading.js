@@ -43,7 +43,7 @@ const Heading = ({ user, userId, profile, friends }) => {
     if (selectedFile) {
       const response = await updateProfilePic(
         token,
-        userId ?? user._id,
+        userId === "friends" ? user._id : userId,
         selectedFile
       );
       closeProfilePicModal();
@@ -104,11 +104,13 @@ const Heading = ({ user, userId, profile, friends }) => {
             {profile.picture && (
               <ProfilePic
                 picture={profile.picture}
-                id={userId || user._id}
+                id={
+                  userId ? (userId === "friends" ? user._id : userId) : user._id
+                }
                 className="object-cover md:w-48 md:h-48 w-44 h-44 rounded-full border-4 border-white"
               />
             )}
-            {(!userId || userId === user._id) && (
+            {isOwnProfile && (
               <button
                 onClick={handleCameraButtonClick}
                 className="w-8 h-8 rounded-full bg-gray-200 hover:bg-gray-300 flex justify-center items-center absolute right-3 bottom-3"
