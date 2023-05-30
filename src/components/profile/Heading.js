@@ -70,7 +70,7 @@ const Heading = ({ user, userId, profile, friends }) => {
     fetchFriend();
   }, [token, acceptOrDeleteCount, user._id]);
 
-  const isOwnProfile = !userId || userId === user._id;
+  const isOwnProfile = !userId || userId === user._id || userId === "friends";
   const isFriend = userFriends.some((element) => element.user._id === userId);
 
   useEffect(() => {

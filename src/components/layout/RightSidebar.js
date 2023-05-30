@@ -4,9 +4,10 @@ import { useSelector } from "react-redux";
 const RightSidebar = ({ friends, className }) => {
   const friendsSwitch = useSelector((state) => state.page.friends);
   const profile = useSelector((state) => state.page.profile);
+  const profileFriends = useSelector((state) => state.page.profileFriends);
   const setting = useSelector((state) => state.page.setting);
 
-  if (friendsSwitch || profile || setting) {
+  if (friendsSwitch || profile || profileFriends || setting) {
     return;
   }
 

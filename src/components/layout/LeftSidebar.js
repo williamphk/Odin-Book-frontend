@@ -12,10 +12,11 @@ const LeftSidebar = ({ className }) => {
   const newsfeed = useSelector((state) => state.page.newsfeed);
   const friends = useSelector((state) => state.page.friends);
   const profile = useSelector((state) => state.page.profile);
+  const profileFriends = useSelector((state) => state.page.profileFriends);
 
   const dispatch = useDispatch();
 
-  if (profile) {
+  if (profile || profileFriends) {
     return;
   }
 

@@ -6,6 +6,7 @@ const pageSlice = createSlice({
     newsfeed: true,
     friends: false,
     profile: false,
+    profileFriends: false,
     setting: false,
   },
   reducers: {
@@ -14,6 +15,7 @@ const pageSlice = createSlice({
       state.newsfeed = payload === "newsfeed";
       state.friends = payload === "friends";
       state.profile = payload === "profile";
+      state.profileFriends = payload === "profileFriends";
       state.setting = payload === "setting";
     },
   },
