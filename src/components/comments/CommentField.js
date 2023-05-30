@@ -47,7 +47,7 @@ const CommentField = ({
   return (
     <form
       onSubmit={handleSubmit(onSubmitWrapper)}
-      className="relative w-full flex justify-end"
+      className="relative flex justify-end grow"
     >
       <InputField
         register={register}
@@ -57,7 +57,7 @@ const CommentField = ({
         placeholder={placeholder || "Write a comment..."}
         value={commentContent}
         setPostContent={setCommentContent}
-        inputClassName="textborder bg-gray-100 w-full p-2 rounded-lg focus:outline-none text-sm resize-none"
+        inputClassName="bg-gray-100 w-full p-2 rounded-lg focus:outline-none text-sm resize-none"
         rows={2}
         isTextArea={true}
         labeltext="Comment content"

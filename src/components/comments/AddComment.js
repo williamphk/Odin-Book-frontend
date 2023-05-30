@@ -21,7 +21,7 @@ const AddComment = ({ postId, token, setIsCommentShow }) => {
   };
 
   return (
-    <div className="flex gap-x-2 items-start">
+    <div className="flex gap-x-2 items-start justify-between">
       <ProfilePic
         picture={user.picture}
         id={user._id}
