@@ -50,16 +50,22 @@ const NewsFeed = () => {
         </div>
       ) : null}
       <div className={`${isLoading && "hidden"}`}>
-        {posts.map((post) => (
-          <Post
-            post={post}
-            key={post._id}
-            id={post._id}
-            token={token}
-            user={user}
-            setIsLoading={setIsLoading}
-          />
-        ))}
+        {posts.length === 0 ? (
+          <div className="text-center text-gray-500 font-bold text-lg">
+            No posts available
+          </div>
+        ) : (
+          posts.map((post) => (
+            <Post
+              post={post}
+              key={post._id}
+              id={post._id}
+              token={token}
+              user={user}
+              setIsLoading={setIsLoading}
+            />
+          ))
+        )}
       </div>
     </div>
   );
