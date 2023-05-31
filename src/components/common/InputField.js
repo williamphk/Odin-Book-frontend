@@ -48,12 +48,18 @@ const InputField = ({
         />
       ) : (
         <input
-          className="border border-gray-300 p-2 rounded focus:outline-none focus:ring-2 focus:ring-purple-600"
+          className={
+            inputClassName ||
+            "border border-gray-300 p-2 rounded focus:outline-none focus:ring-2 focus:ring-purple-600"
+          }
           id={id}
           type={type}
+          value={value}
+          onChange={handleChange}
           placeholder={placeholder}
           aria-label={labeltext}
-          {...register(id, validation)}
+          onKeyDown={handleKeyPress}
+          {...rest}
         />
       )}
 

@@ -408,4 +408,48 @@ export const updateProfilePic = async (token, userId, file) => {
   }
 };
 
+export const updateProfileWork = async (token, userId, updatedWork) => {
+  try {
+    const response = await api.put("/users/" + userId + "/work", updatedWork, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    return response;
+  } catch (error) {
+    console.error("Error in updateProfileWork:", error);
+    throw error;
+  }
+};
+
+export const updateProfileEducation = async (
+  token,
+  userId,
+  updatedEducation
+) => {
+  try {
+    const response = await api.put(
+      "/users/" + userId + "/education",
+      updatedEducation,
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
+    return response;
+  } catch (error) {
+    console.error("Error in updateProfileEducation:", error);
+    throw error;
+  }
+};
+
+export const updateProfileCity = async (token, userId, updatedCity) => {
+  try {
+    const response = await api.put("/users/" + userId + "/city", updatedCity, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    return response;
+  } catch (error) {
+    console.error("Error in updateProfileCity:", error);
+    throw error;
+  }
+};
+
 export default api;
