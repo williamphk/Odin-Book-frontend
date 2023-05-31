@@ -43,7 +43,7 @@ const Heading = ({ user, userId, profile, friends }) => {
     if (selectedFile) {
       const response = await updateProfilePic(
         token,
-        userId === "friends" ? user._id : userId,
+        userId ? (userId === "friends" ? user._id : userId) : user._id,
         selectedFile
       );
       closeProfilePicModal();
