@@ -17,7 +17,16 @@ import {
   incrementUpdateCityCount,
 } from "../../slices/profileSlice";
 
-const Intro = ({ user, userId }) => {
+const Intro = ({
+  user,
+  userId,
+  isWorkClick,
+  isEducationClick,
+  isCityClick,
+  setIsWorkClick,
+  setIsEducationClick,
+  setIsCityClick,
+}) => {
   const {
     register,
     handleSubmit,
@@ -34,9 +43,7 @@ const Intro = ({ user, userId }) => {
   const [isWorkLoading, setIsWorkLoading] = useState(true);
   const [isEducationLoading, setIsEducationLoading] = useState(true);
   const [isCityLoading, setIsCityLoading] = useState(true);
-  const [isWorkClick, setIsWorkClick] = useState(false);
-  const [isEducationClick, setIsEducationClick] = useState(false);
-  const [isCityClick, setIsCityClick] = useState(false);
+
   const [isEditClick, setIsEditClick] = useState(false);
 
   const token = useSelector((state) => state.auth.token);

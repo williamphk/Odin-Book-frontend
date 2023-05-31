@@ -11,7 +11,17 @@ import AddPost from "../posts/AddPost";
 
 import { getUserPost, getFriendList } from "../../api";
 
-const Home = ({ user, setFriends, friends }) => {
+const Home = ({
+  user,
+  setFriends,
+  friends,
+  isWorkClick,
+  isEducationClick,
+  isCityClick,
+  setIsWorkClick,
+  setIsEducationClick,
+  setIsCityClick,
+}) => {
   const [isLoading, setIsLoading] = useState(true);
   const [isPostsLoading, setIsPostsLoading] = useState(true);
 
@@ -73,7 +83,16 @@ const Home = ({ user, setFriends, friends }) => {
   return (
     <div className="flex flex-col md:flex-row gap-x-4 md:px-[5%] lg:px-[15%] pt-4 gap-4">
       <div className="md:w-[43%] w-full flex flex-col gap-4">
-        <Intro user={user} userId={userId} />
+        <Intro
+          user={user}
+          userId={userId}
+          isWorkClick={isWorkClick}
+          isEducationClick={isEducationClick}
+          isCityClick={isCityClick}
+          setIsWorkClick={setIsWorkClick}
+          setIsEducationClick={setIsEducationClick}
+          setIsCityClick={setIsCityClick}
+        />
         <Friends friends={friends} />
       </div>
       <div className="md:w-[57%] w-full">

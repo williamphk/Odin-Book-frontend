@@ -14,6 +14,9 @@ const Profile = () => {
   const [friends, setFriends] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [isWorkClick, setIsWorkClick] = useState(false);
+  const [isEducationClick, setIsEducationClick] = useState(false);
+  const [isCityClick, setIsCityClick] = useState(false);
 
   const user = useSelector((state) => state.auth.user);
   const token = useSelector((state) => state.auth.token);
@@ -50,6 +53,12 @@ const Profile = () => {
         userId={userId}
         profile={profile}
         friends={friends}
+        isWorkClick={isWorkClick}
+        isEducationClick={isEducationClick}
+        isCityClick={isCityClick}
+        setIsWorkClick={setIsWorkClick}
+        setIsEducationClick={setIsEducationClick}
+        setIsCityClick={setIsCityClick}
       />
       <Nav />
       {userId === "friends" ||
@@ -67,6 +76,12 @@ const Profile = () => {
           setProfile={setProfile}
           friends={friends}
           setFriends={setFriends}
+          isWorkClick={isWorkClick}
+          isEducationClick={isEducationClick}
+          isCityClick={isCityClick}
+          setIsWorkClick={setIsWorkClick}
+          setIsEducationClick={setIsEducationClick}
+          setIsCityClick={setIsCityClick}
         />
       )}
     </div>

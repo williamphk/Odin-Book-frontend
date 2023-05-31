@@ -16,7 +16,18 @@ import {
 import { incrementUpdatePictureCount } from "../../slices/profileSlice";
 import { updateUser } from "../../slices/authSlice";
 
-const Heading = ({ user, userId, profile, friends }) => {
+const Heading = ({
+  user,
+  userId,
+  profile,
+  friends,
+  isWorkClick,
+  isEducationClick,
+  isCityClick,
+  setIsWorkClick,
+  setIsEducationClick,
+  setIsCityClick,
+}) => {
   const [isProfilePicModalOpen, setIsProfilePicModalOpen] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
   const [userFriends, setUserFriends] = useState([]);
@@ -99,6 +110,21 @@ const Heading = ({ user, userId, profile, friends }) => {
     );
   };
 
+  function handleEditClick() {
+    if (
+      (isWorkClick && isEducationClick && isCityClick) ||
+      (!isWorkClick && !isEducationClick && !isCityClick)
+    ) {
+      setIsWorkClick(!isWorkClick);
+      setIsEducationClick(!isEducationClick);
+      setIsCityClick(!isCityClick);
+    } else {
+      setIsWorkClick(false);
+      setIsEducationClick(false);
+      setIsCityClick(false);
+    }
+  }
+
   return (
     <div className="flex flex-col items-center lg:flex-row lg:justify-between w-full bg-white lg:mt-48 mt-32 relative h-48 lg:pr-60 pt-24 lg:pt-0 pb-32 lg:pb-0">
       <div className="flex items-center flex-col lg:flex-row">
@@ -133,7 +159,10 @@ const Heading = ({ user, userId, profile, friends }) => {
       </div>
       <div className="flex items-center mt-2 md:mt-0">
         {isOwnProfile ? (
-          <button className="bg-gray-200 px-4 py-2 rounded-lg hover:bg-gray-300">
+          <button
+            onClick={handleEditClick}
+            className="bg-gray-200 px-4 py-2 rounded-lg hover:bg-gray-300"
+          >
             Edit profile
           </button>
         ) : isFriend ? (
