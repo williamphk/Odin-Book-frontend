@@ -104,4 +104,4 @@ function App() {
 
 export default App;
 
-//Todo: Profile page, modal to show sucess/fail message, like modal, facebook login
+//Todo: like modal, facebook login
