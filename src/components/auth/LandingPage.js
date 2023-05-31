@@ -34,9 +34,11 @@ const LandingPage = () => {
   useEffect(() => {
     if (errorState && errorState.email) {
       setError("email", { message: errorState.email });
+      setIsLoginLoading(false);
     }
     if (errorState && errorState.password) {
       setError("password", { message: errorState.password });
+      setIsLoginLoading(false);
     }
   }, [errorState, setError]);
 

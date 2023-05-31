@@ -23,10 +23,10 @@ const NewsFeed = () => {
       try {
         const fetchedPosts = await getNewsFeed(token);
         setPosts(fetchedPosts.data.posts);
-        //setIsLoading(false);
+        if (fetchedPosts.data.posts.length === 0) setIsLoading(false);
       } catch (err) {
         setError(err);
-        //setIsLoading(false);
+        setIsLoading(false);
       }
     };
 
