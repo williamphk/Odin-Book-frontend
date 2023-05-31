@@ -16,6 +16,7 @@ import {
   incrementUpdateEducationCount,
   incrementUpdateCityCount,
 } from "../../slices/profileSlice";
+
 const Intro = ({ user, userId }) => {
   const {
     register,
@@ -44,6 +45,23 @@ const Intro = ({ user, userId }) => {
     (state) => state.profile.updateEducationCount
   );
   const updateCityCount = useSelector((state) => state.profile.updateCityCount);
+
+  useEffect(() => {
+    const getUserIntro = async () => {
+      try {
+        const fetchedUserIntro = await getUser(token, userId ?? user._id);
+        setUserIntro(fetchedUserIntro.data.user.profile);
+        setWork(fetchedUserIntro.data.user.profile.work);
+        setEducation(fetchedUserIntro.data.user.profile.education);
+        setCity(fetchedUserIntro.data.user.profile.city);
+        setIsWorkLoading(false);
+        setIsEducationLoading(false);
+        setIsCityLoading(false);
+      } catch (err) {}
+    };
+
+    getUserIntro();
+  }, []);
 
   useEffect(() => {
     const getUserIntro = async () => {
