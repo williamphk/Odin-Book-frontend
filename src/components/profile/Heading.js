@@ -6,6 +6,7 @@ import PostModal from "../posts/PostModal";
 import ProfilePic from "../common/ProfilePic";
 import FriendButton from "../friends/FriendButton";
 import FriendSuggestionButton from "../friends/FriendSuggestionButton";
+import ResponseModal from "../common/ResponseModal";
 
 import {
   updateProfilePic,
@@ -22,6 +23,8 @@ const Heading = ({ user, userId, profile, friends }) => {
   const [friendRequestSent, setFriendRequestSent] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [isRequestSuccess, setIsRequestSuccess] = useState(null);
+  const [message, setMessage] = useState("");
 
   const token = useSelector((state) => state.auth.token);
   const acceptOrDeleteCount = useSelector(
@@ -140,6 +143,8 @@ const Heading = ({ user, userId, profile, friends }) => {
             suggestionId={userId}
             isSent={!!matchingFriendRequest(userId)}
             friendRequestId={matchingFriendRequest(userId)?._id}
+            setIsRequestSuccess={setIsRequestSuccess}
+            setMessage={setMessage}
           />
         )}
       </div>
@@ -154,6 +159,9 @@ const Heading = ({ user, userId, profile, friends }) => {
           setSelectedFile={setSelectedFile}
           onSubmit={onSubmit}
         />
+      )}
+      {isRequestSuccess !== null && (
+        <ResponseModal status={isRequestSuccess} message={message} />
       )}
     </div>
   );
