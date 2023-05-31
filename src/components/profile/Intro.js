@@ -11,7 +11,11 @@ import {
   updateProfileEducation,
   updateProfileCity,
 } from "../../api";
-import { incrementUpdateInfoCount } from "../../slices/profileSlice";
+import {
+  incrementUpdateWorkCount,
+  incrementUpdateEducationCount,
+  incrementUpdateCityCount,
+} from "../../slices/profileSlice";
 const Intro = ({ user, userId }) => {
   const {
     register,
@@ -26,33 +30,76 @@ const Intro = ({ user, userId }) => {
   const [work, setWork] = useState("");
   const [education, setEducation] = useState("");
   const [city, setCity] = useState("");
-  const [isLoading, setIsLoading] = useState(true);
+  const [isWorkLoading, setIsWorkLoading] = useState(true);
+  const [isEducationLoading, setIsEducationLoading] = useState(true);
+  const [isCityLoading, setIsCityLoading] = useState(true);
   const [isWorkClick, setIsWorkClick] = useState(false);
   const [isEducationClick, setIsEducationClick] = useState(false);
   const [isCityClick, setIsCityClick] = useState(false);
   const [isEditClick, setIsEditClick] = useState(false);
 
   const token = useSelector((state) => state.auth.token);
-  const updateInfoCount = useSelector((state) => state.profile.updateInfoCount);
+  const updateWorkCount = useSelector((state) => state.profile.updateWorkCount);
+  const updateEducationCount = useSelector(
+    (state) => state.profile.updateEducationCount
+  );
+  const updateCityCount = useSelector((state) => state.profile.updateCityCount);
 
   useEffect(() => {
     const getUserIntro = async () => {
       try {
-        setIsLoading(true);
+        setIsWorkLoading(true);
         const fetchedUserIntro = await getUser(token, userId ?? user._id);
         setUserIntro(fetchedUserIntro.data.user.profile);
         setWork(fetchedUserIntro.data.user.profile.work);
-        setIsLoading(false);
+        setIsWorkLoading(false);
       } catch (err) {}
     };
 
     getUserIntro();
-  }, [userId, token, user._id, updateInfoCount]);
+  }, [userId, token, user._id, updateWorkCount]);
+
+  useEffect(() => {
+    const getUserIntro = async () => {
+      try {
+        setIsEducationLoading(true);
+        const fetchedUserIntro = await getUser(token, userId ?? user._id);
+        setUserIntro(fetchedUserIntro.data.user.profile);
+        setEducation(fetchedUserIntro.data.user.profile.education);
+        setIsEducationLoading(false);
+      } catch (err) {}
+    };
+
+    getUserIntro();
+  }, [userId, token, user._id, updateEducationCount]);
+
+  useEffect(() => {
+    const getUserIntro = async () => {
+      try {
+        setIsCityLoading(true);
+        const fetchedUserIntro = await getUser(token, userId ?? user._id);
+        setUserIntro(fetchedUserIntro.data.user.profile);
+        setCity(fetchedUserIntro.data.user.profile.city);
+        setIsCityLoading(false);
+      } catch (err) {}
+    };
+
+    getUserIntro();
+  }, [userId, token, user._id, updateCityCount]);
 
   function handleEditClick() {
-    setIsWorkClick(!isWorkClick);
-    setIsEducationClick(!isEducationClick);
-    setIsCityClick(!isCityClick);
+    if (
+      (isWorkClick && isEducationClick && isCityClick) ||
+      (!isWorkClick && !isEducationClick && !isCityClick)
+    ) {
+      setIsWorkClick(!isWorkClick);
+      setIsEducationClick(!isEducationClick);
+      setIsCityClick(!isCityClick);
+    } else {
+      setIsWorkClick(false);
+      setIsEducationClick(false);
+      setIsCityClick(false);
+    }
   }
 
   const handleKeyPressWork = (event) => {
@@ -79,31 +126,25 @@ const Intro = ({ user, userId }) => {
   const onWorkSubmit = async (data) => {
     await updateProfileWork(token, user._id, data);
     setIsWorkClick(false);
-    setIsEducationClick(false);
-    setIsCityClick(false);
-    dispatch(incrementUpdateInfoCount());
+    dispatch(incrementUpdateWorkCount());
   };
 
   const onEducationSubmit = async (data) => {
     await updateProfileEducation(token, user._id, data);
-    setIsWorkClick(false);
     setIsEducationClick(false);
-    setIsCityClick(false);
-    dispatch(incrementUpdateInfoCount());
+    dispatch(incrementUpdateEducationCount());
   };
 
   const onCitySubmit = async (data) => {
     await updateProfileCity(token, user._id, data);
-    setIsWorkClick(false);
-    setIsEducationClick(false);
     setIsCityClick(false);
-    dispatch(incrementUpdateInfoCount());
+    dispatch(incrementUpdateCityCount());
   };
 
   return (
     <div className="w-full bg-white rounded-lg shadow p-3 flex flex-col gap-y-1">
       <div className="font-bold text-lg">Intro</div>
-      {isLoading ? (
+      {isWorkLoading ? (
         <div>Loading...</div>
       ) : isWorkClick ? (
         <form className="flex gap-x-2" onSubmit={handleSubmit(onWorkSubmit)}>
@@ -141,7 +182,7 @@ const Intro = ({ user, userId }) => {
         )
       )}
 
-      {isLoading ? (
+      {isEducationLoading ? (
         <div>Loading...</div>
       ) : isEducationClick ? (
         <form
@@ -184,7 +225,7 @@ const Intro = ({ user, userId }) => {
           </div>
         )
       )}
-      {isLoading ? (
+      {isCityLoading ? (
         <div>Loading...</div>
       ) : isCityClick ? (
         <form className="flex gap-x-2" onSubmit={handleSubmit(onCitySubmit)}>
