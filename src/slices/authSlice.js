@@ -27,6 +27,21 @@ export const loginUser = createAsyncThunk(
   }
 );
 
+export const checkAuth = createAsyncThunk(
+  "auth/check",
+  async (data, thunkAPI) => {
+    //console.log(data);
+    try {
+      const response = await api.get("/login/check", {
+        withCredentials: true,
+      });
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response.data);
+    }
+  }
+);
+
 const authSlice = createSlice({
   name: "auth",
   initialState: {
@@ -88,6 +103,24 @@ const authSlice = createSlice({
     });
     builder.addCase(signUp.rejected, (state, action) => {
       // Handle the registration error case
+      state.status = "failed";
+      state.error = action.payload;
+    });
+
+    builder.addCase(checkAuth.fulfilled, (state, action) => {
+      state.isLoggedIn = true;
+      // Handle the registration success case
+      state.status = "succeeded";
+      // Update the state with the received user data
+      state.token = action.payload.token;
+      state.user = action.payload.userResponse;
+      state.error = null;
+      // Store the token & user in localStorage
+      localStorage.setItem("token", action.payload.token);
+      localStorage.setItem("user", JSON.stringify(action.payload.userResponse));
+    });
+    builder.addCase(checkAuth.rejected, (state, action) => {
+      state.isLoggedIn = false;
       state.status = "failed";
       state.error = action.payload;
     });
