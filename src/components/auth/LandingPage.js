@@ -98,7 +98,9 @@ const LandingPage = () => {
           </Link>
           {/* login with facebook */}
           <button className="bg-blue-500 hover:bg-blue-700 text-white px-6 py-2 rounded font-semibold shadow-md transition duration-200">
-            Login with Facebook
+            <a href="http://localhost:3000/login/facebook">
+              Login With Facebook
+            </a>
           </button>
         </div>
         {/* Login with Test Account */}

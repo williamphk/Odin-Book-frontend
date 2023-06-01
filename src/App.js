@@ -96,7 +96,7 @@ function App() {
             />
           )}
         </div>
-        <Footer />
+        {isLoggedIn && <Footer />}
       </Router>
     </div>
   );
