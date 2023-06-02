@@ -98,7 +98,7 @@ const LandingPage = () => {
           </Link>
           {/* login with facebook */}
           <button className="bg-blue-500 hover:bg-blue-700 text-white px-6 py-2 rounded font-semibold shadow-md transition duration-200">
-            <a href="http://localhost:3000/login/facebook">
+            <a href="https://odin-book-api.azurewebsites.net/login/facebook">
               Login With Facebook
             </a>
           </button>
