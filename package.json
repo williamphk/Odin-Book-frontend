@@ -2,7 +2,7 @@
   "name": "odin-book-frontend",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://williamphk.github.io/odin-book-frontend",
+  "homepage": "https://williamphk.github.io/Odin-Book-frontend/",
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",
     "@testing-library/jest-dom": "^5.16.5",

@@ -81,17 +81,26 @@ function App() {
             <LeftSidebar className="flex-col bg-gray-100 w-[330px] hidden sm:flex py-3 pl-0 sm:pl-3" />
           )}
           <Routes>
-            <Route path="/register" element={<Register />} />
+            <Route path="/Odin-Book-frontend/register" element={<Register />} />
             <Route
-              path="/"
+              path="/Odin-Book-frontend/"
               element={isLoggedIn ? <NewsFeed /> : <LandingPage />}
             />
-            <Route path="/" element={<ProtectedRoute />}>
-              <Route path="/friends/*" element={<Friends />} />
-              <Route path="/profile/:userId/friends" element={<Profile />} />
-              <Route path="/profile/:userId" element={<Profile />} />
-              <Route path="/profile" element={<Profile />} />
-              <Route path="/setting" element={<Setting />} />
+            <Route path="/Odin-Book-frontend/" element={<ProtectedRoute />}>
+              <Route
+                path="/Odin-Book-frontend/friends/*"
+                element={<Friends />}
+              />
+              <Route
+                path="/Odin-Book-frontend/profile/:userId/friends"
+                element={<Profile />}
+              />
+              <Route
+                path="/Odin-Book-frontend/profile/:userId"
+                element={<Profile />}
+              />
+              <Route path="/Odin-Book-frontend/profile" element={<Profile />} />
+              <Route path="/Odin-Book-frontend/setting" element={<Setting />} />
             </Route>
           </Routes>
           {isLoggedIn && (
