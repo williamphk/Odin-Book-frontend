@@ -44,7 +44,7 @@ const LeftSidebar = ({ className }) => {
               onClick={() => dispatch(switchComponent("newfeed"))}
             >
               <Link
-                to="/"
+                to="/Odin-Book-frontend/"
                 className={`${
                   newsfeed && "text-purple-600 border-l-2 border-purple-500"
                 } px-2 w-full flex`}
@@ -59,7 +59,7 @@ const LeftSidebar = ({ className }) => {
               onClick={() => dispatch(switchComponent("friends"))}
             >
               <Link
-                to="/friends"
+                to="/Odin-Book-frontend/friends"
                 className={`${
                   friends && "text-purple-600 border-l-2 border-purple-500"
                 } px-2 w-full flex`}
@@ -70,13 +70,15 @@ const LeftSidebar = ({ className }) => {
             {friends && (
               <ul className="flex flex-col items-start pl-2">
                 <li>
-                  <Link to="/friends">Friend requests</Link>
+                  <Link to="/Odin-Book-frontend/friends">Friend requests</Link>
                 </li>
                 <li>
-                  <Link to="/friends/suggestion">Friend suggestions</Link>
+                  <Link to="/Odin-Book-frontend/friends/suggestion">
+                    Friend suggestions
+                  </Link>
                 </li>
                 <li>
-                  <Link to="/friends/list">All friends</Link>
+                  <Link to="/Odin-Book-frontend/friends/list">All friends</Link>
                 </li>
               </ul>
             )}
