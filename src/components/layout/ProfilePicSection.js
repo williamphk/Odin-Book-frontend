@@ -1,11 +1,14 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { logout } from "../../slices/authSlice";
 
 import MenuModal from "../common/MenuModal";
+
+import { removeTokenInCookie } from "../../api";
+import { logout } from "../../slices/authSlice";
 import { switchComponent } from "../../slices/pageSlice";
 
 const ProfilePicSection = () => {
+  const token = useSelector((state) => state.auth.token);
   const user = useSelector((state) => state.auth.user);
 
   const dispatch = useDispatch();
@@ -30,7 +33,8 @@ const ProfilePicSection = () => {
     };
   }, []);
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
+    await removeTokenInCookie(token);
     dispatch(logout());
     dispatch(switchComponent("newfeed"));
   };
@@ -72,7 +76,9 @@ const ProfilePicSection = () => {
       <button onClick={toggleProfileMenu} ref={menuRef}>
         <img
           src={`${
-            user.picture === "default"
+            user.picture.charAt(0) === "h"
+              ? user.picture
+              : user.picture === "default"
               ? "http://localhost:3000/images/default.jpg"
               : "http://localhost:3000/uploads/" + user.picture
           }`}

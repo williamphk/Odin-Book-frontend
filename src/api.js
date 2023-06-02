@@ -452,4 +452,17 @@ export const updateProfileCity = async (token, userId, updatedCity) => {
   }
 };
 
+export const removeTokenInCookie = async (token) => {
+  try {
+    const reponse = await api.get("/logout", {
+      withCredentials: true,
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    return reponse;
+  } catch (error) {
+    console.log("Error in removeTokenInCookie:", error);
+    throw error;
+  }
+};
+
 export default api;
