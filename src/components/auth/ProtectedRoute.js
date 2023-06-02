@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 const ProtectedRoute = () => {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
 
-  return isLoggedIn ? <Outlet /> : <Navigate to="/" />;
+  return isLoggedIn ? <Outlet /> : <Navigate to="/Odin-Book-frontend/" />;
 };
 
 export default ProtectedRoute;

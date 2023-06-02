@@ -22,7 +22,9 @@ const Nav = () => {
           <Link
             className="block h-full w-full flex justify-center items-center"
             to={`${
-              userId && userId !== "friends" ? "/profile/" + userId : "/profile"
+              userId && userId !== "friends"
+                ? "/Odin-Book-frontend/profile/" + userId
+                : "/Odin-Book-frontend/profile"
             }`}
           >
             Home
@@ -36,8 +38,8 @@ const Nav = () => {
             className="block h-full w-full flex justify-center items-center"
             to={`${
               userId && userId !== "friends"
-                ? "/profile/" + userId + "/friends"
-                : "/profile/friends"
+                ? "/Odin-Book-frontend/profile/" + userId + "/friends"
+                : "/Odin-Book-frontend/profile/friends"
             }`}
           >
             Friends

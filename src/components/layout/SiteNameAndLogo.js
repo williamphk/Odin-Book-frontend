@@ -17,7 +17,7 @@ const SiteNameAndLogo = () => {
         onClick={handleSiteNameAndLogoClick}
         className="lg:flex justify-start text-purple-500 font-bold text-3xl hidden"
       >
-        <Link to="/">
+        <Link to="/Odin-Book-frontend/">
           <h1>Odin-book</h1>
         </Link>
       </button>

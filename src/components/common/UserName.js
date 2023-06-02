@@ -12,7 +12,7 @@ const UserName = ({ name, id, className }) => {
   };
   return (
     <button onClick={handleOnClick}>
-      <Link className="w-full" to={"/profile/" + id}>
+      <Link className="w-full" to={"/Odin-Book-frontend/profile/" + id}>
         <p className={className}>{name}</p>
       </Link>
     </button>

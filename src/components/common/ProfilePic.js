@@ -13,7 +13,7 @@ const ProfilePic = ({ picture, id, className }) => {
 
   return (
     <button onClick={handleOnClick}>
-      <Link className="w-full" to={"/profile/" + id}>
+      <Link className="w-full" to={"/Odin-Book-frontend/profile/" + id}>
         <img
           src={`${
             picture.charAt(0) === "h"
