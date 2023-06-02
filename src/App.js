@@ -29,25 +29,25 @@ function App() {
     dispatch(checkAuth());
   }, []);
 
-  // useEffect(() => {
-  //   const token = localStorage.getItem("token");
-  //   const user = JSON.parse(localStorage.getItem("user"));
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    const user = JSON.parse(localStorage.getItem("user"));
 
-  //   if (token && isTokenValid(token)) {
-  //     //console.log("Token is valid");
-  //   } else if (token && !isTokenValid(token)) {
-  //     console.log("Token is expired");
-  //     localStorage.removeItem("token");
-  //   }
+    if (token && isTokenValid(token)) {
+      //console.log("Token is valid");
+    } else if (token && !isTokenValid(token)) {
+      console.log("Token is expired");
+      localStorage.removeItem("token");
+    }
 
-  //   // Dispatch the login action only if there's a valid token in the localStorage and the user is not already logged in
-  //   if (token && !isLoggedIn) {
-  //     dispatch(login({ token, user }));
-  //     setIsLoading(false);
-  //   } else {
-  //     setIsLoading(false);
-  //   }
-  // }, [dispatch, isLoggedIn]);
+    // Dispatch the login action only if there's a valid token in the localStorage and the user is not already logged in
+    if (token && !isLoggedIn) {
+      dispatch(login({ token, user }));
+      setIsLoading(false);
+    } else {
+      setIsLoading(false);
+    }
+  }, [dispatch, isLoggedIn]);
 
   const isTokenValid = (token) => {
     let decodedToken = jwt_decode(token);
@@ -109,4 +109,4 @@ function App() {
 
 export default App;
 
-//Todo: like modal, facebook login
+//Todo: like modal
