@@ -16,7 +16,10 @@ const Modal = ({ menuItems }) => {
             key={index}
             onClick={element.onClick}
           >
-            <Link className="w-full block px-4 py-2" to={"/" + element.name}>
+            <Link
+              className="w-full block px-4 py-2"
+              to={"/Odin-Book-frontend/" + element.name}
+            >
               {capitalizeString(element.name)}
             </Link>
           </button>

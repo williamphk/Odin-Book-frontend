@@ -30,8 +30,8 @@ const NavButton = ({ setIsMobileMenuOpen, isMobileMenuOpen }) => {
 
   const navItems = ["Home", "Friends", "Post"];
   const navRoutes = {
-    Home: "/",
-    Friends: "/friends",
+    Home: "/Odin-Book-frontend/",
+    Friends: "/Odin-Book-frontend/friends",
   };
 
   const navSelected = {
