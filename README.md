@@ -4,6 +4,20 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 Live Preview: https://williamphk.github.io/Odin-Book-frontend/
 
+## Features
+- User Authentication: Implemented secure user registration and login functionality.
+- Post Creation: Users can create and share posts with text content.
+- Interactive System: Users can interact with posts through likes and comments.
+- Friend System: Users can send, accept or decline friend requests from other users.
+- Responsive Design: Responsive across multiple devices.
+
+## Technologies
+- **ReactJS**: A JavaScript library for building user interfaces.
+- **Redux**: Used for application state management.
+- **Axios**: Promise based HTTP client for the browser and Node.js.
+- **React-hook-form**: A flexible and efficient form library for React.
+- **TailwindCSS**: A utility-first CSS framework that can be used to build modern websites.
+
 ## Available Scripts
 
 In the project directory, you can run:
