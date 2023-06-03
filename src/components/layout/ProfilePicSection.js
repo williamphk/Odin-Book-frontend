@@ -33,10 +33,10 @@ const ProfilePicSection = () => {
     };
   }, []);
 
-  const handleLogout = async () => {
-    await removeTokenInCookie(token);
+  const handleLogout = () => {
     dispatch(logout());
     dispatch(switchComponent("newfeed"));
+    removeTokenInCookie(token);
   };
 
   const toggleProfileMenu = () => {

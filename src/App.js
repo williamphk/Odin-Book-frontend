@@ -68,7 +68,7 @@ function App() {
 
   return (
     <div className="App">
-      <Router>
+      <Router basename="/Odin-Book-frontend">
         <NavigationHandler />
         {isLoggedIn && <Navbar />}
         <div
