@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 
+import MaterialIcon from "../common/MaterialIcon";
+import ProfilePic from "../common/ProfilePic";
+import UserName from "../common/UserName";
 import CommentField from "./CommentField";
+import PostModal from "../posts/PostModal";
+
 import {
   getCommentContent,
   updateComment,
@@ -12,9 +17,6 @@ import {
 } from "../../api";
 import FormattedDate from "../common/FormattedDate";
 import { incrementCreateOrUpdateCount } from "../../slices/commentSlice";
-import MaterialIcon from "../common/MaterialIcon";
-import ProfilePic from "../common/ProfilePic";
-import UserName from "../common/UserName";
 
 const Comment = ({ comment, postId, commentId, token, user }) => {
   const [isEdit, setIsEdit] = useState(false);
@@ -23,6 +25,7 @@ const Comment = ({ comment, postId, commentId, token, user }) => {
   const [isLike, setIsLike] = useState(false);
   const [fetchLikesTrigger, setFetchLikesTrigger] = useState(false);
   const [likeCount, setLikeCount] = useState(0);
+  const [isPostModalOpen, setIsPostModalOpen] = useState(false);
 
   const handleEditButton = async () => {
     setIsEdit(!isEdit);
@@ -96,6 +99,14 @@ const Comment = ({ comment, postId, commentId, token, user }) => {
     }
   };
 
+  const openPostModal = () => {
+    setIsPostModalOpen(true);
+  };
+
+  const closePostModal = () => {
+    setIsPostModalOpen(false);
+  };
+
   return (
     <div className="flex m-y-1 gap-x-2 mb-1" id={commentId}>
       <div className="items-start">
@@ -124,7 +135,7 @@ const Comment = ({ comment, postId, commentId, token, user }) => {
             />
             <div>{comment.content}</div>
             {commentLikes.length > 0 && (
-              <button className="absolute top-7 right-0 flex justify-center items-center gap-x-1 rounded-lg bg-white px-0.5 drop-shadow-xl">
+              <button onClick={openPostModal} className="absolute top-7 right-[-20px] flex justify-center items-center gap-x-1 rounded-lg bg-white px-0.5 drop-shadow-xl">
                 <MaterialIcon
                   className={`material-symbols-outlined text-lg text-purple-600`}
                   iconName={"thumb_up"}
@@ -135,9 +146,8 @@ const Comment = ({ comment, postId, commentId, token, user }) => {
           </div>
           <div className="flex gap-x-2 pl-2 items-center">
             <button
-              className={`pl-1 text-xs font-medium ${
-                isLike ? "text-purple-600" : "text-black"
-              }`}
+              className={`pl-1 text-xs font-medium ${isLike ? "text-purple-600" : "text-black"
+                }`}
               onClick={handleLikeButtonClick}
             >
               Like
@@ -164,6 +174,13 @@ const Comment = ({ comment, postId, commentId, token, user }) => {
             />
           </div>
         </div>
+      )}
+      {isPostModalOpen && (
+        <PostModal
+          title="Likes"
+          closePostModal={closePostModal}
+          likes={commentLikes}
+        />
       )}
     </div>
   );
