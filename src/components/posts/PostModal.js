@@ -118,7 +118,7 @@ const PostModal = ({
             {button}
           </button>}
         </form>}
-        {likes.map((like) => (
+        {likes && likes.map((like) => (
           <div key={like._id} className="flex items-center py-2 px-2 hover:bg-gray-200 transition duration-200 rounded-lg">
             <div className="flex items-center w-full">
               <ProfilePic
