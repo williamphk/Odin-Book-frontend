@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/Odin-Book-frontend/static/css/main.549fc9cf.css",
-    "main.js": "/Odin-Book-frontend/static/js/main.b373448f.js",
+    "main.css": "/Odin-Book-frontend/static/css/main.b1527341.css",
+    "main.js": "/Odin-Book-frontend/static/js/main.b5a0605c.js",
     "static/js/787.2aaf10be.chunk.js": "/Odin-Book-frontend/static/js/787.2aaf10be.chunk.js",
     "index.html": "/Odin-Book-frontend/index.html",
-    "main.549fc9cf.css.map": "/Odin-Book-frontend/static/css/main.549fc9cf.css.map",
-    "main.b373448f.js.map": "/Odin-Book-frontend/static/js/main.b373448f.js.map",
+    "main.b1527341.css.map": "/Odin-Book-frontend/static/css/main.b1527341.css.map",
+    "main.b5a0605c.js.map": "/Odin-Book-frontend/static/js/main.b5a0605c.js.map",
     "787.2aaf10be.chunk.js.map": "/Odin-Book-frontend/static/js/787.2aaf10be.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.549fc9cf.css",
-    "static/js/main.b373448f.js"
+    "static/css/main.b1527341.css",
+    "static/js/main.b5a0605c.js"
   ]
 }
