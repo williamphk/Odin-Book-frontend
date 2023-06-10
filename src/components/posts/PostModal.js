@@ -45,7 +45,7 @@ const PostModal = ({
         className="absolute w-full h-full bg-gray-100 bg-opacity-80"
         onClick={closePostModal}
       ></div>
-      <div className="relative bg-white rounded-lg z-50 w-[36%] shadow-3xl">
+      <div className="relative bg-white rounded-lg z-50 w-[93%] sm:w-[36%] shadow-3xl">
         <div className="flex items-center justify-center border-b-[1px]">
           <h2 className="text-xl font-bold py-4">{title}</h2>
           <button
@@ -105,13 +105,11 @@ const PostModal = ({
             />
           )}
           <button
-            className={`${
-              buttonColor || "bg-purple-500"
-            } text-white px-4 py-2 rounded-md m-4 ${
-              buttonHoverColor
+            className={`${buttonColor || "bg-purple-500"
+              } text-white px-4 py-2 rounded-md m-4 ${buttonHoverColor
                 ? "hover:" + buttonHoverColor
                 : "hover:bg-purple-600"
-            }
+              }
             transition duration-200 disabled:bg-gray-300 disabled:text-gray-400`}
             disabled={requiredInputField && !allFieldValues.content}
           >

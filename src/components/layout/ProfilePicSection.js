@@ -75,13 +75,12 @@ const ProfilePicSection = () => {
     <div className="relative flex justify-end self-center">
       <button onClick={toggleProfileMenu} ref={menuRef}>
         <img
-          src={`${
-            user.picture.charAt(0) === "h"
+          src={`${user.picture.charAt(0) === "h"
               ? user.picture
               : user.picture === "default"
-              ? "http://localhost:3000/images/default.jpg"
-              : "http://localhost:3000/uploads/" + user.picture
-          }`}
+                ? "https://odin-book-api.azurewebsites.net/images/default.jpg"
+                : "https://odin-book-api.azurewebsites.net/uploads/" + user.picture
+            }`}
           alt="Profile"
           className="w-10 h-10 object-cover rounded-full"
         />

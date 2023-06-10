@@ -15,13 +15,12 @@ const ProfilePic = ({ picture, id, className }) => {
     <button onClick={handleOnClick}>
       <Link className="w-full" to={"/Odin-Book-frontend/profile/" + id}>
         <img
-          src={`${
-            picture.charAt(0) === "h"
+          src={`${picture.charAt(0) === "h"
               ? picture
               : picture === "default"
-              ? "http://localhost:3000/images/default.jpg"
-              : "http://localhost:3000/uploads/" + picture
-          }`}
+                ? "https://odin-book-api.azurewebsites.net/images/default.jpg"
+                : "https://odin-book-api.azurewebsites.net/uploads/" + picture
+            }`}
           alt="Profile"
           className={className}
         />
