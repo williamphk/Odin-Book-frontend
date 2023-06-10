@@ -8,7 +8,7 @@ const SiteNameAndLogo = () => {
   const dispatch = useDispatch();
 
   const handleSiteNameAndLogoClick = () => {
-    dispatch(switchComponent("newfeed"));
+    dispatch(switchComponent("newsfeed"));
   };
 
   return (

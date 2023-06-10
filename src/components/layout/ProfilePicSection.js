@@ -35,7 +35,7 @@ const ProfilePicSection = () => {
 
   const handleLogout = () => {
     dispatch(logout());
-    dispatch(switchComponent("newfeed"));
+    dispatch(switchComponent("newsfeed"));
     removeTokenInCookie(token);
   };
 

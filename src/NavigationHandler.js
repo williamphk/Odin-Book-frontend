@@ -25,7 +25,7 @@ function NavigationHandler() {
     ) {
       dispatch(switchComponent("profileFriends"));
     } else {
-      dispatch(switchComponent("newfeed"));
+      dispatch(switchComponent("newsfeed"));
     }
   }, [dispatch, location]);
 

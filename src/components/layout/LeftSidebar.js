@@ -32,7 +32,7 @@ const LeftSidebar = ({ className }) => {
           <UserName
             name={user.fullName}
             id={user._id}
-            className="ml-2 font-bold"
+            className="ml-2"
           />
         </div>
       </div>
@@ -41,13 +41,12 @@ const LeftSidebar = ({ className }) => {
           <li className="flex items-center space-x-2">
             <button
               className="flex text-gray-600 w-full hover:bg-gray-200 transition duration-200 py-2 rounded-lg"
-              onClick={() => dispatch(switchComponent("newfeed"))}
+              onClick={() => dispatch(switchComponent("newsfeed"))}
             >
               <Link
                 to="/Odin-Book-frontend/"
-                className={`${
-                  newsfeed && "text-purple-600 border-l-2 border-purple-500"
-                } px-2 w-full flex`}
+                className={`${newsfeed && "text-purple-600 border-l-2 border-purple-500"
+                  } px-2 w-full flex`}
               >
                 Home
               </Link>
@@ -60,9 +59,8 @@ const LeftSidebar = ({ className }) => {
             >
               <Link
                 to="/Odin-Book-frontend/friends"
-                className={`${
-                  friends && "text-purple-600 border-l-2 border-purple-500"
-                } px-2 w-full flex`}
+                className={`${friends && "text-purple-600 border-l-2 border-purple-500"
+                  } px-2 w-full flex`}
               >
                 Friends
               </Link>

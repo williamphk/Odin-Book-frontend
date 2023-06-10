@@ -104,7 +104,6 @@ function App() {
           </Routes>
           {isLoggedIn && (
             <RightSidebar
-              friends={[]}
               className="flex-col bg-gray-100 w-[330px] hidden lg:flex py-3 pr-0 sm:pr-3 "
             />
           )}
