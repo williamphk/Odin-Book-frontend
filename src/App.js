@@ -2,8 +2,7 @@ import "./App.css";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import jwt_decode from "jwt-decode";
-import { BrowserRouter as Router, Route, Routes, useParams } from "react-router-dom";
-
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import Navbar from "./components/layout/Navbar";
 import LeftSidebar from "./components/layout/LeftSidebar";
@@ -26,16 +25,9 @@ function App() {
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(false);
 
-  let { token } = useParams();
-
   useEffect(() => {
-    // dispatch(checkAuth());
-    if (token) {
-      localStorage.setItem("token", token);
-      dispatch(login({ token }));
-    }
-  }, [token]);
-
+    dispatch(checkAuth());
+  }, []);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
