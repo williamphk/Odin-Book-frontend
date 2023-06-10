@@ -32,7 +32,7 @@ const LeftSidebar = ({ className }) => {
           <UserName
             name={user.fullName}
             id={user._id}
-            className="ml-2"
+            className="ml-2 font-bold"
           />
         </div>
       </div>

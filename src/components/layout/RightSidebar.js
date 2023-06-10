@@ -52,7 +52,7 @@ const RightSidebar = ({ className }) => {
               <UserName
                 name={friend.fullName}
                 id={friend.user._id}
-                className="ml-2 font-bold"
+                className="ml-2"
               />
             </div>
           </li>
