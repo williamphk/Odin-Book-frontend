@@ -2,7 +2,8 @@ import "./App.css";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import jwt_decode from "jwt-decode";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, useParams } from "react-router-dom";
+
 
 import Navbar from "./components/layout/Navbar";
 import LeftSidebar from "./components/layout/LeftSidebar";
@@ -25,9 +26,16 @@ function App() {
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(false);
 
+  let { token } = useParams();
+
   useEffect(() => {
-    dispatch(checkAuth());
-  }, []);
+    // dispatch(checkAuth());
+    if (token) {
+      localStorage.setItem("token", token);
+      dispatch(login({ token }));
+    }
+  }, [token]);
+
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -72,10 +80,9 @@ function App() {
         <NavigationHandler />
         {isLoggedIn && <Navbar />}
         <div
-          className={`${
-            isLoggedIn &&
+          className={`${isLoggedIn &&
             "min-h-screen bg-gray-100 flex justify-center lg:justify-between"
-          }`}
+            }`}
         >
           {isLoggedIn && (
             <LeftSidebar className="flex-col bg-gray-100 w-[330px] hidden sm:flex py-3 pl-0 sm:pl-3" />
