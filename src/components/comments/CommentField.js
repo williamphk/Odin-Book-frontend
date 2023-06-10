@@ -40,7 +40,7 @@ const CommentField = ({
 
   // Disable button if no content
   useEffect(() => {
-    console.log(!!content);
+    //console.log(!!content);
     setIsDisable(!content);
   }, [content]);
 
@@ -71,9 +71,8 @@ const CommentField = ({
         className="absolute bottom-0 right-1 w-[28px] h-[28px] mb-1 hover:bg-gray-200 disabled:bg-transparent rounded-full flex justify-center items-center"
       >
         <MaterialIcon
-          className={`material-symbols-outlined text-xl ${
-            !isDisable ? "text-purple-500" : "text-gray-500"
-          } absolute`}
+          className={`material-symbols-outlined text-xl ${!isDisable ? "text-purple-500" : "text-gray-500"
+            } absolute`}
           iconName={"send"}
         />
       </button>

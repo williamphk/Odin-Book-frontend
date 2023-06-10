@@ -10,7 +10,7 @@ const MobileMenu = () => {
   }
 
   return (
-    <ul className="flex flex-col lg:hidden text-left pl-2">
+    <ul className="flex flex-col md:hidden text-left pl-2">
       <li className="py-1 hover:bg-gray-100 w-full">
         <Link to="/Odin-Book-frontend/friends">Friend requests</Link>
       </li>

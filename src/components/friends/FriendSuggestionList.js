@@ -67,8 +67,8 @@ const FriendSuggestionList = () => {
 
   return (
     <div className="flex flex-col gap-y-2">
-      <h2 className="flex text-xl font-medium">Friend Suggestions</h2>
-      <div className="flex flex-wrap gap-3">
+      <h2 className="flex text-xl font-medium justify-center sm:justify-start">Friend Suggestions</h2>
+      <div className="flex flex-wrap gap-3 justify-center sm:justify-start">
         {friendSuggestion.length === 0 ? (
           <div>No friend suggestions yet</div>
         ) : (

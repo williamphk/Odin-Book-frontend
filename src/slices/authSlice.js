@@ -53,14 +53,14 @@ const authSlice = createSlice({
   },
   reducers: {
     login: (state, action) => {
-      console.log("login");
+      //console.log("login");
       state.isLoggedIn = true;
       state.token = action.payload.token;
       state.user = action.payload.user;
       state.status = "succeeded";
     },
     logout: (state) => {
-      console.log("logout");
+      //console.log("logout");
       state.isLoggedIn = false;
       state.token = null;
       localStorage.removeItem("token");

@@ -45,7 +45,7 @@ const PostModal = ({
         className="absolute w-full h-full bg-gray-100 bg-opacity-80"
         onClick={closePostModal}
       ></div>
-      <div className="relative bg-white rounded-lg z-50 w-[93%] sm:w-[36%] shadow-3xl">
+      <div className="relative bg-white rounded-lg z-50 w-[93%] md:w-[55%] lg:w-[36%] shadow-3xl">
         <div className="flex items-center justify-center border-b-[1px]">
           <h2 className="text-xl font-bold py-4">{title}</h2>
           <button

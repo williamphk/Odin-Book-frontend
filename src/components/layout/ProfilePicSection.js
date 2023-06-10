@@ -69,17 +69,17 @@ const ProfilePicSection = () => {
     },
   ];
 
-  console.log(user);
+  //console.log(user);
 
   return (
     <div className="relative flex justify-end self-center">
       <button onClick={toggleProfileMenu} ref={menuRef}>
         <img
           src={`${user.picture.charAt(0) === "h"
-              ? user.picture
-              : user.picture === "default"
-                ? "https://odin-book-api.azurewebsites.net/images/default.jpg"
-                : "https://odin-book-api.azurewebsites.net/uploads/" + user.picture
+            ? user.picture
+            : user.picture === "default"
+              ? "https://odin-book-api.azurewebsites.net/images/default.jpg"
+              : "https://odin-book-api.azurewebsites.net/uploads/" + user.picture
             }`}
           alt="Profile"
           className="w-10 h-10 object-cover rounded-full"

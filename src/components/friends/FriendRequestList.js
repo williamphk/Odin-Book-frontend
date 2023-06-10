@@ -40,8 +40,8 @@ const FriendRequestList = () => {
 
   return (
     <div className="flex flex-col gap-y-2">
-      <h2 className="flex text-xl font-medium">Friend Requests</h2>
-      <div className="flex flex-wrap gap-3">
+      <h2 className="flex text-xl font-medium justify-center sm:justify-start">Friend Requests</h2>
+      <div className="flex flex-wrap gap-3 justify-center sm:justify-start">
         {friendRequests.length === 0 ? (
           <div>No requests received yet</div>
         ) : (

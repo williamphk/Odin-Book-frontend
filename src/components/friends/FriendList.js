@@ -59,12 +59,12 @@ const FriendList = ({ userId }) => {
     return <div>Error: {error.message}</div>;
   }
 
-  console.log(friends);
+  //console.log(friends);
 
   return (
     <div className="flex flex-col gap-y-2">
-      <h2 className="flex text-xl font-medium">All friends</h2>
-      <div className="flex flex-wrap gap-3">
+      <h2 className="flex text-xl font-medium justify-center sm:justify-start">All friends</h2>
+      <div className="flex flex-wrap gap-3 justify-center sm:justify-start">
         {friends.length === 0 ? (
           <div>No friends yet</div>
         ) : (
