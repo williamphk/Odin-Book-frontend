@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 import MaterialIcon from "../common/MaterialIcon";
+import PostModal from "./PostModal";
 
 import { getPostLikeList, createPostLike, deletePostLike } from "../../api";
 
@@ -16,6 +17,7 @@ const PostAction = ({
   const [isLike, setIsLike] = useState(false);
   const [fetchLikesTrigger, setFetchLikesTrigger] = useState(false);
   const [likeCount, setLikeCount] = useState(0);
+  const [isPostModalOpen, setIsPostModalOpen] = useState(false);
 
   useEffect(() => {
     const fetchPostLikes = async () => {
@@ -70,11 +72,19 @@ const PostAction = ({
     }
   };
 
+  const openPostModal = () => {
+    setIsPostModalOpen(true);
+  };
+
+  const closePostModal = () => {
+    setIsPostModalOpen(false);
+  };
+
   return (
     <div>
       <div className="flex justify-between py-2">
         {postLikes.length > 0 ? (
-          <button className="flex gap-x-1 items-center">
+          <button onClick={openPostModal} className="flex gap-x-1 items-center">
             <MaterialIcon
               className="material-symbols-outlined text-xl text-purple-500"
               iconName={"thumb_up"}
@@ -97,9 +107,8 @@ const PostAction = ({
           className="text-gray-500 font-medium hover:bg-gray-100 py-2 rounded w-1/2 flex items-center justify-center gap-x-2 transition duration-200"
         >
           <MaterialIcon
-            className={`material-symbols-outlined text-xl ${
-              isLike ? "text-purple-600" : "text-gray-500"
-            }`}
+            className={`material-symbols-outlined text-xl ${isLike ? "text-purple-600" : "text-gray-500"
+              }`}
             iconName={"thumb_up"}
           />
 
@@ -124,6 +133,13 @@ const PostAction = ({
           Comment
         </button>
       </div>
+      {isPostModalOpen && (
+        <PostModal
+          title="Likes"
+          closePostModal={closePostModal}
+          likes={postLikes}
+        />
+      )}
     </div>
   );
 };

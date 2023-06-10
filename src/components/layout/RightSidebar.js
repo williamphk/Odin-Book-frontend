@@ -42,7 +42,7 @@ const RightSidebar = ({ className }) => {
       <h3 className="font-bold text-lg mb-4">Friends</h3>
       <ul>
         {friends.map((friend) => (
-          <li key={friend.id} className="flex items-center py-2 px-2 hover:bg-gray-200 transition duration-200 rounded-lg">
+          <li key={friend._id} className="flex items-center py-2 px-2 hover:bg-gray-200 transition duration-200 rounded-lg">
             <div className="flex items-center w-full">
               <ProfilePic
                 picture={friend.picture}
