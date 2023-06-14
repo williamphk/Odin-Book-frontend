@@ -2,7 +2,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "https://odin-book-api.azurewebsites.net",
+  baseURL: "https://odin-book.azurewebsites.net",
 });
 
 export const createPost = async (newPost, token) => {

@@ -78,8 +78,8 @@ const ProfilePicSection = () => {
           src={`${user.picture.charAt(0) === "h"
             ? user.picture
             : user.picture === "default"
-              ? "https://odin-book-api.azurewebsites.net/images/default.jpg"
-              : "https://odin-book-api.azurewebsites.net/uploads/" + user.picture
+              ? "https://odin-book.azurewebsites.net/images/default.jpg"
+              : "https://odin-book.azurewebsites.net/uploads/" + user.picture
             }`}
           alt="Profile"
           className="w-10 h-10 object-cover rounded-full"
