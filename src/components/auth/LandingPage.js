@@ -91,7 +91,7 @@ const LandingPage = () => {
         </form>
         <div className="flex space-x-4">
           {/* register button */}
-          <Link to="/register">
+          <Link to="/Odin-Book-frontend/register">
             <button className="bg-pink-500 hover:bg-pink-700 text-white px-7 py-2 rounded font-semibold shadow-md transition duration-200">
               Register
             </button>
