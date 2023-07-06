@@ -55,7 +55,7 @@ const FriendSuggestionButton = ({
         "Failed to send/remove friend request due to a network error."
       );
       timer.current = setTimeout(() => setIsRequestSuccess(null), 3500);
-      console.error("Error in sending/removing friend request:", error);
+      //console.error("Error in sending/removing friend request:", error);
     }
   };
 

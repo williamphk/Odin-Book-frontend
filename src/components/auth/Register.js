@@ -35,7 +35,7 @@ const Register = () => {
       setIsRegisterLoading(true);
       dispatch(signUp(data));
     } catch (error) {
-      console.error("Error during registration:", error);
+      //console.error("Error during registration:", error);
     }
   };
 

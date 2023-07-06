@@ -87,7 +87,7 @@ const Comment = ({ comment, postId, commentId, token, user }) => {
         await deleteCommentLike(token, postId, commentId, userLikeId);
         setFetchLikesTrigger(!fetchLikesTrigger);
       } else {
-        console.error("User like ID is undefined, cannot delete like.");
+        //console.error("User like ID is undefined, cannot delete like.");
       }
     } else {
       // Optimistic updates the like button and like count
@@ -135,7 +135,10 @@ const Comment = ({ comment, postId, commentId, token, user }) => {
             />
             <div>{comment.content}</div>
             {commentLikes.length > 0 && (
-              <button onClick={openPostModal} className="absolute top-7 right-[-20px] flex justify-center items-center gap-x-1 rounded-lg bg-white px-0.5 drop-shadow-xl">
+              <button
+                onClick={openPostModal}
+                className="absolute top-7 right-[-20px] flex justify-center items-center gap-x-1 rounded-lg bg-white px-0.5 drop-shadow-xl"
+              >
                 <MaterialIcon
                   className={`material-symbols-outlined text-lg text-purple-600`}
                   iconName={"thumb_up"}
@@ -146,8 +149,9 @@ const Comment = ({ comment, postId, commentId, token, user }) => {
           </div>
           <div className="flex gap-x-2 pl-2 items-center">
             <button
-              className={`pl-1 text-xs font-medium ${isLike ? "text-purple-600" : "text-black"
-                }`}
+              className={`pl-1 text-xs font-medium ${
+                isLike ? "text-purple-600" : "text-black"
+              }`}
               onClick={handleLikeButtonClick}
             >
               Like

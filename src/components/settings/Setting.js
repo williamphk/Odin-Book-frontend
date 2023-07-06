@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+
+import ResponseModal from "../common/ResponseModal";
 
 import { deleteAccount } from "../../api";
 import { logout } from "../../slices/authSlice";
@@ -9,12 +11,35 @@ const Setting = () => {
   const token = useSelector((state) => state.auth.token);
   const user = useSelector((state) => state.auth.user);
 
+  const [isRequestSuccess, setIsRequestSuccess] = useState(null);
+  const [message, setMessage] = useState("");
+
   const dispatch = useDispatch();
 
   const handleDeleteButtonClick = async () => {
-    await deleteAccount(token, user._id);
-    dispatch(logout());
-    dispatch(switchComponent("setting"));
+    try {
+      // The request was successful
+      const response = await deleteAccount(token, user._id);
+      if (response.status >= 200 && response.status < 300) {
+        dispatch(logout());
+        dispatch(switchComponent("setting"));
+      } else {
+        // The request failed, but did not throw an error
+        setIsRequestSuccess(false);
+        setMessage("This user cannot be removed.");
+        setTimeout(() => setIsRequestSuccess(null), 3500);
+      }
+    } catch (err) {
+      if (err.response.status === 401) {
+        setMessage("This user cannot be removed.");
+      } else {
+        setMessage("Failed to remove this user due to a network error.");
+      }
+      // The request failed and threw an error
+      setIsRequestSuccess(false);
+      setTimeout(() => setIsRequestSuccess(null), 3500);
+      //console.error("Error deleting friend:", err);
+    }
   };
 
   return (
@@ -42,6 +67,9 @@ const Setting = () => {
           </button>
         </div>
       </div>
+      {isRequestSuccess !== null && (
+        <ResponseModal status={isRequestSuccess} message={message} />
+      )}
     </div>
   );
 };

@@ -30,7 +30,7 @@ const FriendButton = ({ friendId, setIsRequestSuccess, setMessage }) => {
       setIsRequestSuccess(false);
       setMessage("Failed to remove friend due to a network error.");
       setTimeout(() => setIsRequestSuccess(null), 3500);
-      console.error("Error deleting friend:", err);
+      //console.error("Error deleting friend:", err);
     }
   };
 

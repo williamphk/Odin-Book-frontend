@@ -15,7 +15,7 @@ export const createPost = async (newPost, token) => {
     });
     return response.data;
   } catch (error) {
-    console.error("Error in createPost:", error);
+    //console.error("Error in createPost:", error);
     throw error;
   }
 };
@@ -29,7 +29,7 @@ export const getNewsFeed = async (token) => {
     });
     return response;
   } catch (error) {
-    console.error("Error in getNewsFeed:", error);
+    //console.error("Error in getNewsFeed:", error);
     throw error;
   }
 };
@@ -43,7 +43,7 @@ export const getPostContent = async (token, postId) => {
     });
     return response;
   } catch (error) {
-    console.error("Error in getPostContent:", error);
+    //console.error("Error in getPostContent:", error);
     throw error;
   }
 };
@@ -58,7 +58,7 @@ export const updatePost = async (updatedPost, token, postId) => {
     });
     return response;
   } catch (error) {
-    console.error("Error in updatePost:", error);
+    //console.error("Error in updatePost:", error);
     throw error;
   }
 };
@@ -72,7 +72,7 @@ export const deletePost = async (token, postId) => {
     });
     return response;
   } catch (error) {
-    console.error("Error in deletePost:", error);
+    //console.error("Error in deletePost:", error);
     throw error;
   }
 };
@@ -86,7 +86,7 @@ export const getCommentList = async (token, postId) => {
     });
     return response;
   } catch (error) {
-    console.error("Error in getCommentList:", error);
+    //console.error("Error in getCommentList:", error);
     throw error;
   }
 };
@@ -104,7 +104,7 @@ export const createComment = async (newComment, token, postId) => {
     );
     return response;
   } catch (error) {
-    console.error("Error in createComment:", error);
+    //console.error("Error in createComment:", error);
     throw error;
   }
 };
@@ -121,7 +121,7 @@ export const getCommentContent = async (token, postId, commentId) => {
     );
     return response;
   } catch (error) {
-    console.error("Error in getCommentContent:", error);
+    //console.error("Error in getCommentContent:", error);
     throw error;
   }
 };
@@ -142,7 +142,7 @@ export const updateComment = async (
     );
     return response;
   } catch (error) {
-    console.error("Error in updateComment:", error);
+    //console.error("Error in updateComment:", error);
     throw error;
   }
 };
@@ -155,7 +155,7 @@ export const deleteComment = async (token, postId, commentId) => {
     );
     return response;
   } catch (error) {
-    console.error("Error in deleteComment:", error);
+    //console.error("Error in deleteComment:", error);
     throw error;
   }
 };
@@ -167,7 +167,7 @@ export const getPostLikeList = async (token, postId) => {
     });
     return response;
   } catch (error) {
-    console.error("Error in getPostLikeList:", error);
+    //console.error("Error in getPostLikeList:", error);
     throw error;
   }
 };
@@ -181,7 +181,7 @@ export const createPostLike = async (token, postId) => {
     );
     return response;
   } catch (error) {
-    console.error("Error in createPostLike:", error);
+    //console.error("Error in createPostLike:", error);
     throw error;
   }
 };
@@ -193,7 +193,7 @@ export const deletePostLike = async (token, postId, likeId) => {
     });
     return response;
   } catch (error) {
-    console.error("Error in deletePostLike:", error);
+    //console.error("Error in deletePostLike:", error);
     throw error;
   }
 };
@@ -206,7 +206,7 @@ export const getCommentLikeList = async (token, postId, commentId) => {
     );
     return response;
   } catch (error) {
-    console.error("Error in getCommentLikeList:", error);
+    //console.error("Error in getCommentLikeList:", error);
     throw error;
   }
 };
@@ -222,7 +222,7 @@ export const createCommentLike = async (token, postId, commentId) => {
     );
     return response;
   } catch (error) {
-    console.error("Error in createCommentLike:", error);
+    //console.error("Error in createCommentLike:", error);
     throw error;
   }
 };
@@ -235,7 +235,7 @@ export const deleteCommentLike = async (token, postId, commentId, likeId) => {
     );
     return response;
   } catch (error) {
-    console.error("Error in deleteCommentLike:", error);
+    //console.error("Error in deleteCommentLike:", error);
     throw error;
   }
 };
@@ -247,7 +247,7 @@ export const getFriendRequestsReceived = async (token) => {
     });
     return response;
   } catch (error) {
-    console.error("Error in getFriendRequestsReceived:", error);
+    //console.error("Error in getFriendRequestsReceived:", error);
     throw error;
   }
 };
@@ -259,7 +259,7 @@ export const getFriendSuggestion = async (token, userId) => {
     });
     return response;
   } catch (error) {
-    console.error("Error in getFriendSuggestion:", error);
+    //console.error("Error in getFriendSuggestion:", error);
     throw error;
   }
 };
@@ -273,7 +273,7 @@ export const sendFriendRequest = async (token, receiverId) => {
     );
     return response;
   } catch (error) {
-    console.error("Error in sendFriendRequest:", error);
+    //console.error("Error in sendFriendRequest:", error);
     throw error;
   }
 };
@@ -285,7 +285,7 @@ export const getFriendRequestsSent = async (token) => {
     });
     return response;
   } catch (error) {
-    console.error("Error in getFriendRequestsSent:", error);
+    //console.error("Error in getFriendRequestsSent:", error);
     throw error;
   }
 };
@@ -297,7 +297,7 @@ export const deleteFriendRequest = async (token, friendRequestId) => {
     });
     return response;
   } catch (error) {
-    console.error("Error in deleteFriendRequest:", error);
+    //console.error("Error in deleteFriendRequest:", error);
     throw error;
   }
 };
@@ -311,7 +311,7 @@ export const acceptFriendRequest = async (token, friendRequestId) => {
     );
     return response;
   } catch (error) {
-    console.error("Error in acceptFriendRequest:", error);
+    //console.error("Error in acceptFriendRequest:", error);
     throw error;
   }
 };
@@ -324,7 +324,7 @@ export const rejectFriendRequest = async (token, friendRequestId) => {
     );
     return response;
   } catch (error) {
-    console.error("Error in rejectFriendRequest:", error);
+    //console.error("Error in rejectFriendRequest:", error);
     throw error;
   }
 };
@@ -336,7 +336,7 @@ export const getFriendList = async (token, userId) => {
     });
     return response;
   } catch (error) {
-    console.error("Error in getFriendList:", error);
+    //console.error("Error in getFriendList:", error);
     throw error;
   }
 };
@@ -349,7 +349,7 @@ export const deleteFriend = async (token, userId, friendId) => {
     );
     return response;
   } catch (error) {
-    console.error("Error in getFriendList:", error);
+    //console.error("Error in getFriendList:", error);
     throw error;
   }
 };
@@ -361,7 +361,7 @@ export const deleteAccount = async (token, userId) => {
     });
     return response;
   } catch (error) {
-    console.error("Error in deleteAccount:", error);
+    //console.error("Error in deleteAccount:", error);
     throw error;
   }
 };
@@ -373,7 +373,7 @@ export const getUser = async (token, userId) => {
     });
     return response;
   } catch (error) {
-    console.error("Error in getUser:", error);
+    //console.error("Error in getUser:", error);
     throw error;
   }
 };
@@ -385,7 +385,7 @@ export const getUserPost = async (token, userId) => {
     });
     return response;
   } catch (error) {
-    console.error("Error in getUserPost:", error);
+    //console.error("Error in getUserPost:", error);
     throw error;
   }
 };
@@ -403,7 +403,7 @@ export const updateProfilePic = async (token, userId, file) => {
     });
     return response;
   } catch (error) {
-    console.error("Error in updateProfilePic:", error);
+    //console.error("Error in updateProfilePic:", error);
     throw error;
   }
 };
@@ -415,7 +415,7 @@ export const updateProfileWork = async (token, userId, updatedWork) => {
     });
     return response;
   } catch (error) {
-    console.error("Error in updateProfileWork:", error);
+    //console.error("Error in updateProfileWork:", error);
     throw error;
   }
 };
@@ -435,7 +435,7 @@ export const updateProfileEducation = async (
     );
     return response;
   } catch (error) {
-    console.error("Error in updateProfileEducation:", error);
+    //console.error("Error in updateProfileEducation:", error);
     throw error;
   }
 };
@@ -447,7 +447,7 @@ export const updateProfileCity = async (token, userId, updatedCity) => {
     });
     return response;
   } catch (error) {
-    console.error("Error in updateProfileCity:", error);
+    //console.error("Error in updateProfileCity:", error);
     throw error;
   }
 };
@@ -460,7 +460,7 @@ export const removeTokenInCookie = async (token) => {
     });
     return reponse;
   } catch (error) {
-    console.log("Error in removeTokenInCookie:", error);
+    //console.log("Error in removeTokenInCookie:", error);
     throw error;
   }
 };

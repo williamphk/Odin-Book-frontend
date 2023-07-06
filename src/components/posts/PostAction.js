@@ -28,7 +28,7 @@ const PostAction = ({
         setIsLoading(false);
       } catch (err) {
         setPostLikes([]);
-        console.error("There was an error fetching the post likes: ", err);
+        //console.error("There was an error fetching the post likes: ", err);
       }
     };
 
@@ -60,7 +60,7 @@ const PostAction = ({
         await deletePostLike(token, postId, userLikeId);
         setFetchLikesTrigger(!fetchLikesTrigger);
       } else {
-        console.error("User like ID is undefined, cannot delete like.");
+        //console.error("User like ID is undefined, cannot delete like.");
       }
     } else {
       // Optimistic updates the like button and like count
@@ -107,8 +107,9 @@ const PostAction = ({
           className="text-gray-500 font-medium hover:bg-gray-100 py-2 rounded w-1/2 flex items-center justify-center gap-x-2 transition duration-200"
         >
           <MaterialIcon
-            className={`material-symbols-outlined text-xl ${isLike ? "text-purple-600" : "text-gray-500"
-              }`}
+            className={`material-symbols-outlined text-xl ${
+              isLike ? "text-purple-600" : "text-gray-500"
+            }`}
             iconName={"thumb_up"}
           />
 

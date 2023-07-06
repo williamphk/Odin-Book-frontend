@@ -65,7 +65,7 @@ const Heading = ({
       dispatch(updateUser(updatedUser));
       localStorage.setItem("user", JSON.stringify(updatedUser));
       dispatch(incrementUpdatePictureCount());
-      console.log(response);
+      //console.log(response);
     }
   };
 

@@ -78,7 +78,7 @@ const PostModal = ({
             <div>Continue to delete this post?</div>
           </div>
         )}
-        {(requiredInputField || requiredFileUpload) && <form className="flex flex-col" onSubmit={handleSubmit(onSubmit)}>
+        <form className="flex flex-col" onSubmit={handleSubmit(onSubmit)}>
           {requiredInputField && (
             <InputField
               register={register}
@@ -106,34 +106,42 @@ const PostModal = ({
               onChange={(event) => setSelectedFile(event.target.files[0])}
             />
           )}
-          {button && <button
-            className={`${buttonColor || "bg-purple-500"
-              } text-white px-4 py-2 rounded-md m-4 ${buttonHoverColor
-                ? "hover:" + buttonHoverColor
-                : "hover:bg-purple-600"
+          {button && (
+            <button
+              className={`${
+                buttonColor || "bg-purple-500"
+              } text-white px-4 py-2 rounded-md m-4 ${
+                buttonHoverColor
+                  ? "hover:" + buttonHoverColor
+                  : "hover:bg-purple-600"
               }
             transition duration-200 disabled:bg-gray-300 disabled:text-gray-400`}
-            disabled={requiredInputField && !allFieldValues.content}
-          >
-            {button}
-          </button>}
-        </form>}
-        {likes && likes.map((like) => (
-          <div key={like._id} className="flex items-center py-2 px-2 hover:bg-gray-200 transition duration-200 rounded-lg">
-            <div className="flex items-center w-full">
-              <ProfilePic
-                picture={like.user.profile.picture}
-                id={like.user._id}
-                className="w-10 h-10 object-cover rounded-full"
-              />
-              <UserName
-                name={like.user.profile.fullName}
-                id={like.user._id}
-                className="ml-2"
-              />
+              disabled={requiredInputField && !allFieldValues.content}
+            >
+              {button}
+            </button>
+          )}
+        </form>
+        {likes &&
+          likes.map((like) => (
+            <div
+              key={like._id}
+              className="flex items-center py-2 px-2 hover:bg-gray-200 transition duration-200 rounded-lg"
+            >
+              <div className="flex items-center w-full">
+                <ProfilePic
+                  picture={like.user.profile.picture}
+                  id={like.user._id}
+                  className="w-10 h-10 object-cover rounded-full"
+                />
+                <UserName
+                  name={like.user.profile.fullName}
+                  id={like.user._id}
+                  className="ml-2"
+                />
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
       </div>
     </div>
   );

@@ -36,7 +36,7 @@ function App() {
     if (token && isTokenValid(token)) {
       //console.log("Token is valid");
     } else if (token && !isTokenValid(token)) {
-      console.log("Token is expired");
+      //console.log("Token is expired");
       localStorage.removeItem("token");
     }
 
@@ -72,9 +72,10 @@ function App() {
         <NavigationHandler />
         {isLoggedIn && <Navbar />}
         <div
-          className={`${isLoggedIn &&
+          className={`${
+            isLoggedIn &&
             "min-h-screen bg-gray-100 flex justify-center lg:justify-between"
-            }`}
+          }`}
         >
           {isLoggedIn && (
             <LeftSidebar className="flex-col bg-gray-100 w-[330px] hidden sm:flex py-3 pl-0 sm:pl-3" />
@@ -103,9 +104,7 @@ function App() {
             </Route>
           </Routes>
           {isLoggedIn && (
-            <RightSidebar
-              className="flex-col bg-gray-100 w-[330px] hidden lg:flex py-3 pr-0 sm:pr-3 "
-            />
+            <RightSidebar className="flex-col bg-gray-100 w-[330px] hidden lg:flex py-3 pr-0 sm:pr-3 " />
           )}
         </div>
         {isLoggedIn && <Footer />}
