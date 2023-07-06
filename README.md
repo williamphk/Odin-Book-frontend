@@ -1,10 +1,10 @@
-# Getting Started with Create React App
+# Odin-book - A Full Stack Social Media Application
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
+<img width="1710" alt="Screenshot" src="https://github.com/williamphk/Odin-Book-frontend/assets/65807958/b3deaea0-ef12-4f06-9f3e-6d3e2dac122b">
 Live Preview: https://williamphk.github.io/Odin-Book-frontend/
 
 ## Features
+
 - User Authentication: Implemented secure user registration and login functionality.
 - Post Creation: Users can create and share posts with text content.
 - Interactive System: Users can interact with posts through likes and comments.
